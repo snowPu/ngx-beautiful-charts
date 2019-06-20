@@ -18,6 +18,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "regular-charts": [
+        "dist/regular-charts"
+      ],
+      "regular-charts/*": [
+        "dist/regular-charts/*"
+      ]
+    }
   }
 }
