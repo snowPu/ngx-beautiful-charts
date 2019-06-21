@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'rc-regular-charts',
-  template: `
-    <p>
-      regular-charts works!
-    </p>
-  `,
+  templateUrl: './regular-charts.component.html',
   styles: []
 })
 export class RegularChartsComponent implements OnInit {
+
+  @Input() width: number;
+  @Input() height: number;
 
   constructor() { }
 
