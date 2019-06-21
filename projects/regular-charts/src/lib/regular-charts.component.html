@@ -12,9 +12,12 @@
     [attr.height]="rectHeight" 
     stroke="#444444" fill="url(#grid)" stroke-width="1"/>
 
+    <g rc-line-graph [data]="transformedData" [x]="padding" [y]="padding" 
+    [width]="rectWidth" [height]="rectHeight" />
+
     <text
-    *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+50" class="small"> {{ x.value }} </text>
+    *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
     <text
-    *ngFor="let y of yAxis" class="axis-text" [attr.y]="y.yPos" [attr.x]="30" class="small">{{ y.value }}</text>
+    *ngFor="let y of yAxis" class="axis-text" [attr.y]="y.yPos" [attr.x]="padding-30" class="small">{{ y.value }}</text>
     
 </svg>
