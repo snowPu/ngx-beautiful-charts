@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { RegularChartsService } from './regular-charts.service';
 
 @Component({
   selector: 'rc-regular-charts',
@@ -17,7 +18,8 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   @Input() gridPrecisionY: number;
   @Input() displayXAxis: boolean;
   @Input() displayYAxis: boolean;
-  @Input() data: [{x: number, y: number, info: any }];
+  @Input() data;
+  @Input() chartType: string;
 
 
   padding = 60;
@@ -28,7 +30,7 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   gridPath: string;
   xAxis = [];
   yAxis = [];
-  transformedData = [];
+  // transformedData = [];
 
 
   printAllInput() {
@@ -42,66 +44,78 @@ export class RegularChartsComponent implements OnInit, OnChanges {
     console.log('gridPrecisionY: ' + this.gridPrecisionY);
   }
 
-  computeRectDimensions() {
-    this.rectWidth = this.width - this.padding * 2;
-    this.rectHeight = this.height - this.padding * 2;
-  }
 
-  transformX(x: number) {
-    return this.rectWidth * x / (this.maxX - this.minX);
-  }
+  // transformX(x: number) {
+  //   return this.rectWidth * x / (this.maxX - this.minX);
+  // }
 
-  transformY(y: number) {
-    return this.rectHeight * y / (this.maxY - this.minY);
-  }
+  // transformY(y: number) {
+  //   return this.rectHeight * y / (this.maxY - this.minY);
+  // }
 
-  transformData() {
-    this.transformedData = [];
-    for (const point of this.data) {
-      this.transformedData.push({
-        x: this.transformX(point.x) + this.padding,
-        y: this.transformY(this.maxY - point.y) + this.padding,
-        info: point.info,
-        originalX: point.x,
-        originalY: point.y
-      });
-    }
-  }
+  // transformData() {
+  //   this.transformedData = [];
+  //   for (const point of this.data) {
+  //     this.transformedData.push({
+  //       x: this.regularChartsService.transformX(point.x) + this.padding,
+  //       y: this.regularChartsService.transformY(this.maxY - point.y) + this.padding,
+  //       info: point.info,
+  //       originalX: point.x,
+  //       originalY: point.y
+  //     });
+  //   }
+  // }
 
   computeGrid() {
     // maxX - minX --> gridPrecisionX
     // width --> gridWidthX
-    this.gridWidthX = this.transformX(this.gridPrecisionX);
-    this.gridWidthY = this.transformY(this.gridPrecisionY);
+    this.gridWidthX = this.regularChartsService.transformX(this.gridPrecisionX);
+    this.gridWidthY = this.regularChartsService.transformY(this.gridPrecisionY);
     this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
     this.xAxis = [];
     this.yAxis = [];
     for (let x = this.minX; x <= this.maxX; x = x + this.gridPrecisionX) {
-      const xPos = this.transformX(x) + this.padding;
+      const xPos = this.regularChartsService.transformX(x) + this.padding;
       this.xAxis.push({xPos: xPos, value: x});
     }
 
     for (let y = this.minY; y <= this.maxY; y = y + this.gridPrecisionY) {
-      const yPos = this.transformY(y) + this.padding + 7;
+      const yPos = this.regularChartsService.transformY(y) + this.padding + 7;
       this.yAxis.push({yPos: yPos, value: this.maxY - y });
     }
   }
 
-  constructor() {
+  constructor(public regularChartsService: RegularChartsService) {
   }
 
   ngOnInit() {
+    this.regularChartsService.setValues({
+      width: this.width,
+      height: this.height,
+      minX: this.minX,
+      maxX: this.maxX,
+      minY: this.minY,
+      maxY: this.maxY,
+      padding: this.padding
+    });
     this.printAllInput();
-    this.computeRectDimensions();
     this.computeGrid();
-    this.transformData();
+    // this.transformData();
   }
 
   ngOnChanges() {
+    this.regularChartsService.setValues({
+      width: this.width,
+      height: this.height,
+      minX: this.minX,
+      maxX: this.maxX,
+      minY: this.minY,
+      maxY: this.maxY,
+      padding: this.padding
+    });
     this.printAllInput();
-    this.computeRectDimensions();
     this.computeGrid();
-    this.transformData();
+    // this.transformData();
   }
 
 }

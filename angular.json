@@ -59,7 +59,7 @@
               "projects/regular-app/src/assets"
             ],
             "styles": [
-              "projects/regular-app/src/styles.css"
+              "projects/regular-app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -119,7 +119,7 @@
               "projects/regular-app/src/assets"
             ],
             "styles": [
-              "projects/regular-app/src/styles.css"
+              "projects/regular-app/src/styles.scss"
             ],
             "scripts": []
           }
@@ -150,6 +150,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "regular-charts"
+    }
+  },
+  "defaultProject": "regular-charts",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { RegularChartsService } from '../regular-charts.service';
 
 @Component({
   selector: 'g[rc-line-graph]',
   templateUrl: './line-graph.component.html',
-  styleUrls: ['./line-graph.component.css']
+  styleUrls: ['./line-graph.component.scss']
 })
 export class LineGraphComponent implements OnInit, OnChanges {
 
-  @Input() data;
+  @Input() data: [{x: number, y: number, info: any }];
   @Input() x: number;
   @Input() y: number;
   @Input() width: number;
@@ -15,8 +16,22 @@ export class LineGraphComponent implements OnInit, OnChanges {
 
 
   graphLinePath: string;
+  transformedData;
 
-  constructor() { }
+  constructor(private regularChartsService: RegularChartsService) { }
+
+  transformData() {
+    this.transformedData = [];
+    for (const point of this.data) {
+      this.transformedData.push({
+        x: this.regularChartsService.transformX(point.x) + this.regularChartsService.padding,
+        y: this.regularChartsService.transformY(this.regularChartsService.maxY - point.y) + this.regularChartsService.padding,
+        info: point.info,
+        originalX: point.x,
+        originalY: point.y
+      });
+    }
+  }
 
   printAllInput() {
     console.log('width: ' + this.width);
@@ -32,7 +47,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
     this.graphLinePath = 'M';
 
     this.data.sort((a, b) => a.x < b.x ? -1 : a.x > b.x ? 1 : 0);
-    for (const point of this.data) {
+    for (const point of this.transformedData) {
       console.log(point);
       const coordX = point.x;
       const coordY = point.y;
@@ -45,11 +60,13 @@ export class LineGraphComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log('init..');
+    this.transformData();
     this.setLinePath();
   }
 
   ngOnChanges() {
     console.log('changes..');
+    this.transformData();
     this.setLinePath();
   }
 

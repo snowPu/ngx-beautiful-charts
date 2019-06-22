@@ -1,5 +1,5 @@
 <svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <pattern id="grid" 
+    <!-- <pattern id="grid" 
     [attr.x]="padding" [attr.y]="padding" 
     [attr.width]="gridWidthX" [attr.height]="gridWidthY" 
     patternUnits="userSpaceOnUse">
@@ -10,14 +10,20 @@
     [attr.y]="padding" 
     [attr.width]="rectWidth" 
     [attr.height]="rectHeight" 
-    stroke="#444444" fill="url(#grid)" stroke-width="1"/>
+    stroke="#444444" fill="url(#grid)" stroke-width="1"/> -->
+    <g rc-chart-base [gridWidthX]="gridWidthX" [gridWidthY]="gridWidthY" 
+    [padding]="padding" [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight"
+    [xAxis]="xAxis" [yAxis]="yAxis" />
 
-    <g rc-line-graph [data]="transformedData" [x]="padding" [y]="padding" 
-    [width]="rectWidth" [height]="rectHeight" />
+    <g *ngIf="chartType=='line-graph'" rc-line-graph [data]="data" [x]="padding" [y]="padding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
+    
+    <g *ngIf="chartType=='multi-line-graph'" rc-multi-line-graph [data]="data" [x]="padding" [y]="padding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
 
-    <text
+    <!-- <text
     *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
     <text
-    *ngFor="let y of yAxis" class="axis-text" [attr.y]="y.yPos" [attr.x]="padding-30" class="small">{{ y.value }}</text>
+    *ngFor="let y of yAxis" class="axis-text" [attr.y]="y.yPos" [attr.x]="padding-30" class="small">{{ y.value }}</text> -->
     
 </svg>

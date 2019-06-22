@@ -1,0 +1,19 @@
+<svg:pattern id="grid" 
+[attr.x]="padding" [attr.y]="padding" 
+[attr.width]="gridWidthX" [attr.height]="gridWidthY" 
+patternUnits="userSpaceOnUse">
+    <svg:path [attr.d]="gridPath" fill="none" stroke="#444444" stroke-width="0.5" />
+</svg:pattern>
+
+<svg:rect [attr.x]="padding" 
+[attr.y]="padding" 
+[attr.width]="width" 
+[attr.height]="height" 
+stroke="#444444" fill="url(#grid)" stroke-width="1"/>
+
+<svg:text
+*ngFor="let x of xAxis" class="axis-text" 
+[attr.x]="x.xPos" [attr.y]="height+padding+30" class="small"> {{ x.value }} </svg:text>
+<svg:text
+*ngFor="let y of yAxis" class="axis-text" 
+[attr.y]="y.yPos" [attr.x]="padding-30" class="small">{{ y.value }}</svg:text>
