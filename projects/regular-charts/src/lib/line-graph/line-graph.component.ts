@@ -13,6 +13,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
   @Input() y: number;
   @Input() width: number;
   @Input() height: number;
+  @Input() color: string;
 
 
   graphLinePath: string;
@@ -24,8 +25,8 @@ export class LineGraphComponent implements OnInit, OnChanges {
     this.transformedData = [];
     for (const point of this.data) {
       this.transformedData.push({
-        x: this.regularChartsService.transformX(point.x) + this.regularChartsService.padding,
-        y: this.regularChartsService.transformY(this.regularChartsService.maxY - point.y) + this.regularChartsService.padding,
+        x: this.regularChartsService.transformX(point.x) + this.x,
+        y: this.regularChartsService.transformY(this.regularChartsService.maxY - point.y) + this.y,
         info: point.info,
         originalX: point.x,
         originalY: point.y

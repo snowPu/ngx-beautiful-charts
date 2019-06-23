@@ -11,7 +11,8 @@ export class RegularChartsService {
   minY: number;
   maxX: number;
   maxY: number;
-  padding: number;
+  xPadding: number;
+  yPadding: number;
   rectWidth: number;
   rectHeight: number;
 
@@ -19,8 +20,8 @@ export class RegularChartsService {
   constructor() { }
 
   computeRectDimensions() {
-    this.rectWidth = this.width - this.padding * 2;
-    this.rectHeight = this.height - this.padding * 2;
+    this.rectWidth = this.width - this.xPadding * 2;
+    this.rectHeight = this.height - this.yPadding * 4;
   }
 
   transformX(x: number) {
@@ -38,7 +39,8 @@ export class RegularChartsService {
     minY: minY,
     maxX: maxX,
     maxY: maxY,
-    padding: padding
+    xPadding: xPadding,
+    yPadding: yPadding
   }) {
     this.width = width;
     this.height = height;
@@ -46,7 +48,8 @@ export class RegularChartsService {
     this.minY = minY;
     this.maxX = maxX;
     this.maxY = maxY;
-    this.padding = padding;
+    this.xPadding = xPadding;
+    this.yPadding = yPadding;
 
     this.computeRectDimensions();
   }

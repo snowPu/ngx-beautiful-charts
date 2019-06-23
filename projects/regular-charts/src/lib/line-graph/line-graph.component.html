@@ -1,3 +1,8 @@
 <svg:path class="line-path"
-[attr.d]="graphLinePath" fill="none" stroke="#ff4444"
+[attr.d]="graphLinePath" fill="none" [attr.stroke]="color"
   />
+
+<svg:g *ngFor="let point of transformedData;">
+  <svg:circle [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="#444444" />
+  <!-- <svg:text x="100" y="50">{{item.name}}</text> -->
+</svg:g>

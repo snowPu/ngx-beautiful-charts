@@ -11,7 +11,8 @@ export class ChartBaseComponent implements OnInit, OnChanges {
   @Input() gridWidthY: number;
   @Input() width: number;
   @Input() height: number;
-  @Input() padding: number;
+  @Input() xPadding: number;
+  @Input() yPadding: number;
   @Input() xAxis;
   @Input() yAxis;
 

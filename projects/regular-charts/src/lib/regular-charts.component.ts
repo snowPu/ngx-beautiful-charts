@@ -19,10 +19,12 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   @Input() displayXAxis: boolean;
   @Input() displayYAxis: boolean;
   @Input() data;
+  @Input() color;
   @Input() chartType: string;
 
+  xPadding = 60;
+  yPadding = this.xPadding / 2;
 
-  padding = 60;
   rectWidth: number;
   rectHeight: number;
   gridWidthX: number;
@@ -30,8 +32,6 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   gridPath: string;
   xAxis = [];
   yAxis = [];
-  // transformedData = [];
-
 
   printAllInput() {
     console.log('width: ' + this.width);
@@ -44,28 +44,6 @@ export class RegularChartsComponent implements OnInit, OnChanges {
     console.log('gridPrecisionY: ' + this.gridPrecisionY);
   }
 
-
-  // transformX(x: number) {
-  //   return this.rectWidth * x / (this.maxX - this.minX);
-  // }
-
-  // transformY(y: number) {
-  //   return this.rectHeight * y / (this.maxY - this.minY);
-  // }
-
-  // transformData() {
-  //   this.transformedData = [];
-  //   for (const point of this.data) {
-  //     this.transformedData.push({
-  //       x: this.regularChartsService.transformX(point.x) + this.padding,
-  //       y: this.regularChartsService.transformY(this.maxY - point.y) + this.padding,
-  //       info: point.info,
-  //       originalX: point.x,
-  //       originalY: point.y
-  //     });
-  //   }
-  // }
-
   computeGrid() {
     // maxX - minX --> gridPrecisionX
     // width --> gridWidthX
@@ -75,12 +53,12 @@ export class RegularChartsComponent implements OnInit, OnChanges {
     this.xAxis = [];
     this.yAxis = [];
     for (let x = this.minX; x <= this.maxX; x = x + this.gridPrecisionX) {
-      const xPos = this.regularChartsService.transformX(x) + this.padding;
+      const xPos = this.regularChartsService.transformX(x) + this.xPadding;
       this.xAxis.push({xPos: xPos, value: x});
     }
 
     for (let y = this.minY; y <= this.maxY; y = y + this.gridPrecisionY) {
-      const yPos = this.regularChartsService.transformY(y) + this.padding + 7;
+      const yPos = this.regularChartsService.transformY(y) + this.yPadding + 7;
       this.yAxis.push({yPos: yPos, value: this.maxY - y });
     }
   }
@@ -96,7 +74,8 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       maxX: this.maxX,
       minY: this.minY,
       maxY: this.maxY,
-      padding: this.padding
+      xPadding: this.xPadding,
+      yPadding: this.yPadding
     });
     this.printAllInput();
     this.computeGrid();
@@ -111,7 +90,8 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       maxX: this.maxX,
       minY: this.minY,
       maxY: this.maxY,
-      padding: this.padding
+      xPadding: this.xPadding,
+      yPadding: this.yPadding
     });
     this.printAllInput();
     this.computeGrid();

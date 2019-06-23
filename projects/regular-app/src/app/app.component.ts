@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'regular-app';
+  title = 'Regular Charts';
 
   data = [
     {x: 10, y: 10, info: ''},

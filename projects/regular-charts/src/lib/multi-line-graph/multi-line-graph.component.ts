@@ -14,71 +14,71 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   @Input() width: number;
   @Input() height: number;
 
-  graphLinePaths;
-  transformedData = [];
+  // graphLinePaths;
+  // transformedData = [];
 
-  transformData() {
-    this.transformedData = [];
-    for (const singleLine of this.data) {
-      let lineData;
+  // transformData() {
+  //   this.transformedData = [];
+  //   for (const singleLine of this.data) {
+  //     let lineData;
 
-      lineData = [];
-      for (const point of singleLine.data) {
-        lineData.push({
-          x: this.regularChartsService.transformX(point.x) + this.regularChartsService.padding,
-          y: this.regularChartsService.transformY(this.regularChartsService.maxY - point.y) + this.regularChartsService.padding,
-          info: point.info,
-          originalX: point.x,
-          originalY: point.y
-        });
-      }
-      this.transformedData.push({
-        name: singleLine.name,
-        color: singleLine.color,
-        data: lineData
-      });
+  //     lineData = [];
+  //     for (const point of singleLine.data) {
+  //       lineData.push({
+  //         x: this.regularChartsService.transformX(point.x) + this.x,
+  //         y: this.regularChartsService.transformY(this.regularChartsService.maxY - point.y) + this.y,
+  //         info: point.info,
+  //         originalX: point.x,
+  //         originalY: point.y
+  //       });
+  //     }
+  //     this.transformedData.push({
+  //       name: singleLine.name,
+  //       color: singleLine.color,
+  //       data: lineData
+  //     });
 
-    }
-  }
+  //   }
+  // }
 
-  setLinePath() {
-    // console.log(this.printAllInput());
-    this.graphLinePaths = [];
-    for (const singleLine of this.transformedData) {
-      let graphLinePath = 'M';
-      let singleLineData;
-      singleLineData = singleLine.data;
-      singleLineData.sort((a, b) => a.x < b.x ? -1 : a.x > b.x ? 1 : 0);
-      for (const point of singleLineData) {
-        console.log(point);
-        const coordX = point.x;
-        const coordY = point.y;
+  // setLinePath() {
+  //   // console.log(this.printAllInput());
+  //   this.graphLinePaths = [];
+  //   for (const singleLine of this.transformedData) {
+  //     let graphLinePath = 'M';
+  //     let singleLineData;
+  //     singleLineData = singleLine.data;
+  //     singleLineData.sort((a, b) => a.x < b.x ? -1 : a.x > b.x ? 1 : 0);
+  //     for (const point of singleLineData) {
+  //       console.log(point);
+  //       const coordX = point.x;
+  //       const coordY = point.y;
 
-        graphLinePath += ' ' + coordX + ' ' + coordY;
+  //       graphLinePath += ' ' + coordX + ' ' + coordY;
 
-        console.log(graphLinePath);
-      }
+  //       console.log(graphLinePath);
+  //     }
 
-      this.graphLinePaths.push({
-        color: singleLine.color,
-        path: graphLinePath
-      });
-    }
-  }
+  //     this.graphLinePaths.push({
+  //       color: singleLine.color,
+  //       path: graphLinePath
+  //     });
+  //   }
+  // }
 
 
-  constructor(private regularChartsService: RegularChartsService) { }
+  constructor(public regularChartsService: RegularChartsService) { }
 
   ngOnInit() {
     console.log('init..');
-    this.transformData();
-    this.setLinePath();
+    // this.transformData();
+    // this.setLinePath();
   }
 
   ngOnChanges() {
     console.log('changes..');
-    this.transformData();
-    this.setLinePath();
+    // this.transformData();
+    // this.setLinePath();
   }
 
 }
