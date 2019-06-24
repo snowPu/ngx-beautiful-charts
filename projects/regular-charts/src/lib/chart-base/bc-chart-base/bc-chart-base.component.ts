@@ -19,34 +19,6 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
   xAxis;
   yAxis;
 
-  barChartData = [
-    {
-      name: 'Calcutta',
-      value: 120
-    },
-    {
-      name: 'Chennai',
-      value: 300
-    },
-    {
-      name: 'Bombay',
-      value: 100
-    },
-    {
-      name: 'Delhi',
-      value: 400
-    }
-  ];
-
-  closestMultipleLessThanEqualTo(factor, num) {
-    if (num % factor === 0) return num;
-    else return this.closestMultipleLessThanEqualTo(factor, --num);
-  }
-
-  closestMultipleMoreThanEqualTo(factor, num) {
-    if (num % factor === 0) return num;
-    else return this.closestMultipleLessThanEqualTo(factor, ++num);
-  }
 
   computeGrid() {
     // // get range of values in y axis
@@ -89,13 +61,33 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
 
     // now the x axis :)
 
-    const noOfXAxisValues = this.regularChartsService.data.length;
-    const eachWidth = this.width / noOfXAxisValues;
-    let cnt = -1;
-    for (const bcD of this.regularChartsService.data) {
-      cnt ++;
-      const xPos = cnt * eachWidth + eachWidth / 2 + this.xPadding;
-      this.xAxis.push({xPos: xPos, value: bcD.name});
+    let noOfXAxisValues;
+    if (this.regularChartsService.chartType === 'bar-chart') {
+      noOfXAxisValues = this.regularChartsService.data.length;
+      const eachWidth = this.width / noOfXAxisValues;
+      let cnt = -1;
+      for (const bcD of this.regularChartsService.data) {
+        cnt ++;
+        const xPos = cnt * eachWidth + eachWidth / 2 + this.xPadding;
+        this.xAxis.push({xPos: xPos, value: bcD.name});
+      }
+    } else if (this.regularChartsService.chartType === 'clustered-bar-chart') {
+      let uniqueXAxisValues;
+      uniqueXAxisValues = new Set();
+      for (const series of this.regularChartsService.data) {
+        const seriesData = series.data;
+        for (const sData of seriesData) {
+          uniqueXAxisValues.add(sData.name);
+        }
+      }
+      noOfXAxisValues = uniqueXAxisValues.size;
+      const eachWidth = this.width / noOfXAxisValues;
+      let cnt = -1;
+      for (const xAxisValue of uniqueXAxisValues) {
+        cnt ++;
+        const xPos = cnt * eachWidth + eachWidth / 2 + this.xPadding;
+        this.xAxis.push({xPos: xPos, value: xAxisValue });
+      }
     }
 
     // this.gridWidthX = this.regularChartsService.transformX(this.gridPrecisionX);

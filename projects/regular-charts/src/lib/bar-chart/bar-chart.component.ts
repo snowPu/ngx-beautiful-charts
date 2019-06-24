@@ -27,7 +27,7 @@ export class BarChartComponent implements OnInit, OnChanges {
     for (const bcD of this.regularChartsService.data) {
       cnt ++;
       const xPos = cnt * eachWidth + eachWidth / 2 + this.x;
-      const yPos = this.regularChartsService.transformY(bcD.value) + this.y;
+      const yPos = this.regularChartsService.transformY(this.regularChartsService.maxY - bcD.value) + this.y;
 
       const xStart = xPos - barWidth / 2;
       const xEnd = xPos + barWidth / 2;

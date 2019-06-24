@@ -27,6 +27,10 @@
     <g *ngIf="chartType=='bar-chart'" rc-bar-chart [data]="data" [x]="xPadding" [y]="yPadding" 
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" [color]="color" />
     
+    <g *ngIf="chartType=='clustered-bar-chart'" rc-clustered-bar-chart 
+    [data]="data" [x]="xPadding" [y]="yPadding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
+    
     <!-- <text
     *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
     <text

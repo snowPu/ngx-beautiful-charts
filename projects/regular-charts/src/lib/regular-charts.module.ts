@@ -9,9 +9,10 @@ import { LgChartBaseComponent } from './chart-base/lg-chart-base/lg-chart-base.c
 import { MlgChartBaseComponent } from './chart-base/mlg-chart-base/mlg-chart-base.component';
 import { BcChartBaseComponent } from './chart-base/bc-chart-base/bc-chart-base.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ClusteredBarChartComponent } from './clustered-bar-chart/clustered-bar-chart.component';
 
 @NgModule({
-  declarations: [RegularChartsComponent, LineGraphComponent, ChartBaseComponent, MultiLineGraphComponent, LgChartBaseComponent, MlgChartBaseComponent, BcChartBaseComponent, BarChartComponent],
+  declarations: [RegularChartsComponent, LineGraphComponent, ChartBaseComponent, MultiLineGraphComponent, LgChartBaseComponent, MlgChartBaseComponent, BcChartBaseComponent, BarChartComponent, ClusteredBarChartComponent],
   imports: [
     BrowserModule,
     CommonModule

@@ -92,19 +92,19 @@ export class AppComponent {
   barChartData2 = [
     {
       name: 'Calcutta',
-      value: 1
+      value: 100
     },
     {
       name: 'Madras',
-      value: 3
+      value: 104
     },
     {
       name: 'Bombay',
-      value: 5
+      value: 105
     },
     {
       name: 'Delhi',
-      value: 4
+      value: 101
     }
   ];
 
@@ -150,6 +150,28 @@ export class AppComponent {
         {
           name: 'Delhi',
           value: 440
+        }
+      ]
+    },
+    {
+      series: '2030',
+      color: '#1166ee',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 100
+        },
+        {
+          name: 'Chennai',
+          value: 100
+        },
+        {
+          name: 'Bombay',
+          value: 120
+        },
+        {
+          name: 'Delhi',
+          value: 140
         }
       ]
     }
