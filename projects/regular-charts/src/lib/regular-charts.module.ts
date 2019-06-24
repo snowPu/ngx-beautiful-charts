@@ -8,9 +8,10 @@ import { MultiLineGraphComponent } from './multi-line-graph/multi-line-graph.com
 import { LgChartBaseComponent } from './chart-base/lg-chart-base/lg-chart-base.component';
 import { MlgChartBaseComponent } from './chart-base/mlg-chart-base/mlg-chart-base.component';
 import { BcChartBaseComponent } from './chart-base/bc-chart-base/bc-chart-base.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 @NgModule({
-  declarations: [RegularChartsComponent, LineGraphComponent, ChartBaseComponent, MultiLineGraphComponent, LgChartBaseComponent, MlgChartBaseComponent, BcChartBaseComponent],
+  declarations: [RegularChartsComponent, LineGraphComponent, ChartBaseComponent, MultiLineGraphComponent, LgChartBaseComponent, MlgChartBaseComponent, BcChartBaseComponent, BarChartComponent],
   imports: [
     BrowserModule,
     CommonModule

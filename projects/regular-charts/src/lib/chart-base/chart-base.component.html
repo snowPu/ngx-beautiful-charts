@@ -1,14 +1,21 @@
 
 <svg:g rc-lg-chart-base *ngIf="regularChartsService.chartType == 'line-graph'" 
-[gridWidthX]="gridWidthX" [gridWidthY]="gridWidthY" 
+[gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
 [xPadding]="xPadding" [yPadding]="yPadding" 
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
-[xAxis]="xAxis" [yAxis]="yAxis" />
+ />
 
 <svg:g rc-mlg-chart-base *ngIf="regularChartsService.chartType == 'multi-line-graph'" 
-[gridWidthX]="gridWidthX" [gridWidthY]="gridWidthY" 
+[gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
 [xPadding]="xPadding" [yPadding]="yPadding" 
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
-[xAxis]="xAxis" [yAxis]="yAxis" />
+ />
+
+<svg:g rc-bc-chart-base *ngIf="regularChartsService.chartType == 'bar-chart'" 
+[xPadding]="xPadding" [yPadding]="yPadding" 
+[width]="width" [height]="height"
+[xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+ />
+

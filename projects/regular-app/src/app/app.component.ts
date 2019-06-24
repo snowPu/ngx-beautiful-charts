@@ -68,4 +68,90 @@ export class AppComponent {
       {x: 85, y: 5, info: ''}
     ]}
   ];
+
+
+  barChartData = [
+    {
+      name: 'Calcutta',
+      value: 1
+    },
+    {
+      name: 'Madras',
+      value: 3
+    },
+    {
+      name: 'Bombay',
+      value: 9
+    },
+    {
+      name: 'Delhi',
+      value: 8
+    }
+  ];
+
+  barChartData2 = [
+    {
+      name: 'Calcutta',
+      value: 1
+    },
+    {
+      name: 'Madras',
+      value: 3
+    },
+    {
+      name: 'Bombay',
+      value: 5
+    },
+    {
+      name: 'Delhi',
+      value: 4
+    }
+  ];
+
+  clusteredBarChartData = [
+    {
+      series: '2010',
+      color: '#10ffbb',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 120
+        },
+        {
+          name: 'Chennai',
+          value: 300
+        },
+        {
+          name: 'Bombay',
+          value: 100
+        },
+        {
+          name: 'Delhi',
+          value: 400
+        }
+      ]
+    },
+    {
+      series: '2020',
+      color: '#ff1133',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 220
+        },
+        {
+          name: 'Chennai',
+          value: 320
+        },
+        {
+          name: 'Bombay',
+          value: 130
+        },
+        {
+          name: 'Delhi',
+          value: 440
+        }
+      ]
+    }
+  ];
 }

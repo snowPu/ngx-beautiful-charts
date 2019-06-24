@@ -11,11 +11,12 @@
     [attr.width]="rectWidth" 
     [attr.height]="rectHeight" 
     stroke="#444444" fill="url(#grid)" stroke-width="1"/> -->
-    <g rc-chart-base [gridWidthX]="gridWidthX" [gridWidthY]="gridWidthY" 
-    [xPadding]="xPadding" [yPadding]="yPadding" 
+    <g rc-chart-base
+    [xPadding]="xPadding" [yPadding]="yPadding"
+    [gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight"
     [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
-    [xAxis]="xAxis" [yAxis]="yAxis" />
+     />
 
     <g *ngIf="chartType=='line-graph'" rc-line-graph [data]="data" [x]="xPadding" [y]="yPadding" 
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" [color]="color" />
@@ -23,6 +24,9 @@
     <g *ngIf="chartType=='multi-line-graph'" rc-multi-line-graph [data]="data" [x]="xPadding" [y]="yPadding" 
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
 
+    <g *ngIf="chartType=='bar-chart'" rc-bar-chart [data]="data" [x]="xPadding" [y]="yPadding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" [color]="color" />
+    
     <!-- <text
     *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
     <text

@@ -1,0 +1,4 @@
+<svg:g *ngFor="let barPath of barPaths">
+  <svg:path class="chart-bar"
+  [attr.d]="barPath" [attr.fill]="color" />
+</svg:g>

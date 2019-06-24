@@ -31,9 +31,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
 
   rectWidth: number;
   rectHeight: number;
-  gridWidthX: number;
-  gridWidthY: number;
-  gridPath: string;
+  // gridWidthX: number;
+  // gridWidthY: number;
+  // gridPath: string;
   xAxis = [];
   yAxis = [];
   componentID: number;
@@ -49,24 +49,6 @@ export class RegularChartsComponent implements OnInit, OnChanges {
     console.log('gridPrecisionY: ' + this.gridPrecisionY);
   }
 
-  computeGrid() {
-    // maxX - minX --> gridPrecisionX
-    // width --> gridWidthX
-    this.gridWidthX = this.regularChartsService.transformX(this.gridPrecisionX);
-    this.gridWidthY = this.regularChartsService.transformY(this.gridPrecisionY);
-    this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
-    this.xAxis = [];
-    this.yAxis = [];
-    for (let x = this.minX; x <= this.maxX; x = x + this.gridPrecisionX) {
-      const xPos = this.regularChartsService.transformX(x) + this.xPadding;
-      this.xAxis.push({xPos: xPos, value: x});
-    }
-
-    for (let y = this.minY; y <= this.maxY; y = y + this.gridPrecisionY) {
-      const yPos = this.regularChartsService.transformY(y) + this.yPadding + 7;
-      this.yAxis.push({yPos: yPos, value: this.maxY - y });
-    }
-  }
 
   constructor(public regularChartsService: RegularChartsService, private globalParametersService: GlobalParametersService) {
   }
@@ -87,7 +69,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       data: this.data
     });
     this.printAllInput();
-    this.computeGrid();
+    // if (this.chartType === 'line-graph' || this.chartType === 'multi-line-graph') {
+    //   this.computeGrid();
+    // }
     // this.transformData();
   }
 
@@ -106,7 +90,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       data: this.data
     });
     this.printAllInput();
-    this.computeGrid();
+    // if (this.chartType === 'line-graph' || this.chartType === 'multi-line-graph') {
+    //   this.computeGrid();
+    // }
     // this.transformData();
   }
 

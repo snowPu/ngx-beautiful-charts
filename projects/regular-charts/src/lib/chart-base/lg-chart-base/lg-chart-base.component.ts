@@ -8,25 +8,41 @@ import { RegularChartsService } from '../../regular-charts.service';
 })
 export class LgChartBaseComponent implements OnInit, OnChanges {
 
-  @Input() gridWidthX: number;
-  @Input() gridWidthY: number;
   @Input() width: number;
   @Input() height: number;
   @Input() xPadding: number;
   @Input() yPadding: number;
-  @Input() xAxis;
-  @Input() yAxis;
   @Input() xAxisTitle: string;
   @Input() yAxisTitle: string;
+  @Input() gridPrecisionX: number;
+  @Input() gridPrecisionY: number;
 
-
+  gridWidthX: number;
+  gridWidthY: number;
   gridID: string;
   gridPath: string;
   x1: number;
   x2: number;
+  xAxis: any;
+  yAxis: any;
 
   computeGrid() {
+    // maxX - minX --> gridPrecisionX
+    // width --> gridWidthX
+    this.gridWidthX = this.regularChartsService.transformX(this.gridPrecisionX);
+    this.gridWidthY = this.regularChartsService.transformY(this.gridPrecisionY);
     this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
+    this.xAxis = [];
+    this.yAxis = [];
+    for (let x = this.regularChartsService.minX; x <= this.regularChartsService.maxX; x = x + this.gridPrecisionX) {
+      const xPos = this.regularChartsService.transformX(x) + this.xPadding;
+      this.xAxis.push({xPos: xPos, value: x});
+    }
+
+    for (let y = this.regularChartsService.minY; y <= this.regularChartsService.maxY; y = y + this.gridPrecisionY) {
+      const yPos = this.regularChartsService.transformY(y) + this.yPadding + 7;
+      this.yAxis.push({yPos: yPos, value: this.regularChartsService.maxY - y });
+    }
   }
 
   constructor(public regularChartsService: RegularChartsService) { }

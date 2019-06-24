@@ -4,6 +4,7 @@
     "codelyzer"
   ],
   "rules": {
+    "curly": [true, "ignore-same-line"],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
