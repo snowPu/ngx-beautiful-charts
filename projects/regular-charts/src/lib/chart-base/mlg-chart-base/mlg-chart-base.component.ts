@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { RegularChartsService } from '../regular-charts.service';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { RegularChartsService } from '../../regular-charts.service';
 
 @Component({
-  selector: 'g[rc-chart-base]',
-  templateUrl: './chart-base.component.html',
-  styleUrls: ['./chart-base.component.scss']
+  selector: 'g[rc-mlg-chart-base]',
+  templateUrl: './mlg-chart-base.component.html',
+  styleUrls: ['./mlg-chart-base.component.scss']
 })
-export class ChartBaseComponent implements OnInit, OnChanges {
+export class MlgChartBaseComponent implements OnInit, OnChanges {
 
   @Input() gridWidthX: number;
   @Input() gridWidthY: number;

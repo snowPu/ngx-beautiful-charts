@@ -39,7 +39,7 @@ export class RegularChartsService {
     if (this.chartType === 'multi-line-graph') {
       const noOfLines = this.data.length;
       this.legionWidth = this.width * .4 - this.xPadding * 2;
-      this.legionHeight = 60 + 20 * noOfLines;
+      this.legionHeight = 60 + 30 * noOfLines - 19;
     }
   }
 

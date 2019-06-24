@@ -56,6 +56,16 @@ export class AppComponent {
       {x: 55, y: 35, info: ''},
       {x: 65, y: 25, info: ''},
       {x: 75, y: 5, info: ''}
+    ]},
+    {name: 'fourth', color: '#10ffbb', data: [
+      {x: 15, y: 5, info: ''},
+      {x: 5, y: 30, info: ''},
+      {x: 25, y: 15, info: ''},
+      {x: 30, y: 16, info: ''},
+      {x: 4, y: 35, info: ''},
+      {x: 65, y: 35, info: ''},
+      {x: 65, y: 25, info: ''},
+      {x: 85, y: 5, info: ''}
     ]}
   ];
 }

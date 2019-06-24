@@ -1,0 +1,34 @@
+<svg:pattern [attr.id]="gridID" 
+[attr.x]="xPadding" [attr.y]="yPadding" 
+[attr.width]="gridWidthX" [attr.height]="gridWidthY" 
+patternUnits="userSpaceOnUse">
+    <svg:path [attr.d]="gridPath" fill="none" stroke="#444444" stroke-width="0.5" />
+</svg:pattern>
+
+<svg:rect [attr.x]="xPadding" 
+[attr.y]="yPadding" 
+[attr.width]="width" 
+[attr.height]="height" 
+stroke="#444444" [attr.fill]="'url(#' + gridID + ')'" stroke-width="1"/>
+
+<svg:text
+*ngFor="let x of xAxis" class="axis-text" 
+[attr.x]="x.xPos" [attr.y]="height+yPadding+30" class="small"> {{ x.value }} </svg:text>
+
+<svg:text
+*ngFor="let y of yAxis" class="axis-text" 
+[attr.y]="y.yPos" [attr.x]="xPadding-30" class="small">{{ y.value }}</svg:text>
+
+<!-- x Axis Title -->
+<svg:text class="axis-text" 
+  [attr.x]="width/2+xPadding" [attr.y]="height+yPadding+60" dominant-baseline="middle" text-anchor="middle"> 
+  {{ xAxisTitle }} 
+</svg:text>
+
+<!-- y Axis Title -->
+<svg:text class="axis-text" 
+  [attr.x]="-height/2-yPadding" [attr.y]="xPadding-50" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
+  {{ yAxisTitle }} 
+</svg:text>
+
+
