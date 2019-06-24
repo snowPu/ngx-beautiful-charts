@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RegularChartsService } from './regular-charts.service';
+import { GlobalParametersService } from '../global/global-parameters.service';
 
 @Component({
   selector: 'rc-regular-charts',
   templateUrl: './regular-charts.component.html',
-  styles: []
+  styles: [],
+  providers: [RegularChartsService]
 })
 export class RegularChartsComponent implements OnInit, OnChanges {
 
@@ -18,6 +20,8 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   @Input() gridPrecisionY: number;
   @Input() displayXAxis: boolean;
   @Input() displayYAxis: boolean;
+  @Input() xAxisTitle: string;
+  @Input() yAxisTitle: string;
   @Input() data;
   @Input() color;
   @Input() chartType: string;
@@ -32,6 +36,7 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   gridPath: string;
   xAxis = [];
   yAxis = [];
+  componentID: number;
 
   printAllInput() {
     console.log('width: ' + this.width);
@@ -63,11 +68,13 @@ export class RegularChartsComponent implements OnInit, OnChanges {
     }
   }
 
-  constructor(public regularChartsService: RegularChartsService) {
+  constructor(public regularChartsService: RegularChartsService, private globalParametersService: GlobalParametersService) {
   }
 
   ngOnInit() {
+    this.componentID = this.globalParametersService.addNewComponent();
     this.regularChartsService.setValues({
+      componentID: this.componentID,
       width: this.width,
       height: this.height,
       minX: this.minX,
@@ -75,7 +82,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       minY: this.minY,
       maxY: this.maxY,
       xPadding: this.xPadding,
-      yPadding: this.yPadding
+      yPadding: this.yPadding,
+      chartType: this.chartType,
+      data: this.data
     });
     this.printAllInput();
     this.computeGrid();
@@ -84,6 +93,7 @@ export class RegularChartsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.regularChartsService.setValues({
+      componentID: this.componentID,
       width: this.width,
       height: this.height,
       minX: this.minX,
@@ -91,7 +101,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
       minY: this.minY,
       maxY: this.maxY,
       xPadding: this.xPadding,
-      yPadding: this.yPadding
+      yPadding: this.yPadding,
+      chartType: this.chartType,
+      data: this.data
     });
     this.printAllInput();
     this.computeGrid();

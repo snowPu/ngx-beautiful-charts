@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RegularChartsService } from '../regular-charts.service';
+import { RegularChartsComponent } from '../regular-charts.component';
 
 @Component({
   selector: 'g[rc-line-graph]',
@@ -19,7 +20,8 @@ export class LineGraphComponent implements OnInit, OnChanges {
   graphLinePath: string;
   transformedData;
 
-  constructor(private regularChartsService: RegularChartsService) { }
+  constructor(public regularChartsService: RegularChartsService) {
+  }
 
   transformData() {
     this.transformedData = [];

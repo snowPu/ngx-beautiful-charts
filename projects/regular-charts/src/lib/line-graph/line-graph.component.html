@@ -3,6 +3,6 @@
   />
 
 <svg:g *ngFor="let point of transformedData;">
-  <svg:circle [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="#444444" />
+  <svg:circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4" />
   <!-- <svg:text x="100" y="50">{{item.name}}</text> -->
 </svg:g>

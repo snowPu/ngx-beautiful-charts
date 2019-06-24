@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RegularChartsService } from '../regular-charts.service';
+import { RegularChartsComponent } from '../regular-charts.component';
+
 
 @Component({
   selector: 'g[rc-multi-line-graph]',
@@ -67,8 +69,8 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   // }
 
 
-  constructor(public regularChartsService: RegularChartsService) { }
-
+  constructor(public regularChartsService: RegularChartsService) {
+  }
   ngOnInit() {
     console.log('init..');
     // this.transformData();

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { RegularChartsModule } from './regular-charts.module';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: RegularChartsModule
+// })
 export class RegularChartsService {
 
   width: number;
@@ -15,13 +16,31 @@ export class RegularChartsService {
   yPadding: number;
   rectWidth: number;
   rectHeight: number;
-
+  legionWidth: number;
+  legionHeight: number;
+  chartType: string;
+  componentID: number;
+  data;
 
   constructor() { }
 
   computeRectDimensions() {
-    this.rectWidth = this.width - this.xPadding * 2;
+    if (this.chartType === 'line-graph') {
+      this.rectWidth = this.width - this.xPadding * 2;
+    } else if (this.chartType === 'multi-line-graph') {
+      this.rectWidth = this.width * .6 - this.xPadding * 2;
+    }
     this.rectHeight = this.height - this.yPadding * 4;
+
+    console.log(this.chartType + ' - rectWidth: ' + this.rectWidth + ', rectHeight: ' + this.rectHeight);
+  }
+
+  computeLegionDimensions() {
+    if (this.chartType === 'multi-line-graph') {
+      const noOfLines = this.data.length;
+      this.legionWidth = this.width * .4 - this.xPadding * 2;
+      this.legionHeight = 60 + 20 * noOfLines;
+    }
   }
 
   transformX(x: number) {
@@ -33,6 +52,7 @@ export class RegularChartsService {
   }
 
   setValues({
+    componentID: componentID,
     width: width,
     height: height,
     minX: minX,
@@ -40,8 +60,11 @@ export class RegularChartsService {
     maxX: maxX,
     maxY: maxY,
     xPadding: xPadding,
-    yPadding: yPadding
+    yPadding: yPadding,
+    chartType: chartType,
+    data: data
   }) {
+    this.componentID = componentID;
     this.width = width;
     this.height = height;
     this.minX = minX;
@@ -50,7 +73,10 @@ export class RegularChartsService {
     this.maxY = maxY;
     this.xPadding = xPadding;
     this.yPadding = yPadding;
+    this.chartType = chartType;
+    this.data = data;
 
     this.computeRectDimensions();
+    this.computeLegionDimensions();
   }
 }

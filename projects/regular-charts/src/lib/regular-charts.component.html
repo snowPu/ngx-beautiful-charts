@@ -12,7 +12,9 @@
     [attr.height]="rectHeight" 
     stroke="#444444" fill="url(#grid)" stroke-width="1"/> -->
     <g rc-chart-base [gridWidthX]="gridWidthX" [gridWidthY]="gridWidthY" 
-    [xPadding]="xPadding" [yPadding]="yPadding" [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight"
+    [xPadding]="xPadding" [yPadding]="yPadding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight"
+    [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
     [xAxis]="xAxis" [yAxis]="yAxis" />
 
     <g *ngIf="chartType=='line-graph'" rc-line-graph [data]="data" [x]="xPadding" [y]="yPadding" 
