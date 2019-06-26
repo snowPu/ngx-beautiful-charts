@@ -11,9 +11,11 @@ patternUnits="userSpaceOnUse">
 [attr.height]="height" 
 stroke="#444444" fill="none" stroke-width="1"/>
 
-<svg:path *ngFor="let yLevelPath of yLevelPaths"
-class="bar-chart-level"
-[attr.d]="yLevelPath" fill="none" stroke="#444444" />
+<svg:g *ngIf="showGridLines">
+  <svg:path *ngFor="let yLevelPath of yLevelPaths"
+  class="bar-chart-level"
+  [attr.d]="yLevelPath" fill="none" stroke="#444444" />
+</svg:g>
 
 <svg:text
 *ngFor="let x of xAxis" class="axis-text" 

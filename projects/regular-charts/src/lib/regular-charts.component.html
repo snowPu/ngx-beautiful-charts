@@ -15,7 +15,7 @@
     [xPadding]="xPadding" [yPadding]="yPadding"
     [gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight"
-    [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+    [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle" [showGridLines]="showGridLines"
      />
 
     <g *ngIf="chartType=='line-graph'" rc-line-graph [data]="data" [x]="xPadding" [y]="yPadding" 
@@ -28,6 +28,10 @@
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" [color]="color" />
     
     <g *ngIf="chartType=='clustered-bar-chart'" rc-clustered-bar-chart 
+    [data]="data" [x]="xPadding" [y]="yPadding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
+
+    <g *ngIf="chartType=='pie-chart'" rc-pie-chart
     [data]="data" [x]="xPadding" [y]="yPadding" 
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
     

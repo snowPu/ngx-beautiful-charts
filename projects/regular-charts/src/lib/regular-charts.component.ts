@@ -25,6 +25,7 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   @Input() data;
   @Input() color;
   @Input() chartType: string;
+  @Input() showGridLines: boolean;
 
   xPadding = 60;
   yPadding = this.xPadding / 2;
@@ -55,6 +56,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
+    if (this.chartType === 'pie-chart') {
+      this.height = this.width * .6 + this.yPadding * 4;
+    }
     this.regularChartsService.setValues({
       componentID: this.componentID,
       width: this.width,
@@ -76,6 +80,9 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    if (this.chartType === 'pie-chart') {
+      this.height = this.width * .6 + this.yPadding * 4;
+    }
     this.regularChartsService.setValues({
       componentID: this.componentID,
       width: this.width,

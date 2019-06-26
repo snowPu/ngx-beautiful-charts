@@ -20,6 +20,7 @@ export class RegularChartsService {
   legionHeight: number;
   chartType: string;
   componentID: number;
+  pieRadius: number;
   data;
 
   // bar chart
@@ -38,6 +39,9 @@ export class RegularChartsService {
       this.rectWidth = this.width - this.xPadding * 2;
     } else if (this.chartType === 'clustered-bar-chart') {
       this.rectWidth = this.width * .7 - this.xPadding * 2;
+    } else if (this.chartType === 'pie-chart') {
+      this.rectWidth = this.width * .6 - this.xPadding * 2;
+      this.rectHeight = this.rectWidth;
     }
 
     console.log(this.chartType + ' - rectWidth: ' + this.rectWidth + ', rectHeight: ' + this.rectHeight);
@@ -59,6 +63,10 @@ export class RegularChartsService {
       }
       const noOfLines = uniqueXAxisValues.size;
       this.legionWidth = this.width * .3 - this.xPadding * 2;
+      this.legionHeight = 60 + 30 * noOfLines - 19;
+    } else if (this.chartType === 'pie-chart') {
+      const noOfLines = this.data.length;
+      this.legionWidth = this.width * .4 - this.xPadding * 2;
       this.legionHeight = 60 + 30 * noOfLines - 19;
     }
   }
@@ -152,6 +160,8 @@ export class RegularChartsService {
       this.maxY = this.closestMultipleMoreThanEqualTo(this.diff, maxVal);
       this.maxY = this.maxY + this.diff * 2;
 
+    } else if (this.chartType === 'pie-chart') {
+      this.pieRadius = (this.width * .6 - this.xPadding * 2) / 2;
     }
 
     this.computeRectDimensions();

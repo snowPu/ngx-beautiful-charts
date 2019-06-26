@@ -14,11 +14,11 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
   @Input() yPadding: number;
   @Input() xAxisTitle: string;
   @Input() yAxisTitle: string;
+  @Input() showGridLines: boolean;
 
   yLevelPaths: string[];
   xAxis;
   yAxis;
-
 
   computeGrid() {
     // // get range of values in y axis

@@ -14,8 +14,14 @@
  />
 
 <svg:g rc-bc-chart-base *ngIf="regularChartsService.chartType == 'bar-chart' || regularChartsService.chartType=='clustered-bar-chart'" 
-[xPadding]="xPadding" [yPadding]="yPadding" 
+[xPadding]="xPadding" [yPadding]="yPadding" [showGridLines]="showGridLines"
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
+
+<svg:g rc-pie-chart-base *ngIf="regularChartsService.chartType == 'pie-chart'" 
+[xPadding]="xPadding" [yPadding]="yPadding"
+[width]="width" [height]="height"
+ />
+
 

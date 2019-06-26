@@ -41,7 +41,7 @@ chartType="multi-line-graph"></rc-regular-charts>
 xAxisTitle="City"
 yAxisTitle="Value"
 [data]="barChartData"
-chartType="bar-chart"
+chartType="bar-chart" [showGridLines]="true"
 color="#ff4411"></rc-regular-charts>
 
 <rc-regular-charts [width]="800" [height]="400"
@@ -50,7 +50,7 @@ color="#ff4411"></rc-regular-charts>
 xAxisTitle="City"
 yAxisTitle="Value"
 [data]="barChartData2"
-chartType="bar-chart"
+chartType="bar-chart" [showGridLines]="false"
 color="#1166ee"></rc-regular-charts>
 
 <rc-regular-charts [width]="1100" [height]="400"
@@ -60,4 +60,9 @@ xAxisTitle="City"
 yAxisTitle="Value"
 [data]="clusteredBarChartData"
 chartType="clustered-bar-chart"></rc-regular-charts>
+
+<rc-regular-charts [width]="800"
+[data]="pieChartData"
+chartType="pie-chart"></rc-regular-charts>
+
 

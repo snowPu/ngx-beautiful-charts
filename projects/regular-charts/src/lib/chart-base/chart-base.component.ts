@@ -16,6 +16,7 @@ export class ChartBaseComponent implements OnInit, OnChanges {
   @Input() yAxisTitle: string;
   @Input() gridPrecisionX: string;
   @Input() gridPrecisionY: string;
+  @Input() showGridLines: boolean;
 
 
   gridID: string;
