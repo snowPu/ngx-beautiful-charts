@@ -35,6 +35,10 @@
     [data]="data" [x]="xPadding" [y]="yPadding" 
     [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
     
+    <g *ngIf="chartType=='donut-chart'" rc-donut-chart
+    [data]="data" [x]="xPadding" [y]="yPadding" 
+    [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" />
+    
     <!-- <text
     *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
     <text

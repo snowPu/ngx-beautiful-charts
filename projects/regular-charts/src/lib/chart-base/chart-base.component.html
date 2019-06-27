@@ -19,7 +19,7 @@
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
 
-<svg:g rc-pie-chart-base *ngIf="regularChartsService.chartType == 'pie-chart'" 
+<svg:g rc-pie-chart-base *ngIf="regularChartsService.chartType == 'pie-chart' || regularChartsService.chartType == 'donut-chart'" 
 [xPadding]="xPadding" [yPadding]="yPadding"
 [width]="width" [height]="height"
  />

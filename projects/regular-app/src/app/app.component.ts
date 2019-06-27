@@ -111,7 +111,7 @@ export class AppComponent {
   clusteredBarChartData = [
     {
       series: '2010',
-      color: '#ffbb44',
+      color: '#EAC435',
       data: [
         {
           name: 'Calcutta',
@@ -133,7 +133,7 @@ export class AppComponent {
     },
     {
       series: '2020',
-      color: '#ff1133',
+      color: '#345995',
       data: [
         {
           name: 'Calcutta',
@@ -155,7 +155,7 @@ export class AppComponent {
     },
     {
       series: '2030',
-      color: '#1166ee',
+      color: '#CA1551',
       data: [
         {
           name: 'Calcutta',
@@ -180,22 +180,27 @@ export class AppComponent {
   pieChartData = [
     {
       name: 'Calcutta',
-      color: '#1213ff',
+      color: '#EAC435',
       value: 50
     },
     {
       name: 'Madras',
-      color: '#ff1333',
+      color: '#345995',
       value: 50
     },
     {
       name: 'Bombay',
-      color: '#ffbb44',
+      color: '#03CEA4',
       value: 50
     },
     {
       name: 'Delhi',
-      color: '#bbee44',
+      color: '#FF6B6B',
+      value: 50
+    },
+    {
+      name: 'Bangalore',
+      color: '#CA1551',
       value: 50
     }
   ];

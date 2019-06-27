@@ -1,7 +1,7 @@
-<svg:g [ngStyle]="{'transform': gTranslate}">
-  <svg:g *ngFor="let pieSlice of pieSlices">
+<svg:g *ngFor="let pieSlice of pieSlices">
+  <svg:g [ngStyle]="{'transform': gTranslate + ' ' + pieSlice.rotation}">
     <svg:path class="pie-slice" (mouseover)="pieSlice.hover=true" (mouseout)="pieSlice.hover=false"
-    [ngStyle]="{'transform': pieSlice.rotation, 'opacity': pieSlice.hover ? 0.7 : 1.0}"
+    [ngStyle]="{'opacity': pieSlice.hover ? 0.7 : 1.0}"
       [attr.d]="pieSlice.hover ? pieSlice.hoverD : pieSlice.d" [attr.fill]="pieSlice.color" />
   </svg:g>
 </svg:g>
