@@ -56,8 +56,12 @@ export class RegularChartsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
-    if (this.chartType === 'pie-chart' || this.chartType === 'donut-chart') {
-      this.height = this.width * .6 + this.yPadding * 4;
+    if (this.chartType === 'pie-chart') {
+      this.height = this.width * .6 - this.xPadding;
+    } else if (this.chartType === 'donut-chart') {
+      this.height = this.width * .6 - this.xPadding;
+    } else if (this.chartType === 'sunburst-chart') {
+      this.height = this.width - this.xPadding;
     }
     this.regularChartsService.setValues({
       componentID: this.componentID,
@@ -80,8 +84,12 @@ export class RegularChartsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.chartType === 'pie-chart' || this.chartType === 'donut-chart') {
-      this.height = this.width * .6 + this.yPadding * 4;
+    if (this.chartType === 'pie-chart') {
+      this.height = this.width * .6 - this.xPadding;
+    } else if (this.chartType === 'donut-chart') {
+      this.height = this.width * .6 - this.xPadding;
+    } else if (this.chartType === 'sunburst-chart') {
+      this.height = this.width - this.xPadding;
     }
     this.regularChartsService.setValues({
       componentID: this.componentID,

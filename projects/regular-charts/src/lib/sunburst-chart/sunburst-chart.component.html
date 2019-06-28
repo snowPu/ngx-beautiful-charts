@@ -1,0 +1,13 @@
+<svg:g *ngFor="let level of levelSunSlices">
+  <svg:g *ngFor="let slice of level">
+    <svg:g [ngStyle]="{'transform': gTranslate + ' ' + slice.rotation}">
+      <svg:path class="sun-slice" (mouseover)="slice.hover=true" (mouseout)="slice.hover=false"
+      [ngStyle]="{'opacity': slice.hover ? 0.7 : 1.0}"
+        [attr.d]="slice.hover ? slice.hoverD : slice.d" [attr.fill]="slice.color" />
+    <svg:text class="slice-text" [attr.x]="slice.textX" 
+    [attr.y]="0" dominant-baseline="middle" text-anchor="middle" [attr.transform]="slice.textRotation"> 
+      {{ slice.name }} 
+    </svg:text>
+    </svg:g>
+  </svg:g>
+</svg:g>

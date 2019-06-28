@@ -204,4 +204,63 @@ export class AppComponent {
       value: 50
     }
   ];
+
+  sunburstChartData = [
+    {
+      name: 'Calcutta',
+      children: [
+        { name: 'Gariahat', value: 120 },
+        { name: 'Salt Lake', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'Tollygunge', value: 60 }
+      ],
+      color: '#EAC435'
+    },
+    {
+      name: 'Madras',
+      children: [
+        { name: 'Adyar', value: 120 },
+        { name: 'Anna Nagar', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'T Nagar', value: 60 }
+      ],
+      color: '#345995'
+    },
+    {
+      name: 'Bombay',
+      children: [
+        { name: 'Andheri', value: 120 },
+        { name: 'Bandra', children: [
+          { name: 'West', value: 50 },
+          { name: 'East', value: 60 }
+        ]},
+        { name: 'Cobala', value: 60 }
+      ],
+      color: '#03CEA4'
+    },
+    {
+      name: 'Delhi',
+      color: '#FF6B6B',
+      value: 150
+    },
+    {
+      name: 'Bangalore',
+      children: [
+        { name: 'Koramangala', value: 120 },
+        { name: 'Indira Nagar', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'Marathahalli', value: 60 }
+      ],
+      color: '#CA1551'
+    }
+  ];
 }

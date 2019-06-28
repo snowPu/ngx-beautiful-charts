@@ -7,7 +7,7 @@
     x="0" y="0" class="small"
     text-anchor="middle" dominant-baseline="middle">
       <svg:tspan x="0" dy="0em">{{ donutSlice.name }}</svg:tspan>
-      <svg:tspan x="0" dy="1.2em">{{ donutSlice.perc }}%</svg:tspan>
+      <svg:tspan x="0" dy="1.2em">{{ donutSlice.perc * 100 | number: '1.0-2'  }}%</svg:tspan>
     </svg:text>
   </svg:g>
 </svg:g>
