@@ -1,6 +1,7 @@
 {
   "name": "ngx-regular-charts",
-  "version": "0.0.1",
+  "version": "1.0.1",
+  "description": "A library to create charts in Angular",
   "peerDependencies": {
     "@angular/common": "^8.0.1",
     "@angular/core": "^8.0.1"
@@ -9,6 +10,17 @@
   "license": "GNU",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snowPu/regular-lib.git"
-  }
+    "url": "https://github.com/snowPu/ngx-regular-charts"
+  },
+  "bugs": {
+    "url": "https://github.com/snowPu/ngx-regular-charts/issues"
+  },
+  "homepage": "https://github.com/snowPu/ngx-regular-charts",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "charts",
+    "graphs"
+  ]
 }
