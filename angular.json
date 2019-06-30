@@ -3,33 +3,33 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "regular-charts": {
+    "ngx-regular-charts": {
       "projectType": "library",
-      "root": "projects/regular-charts",
-      "sourceRoot": "projects/regular-charts/src",
-      "prefix": "rc",
+      "root": "projects/ngx-regular-charts",
+      "sourceRoot": "projects/ngx-regular-charts/src",
+      "prefix": "ngx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/regular-charts/tsconfig.lib.json",
-            "project": "projects/regular-charts/ng-package.json"
+            "tsConfig": "projects/ngx-regular-charts/tsconfig.lib.json",
+            "project": "projects/ngx-regular-charts/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/regular-charts/src/test.ts",
-            "tsConfig": "projects/regular-charts/tsconfig.spec.json",
-            "karmaConfig": "projects/regular-charts/karma.conf.js"
+            "main": "projects/ngx-regular-charts/src/test.ts",
+            "tsConfig": "projects/ngx-regular-charts/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-regular-charts/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/regular-charts/tsconfig.lib.json",
-              "projects/regular-charts/tsconfig.spec.json"
+              "projects/ngx-regular-charts/tsconfig.lib.json",
+              "projects/ngx-regular-charts/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -152,7 +152,7 @@
       }
     }
   },
-  "defaultProject": "regular-charts",
+  "defaultProject": "ngx-regular-charts",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

@@ -21,10 +21,16 @@
     ],
     "paths": {
       "regular-charts": [
-        "dist/regular-charts"
+        "dist/ngx-regular-charts"
       ],
       "regular-charts/*": [
-        "dist/regular-charts/*"
+        "dist/ngx-regular-charts/*"
+      ],
+      "ngx-mat-regular-charts": [
+        "dist/ngx-mat-regular-charts"
+      ],
+      "ngx-mat-regular-charts/*": [
+        "dist/ngx-mat-regular-charts/*"
       ]
     }
   }

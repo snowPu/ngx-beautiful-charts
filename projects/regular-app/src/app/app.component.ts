@@ -6,38 +6,38 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Regular Charts';
+  title = 'NgxRegularCharts';
 
   data = [
-    {x: 10, y: 10, info: ''},
-    {x: 80, y: 40, info: ''},
-    {x: 30, y: 30, info: ''},
-    {x: 40, y: 20, info: ''},
-    {x: 40, y: 30, info: ''},
-    {x: 40, y: 40, info: ''},
-    {x: 50, y: 20, info: ''},
-    {x: 90, y: 20, info: ''},
-    {x: 41, y: 45, info: ''},
-    {x: 51, y: 22, info: ''},
-    {x: 92, y: 10, info: ''}
+    {x: 10, y: 10, info: 'Point 1'},
+    {x: 80, y: 40, info: 'Point 2'},
+    {x: 30, y: 30, info: 'Point 3'},
+    {x: 40, y: 20, info: 'Point 4'},
+    {x: 40, y: 30, info: 'Point 5'},
+    {x: 40, y: 40, info: 'Point 6'},
+    {x: 50, y: 20, info: 'Point 7'},
+    {x: 90, y: 20, info: 'Point 8'},
+    {x: 41, y: 45, info: 'Point 9'},
+    {x: 51, y: 22, info: 'Point 10'},
+    {x: 92, y: 10, info: 'Point 11'}
   ];
 
   multiLineData = [
     {name: 'first', color: '#ff1111', data: [
-      {x: 10, y: 10, info: ''},
-      {x: 80, y: 40, info: ''},
-      {x: 30, y: 30, info: ''},
-      {x: 40, y: 20, info: ''},
-      {x: 40, y: 30, info: ''},
-      {x: 40, y: 40, info: ''},
-      {x: 50, y: 20, info: ''},
-      {x: 90, y: 20, info: ''},
-      {x: 41, y: 45, info: ''},
-      {x: 51, y: 22, info: ''},
-      {x: 92, y: 10, info: ''}
+      {x: 10, y: 10, info: 'Point 1'},
+      {x: 80, y: 40, info: 'Point 2'},
+      {x: 30, y: 30, info: 'Point 3'},
+      {x: 40, y: 20, info: 'Point 4'},
+      {x: 40, y: 30, info: 'Point 5'},
+      {x: 40, y: 40, info: 'Point 6'},
+      {x: 50, y: 20, info: 'Point 7'},
+      {x: 90, y: 20, info: 'Point 8'},
+      {x: 41, y: 45, info: 'Point 9'},
+      {x: 51, y: 22, info: 'Point 10'},
+      {x: 92, y: 10, info: 'Point 11'}
     ]},
     {name: 'second', color: '#33bb33', data: [
-      {x: 10, y: 5, info: ''},
+      {x: 10, y: 5, info:  ''},
       {x: 80, y: 30, info: ''},
       {x: 30, y: 25, info: ''},
       {x: 40, y: 35, info: ''},
@@ -45,7 +45,7 @@ export class AppComponent {
       {x: 55, y: 35, info: ''},
       {x: 50, y: 15, info: ''},
       {x: 90, y: 15, info: ''},
-      {x: 92, y: 5, info: ''}
+      {x: 92, y: 5, info:  ''}
     ]},
     {name: 'third', color: '#3333bb', data: [
       {x: 5, y: 5, info: ''},
@@ -240,7 +240,7 @@ export class AppComponent {
           { name: 'West', value: 50 },
           { name: 'East', value: 60 }
         ]},
-        { name: 'Cobala', value: 60 }
+        { name: 'Colaba', value: 60 }
       ],
       color: '#03CEA4'
     },
@@ -261,6 +261,60 @@ export class AppComponent {
         { name: 'Marathahalli', value: 60 }
       ],
       color: '#CA1551'
+    }
+  ];
+
+  sunburstChartData2 = [
+    {
+      name: 'Calcutta',
+      children: [
+        { name: 'Gariahat', value: 120 },
+        { name: 'Salt Lake', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'Tollygunge', value: 60 }
+      ]
+    },
+    {
+      name: 'Madras',
+      children: [
+        { name: 'Adyar', value: 120 },
+        { name: 'Anna Nagar', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'T Nagar', value: 60 }
+      ]
+    },
+    {
+      name: 'Bombay',
+      children: [
+        { name: 'Andheri', value: 120 },
+        { name: 'Bandra', children: [
+          { name: 'West', value: 50 },
+          { name: 'East', value: 60 }
+        ]},
+        { name: 'Colaba', value: 60 }
+      ]
+    },
+    {
+      name: 'Delhi',
+      value: 150
+    },
+    {
+      name: 'Bangalore',
+      children: [
+        { name: 'Koramangala', value: 120 },
+        { name: 'Indira Nagar', children: [
+          { name: 'Sector 1', value: 50 },
+          { name: 'Sector 2', value: 60 },
+          { name: 'Sector 3', value: 20 }
+        ]},
+        { name: 'Marathahalli', value: 60 }
+      ]
     }
   ];
 }

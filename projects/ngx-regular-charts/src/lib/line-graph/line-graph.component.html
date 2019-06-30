@@ -1,0 +1,14 @@
+<svg:path class="line-path"
+[attr.d]="graphLinePath" fill="none" [attr.stroke]="color"
+  />
+
+<svg:g id="component" *ngFor="let point of transformedData;">
+  <svg:circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4">
+  </svg:circle>
+  
+  <svg:g class="tooltip" [ngStyle]="{'transform': point.toolTipTranslate, 'display': point.toolTip}" 
+  opacity="0.9">
+    <svg:rect rx="5" width="100" height="25"></svg:rect>
+    <svg:text x="15" y="16">{{ point.info }}</svg:text>
+   </g>
+</svg:g>

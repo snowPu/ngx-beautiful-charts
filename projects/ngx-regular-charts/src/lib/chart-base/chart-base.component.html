@@ -1,0 +1,27 @@
+
+<svg:g ngx-lg-chart-base *ngIf="regularChartsService.chartType == 'line-graph'" 
+[gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
+[xPadding]="xPadding" [yPadding]="yPadding" 
+[width]="width" [height]="height"
+[xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+ />
+
+<svg:g ngx-mlg-chart-base *ngIf="regularChartsService.chartType == 'multi-line-graph'" 
+[gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
+[xPadding]="xPadding" [yPadding]="yPadding" 
+[width]="width" [height]="height"
+[xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+ />
+
+<svg:g ngx-bc-chart-base *ngIf="regularChartsService.chartType == 'bar-chart' || regularChartsService.chartType=='clustered-bar-chart'" 
+[xPadding]="xPadding" [yPadding]="yPadding" [showGridLines]="showGridLines"
+[width]="width" [height]="height"
+[xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+ />
+
+<svg:g ngx-pie-chart-base *ngIf="regularChartsService.chartType == 'pie-chart' || regularChartsService.chartType == 'donut-chart'" 
+[xPadding]="xPadding" [yPadding]="yPadding"
+[width]="width" [height]="height"
+ />
+
+

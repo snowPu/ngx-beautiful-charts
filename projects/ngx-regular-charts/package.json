@@ -1,0 +1,14 @@
+{
+  "name": "ngx-regular-charts",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1"
+  },
+  "author": "Sukanya Dasgupta",
+  "license": "GNU",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snowPu/regular-lib.git"
+  }
+}
