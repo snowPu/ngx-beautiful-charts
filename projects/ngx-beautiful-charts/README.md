@@ -21,8 +21,6 @@ Started out initially as an interesting way to pass time, NgxBeautifulCharts tur
 
 ### Line Graph
 
-![Line Graph in Angular](./chart-images/line-graph.png)
-
 #### TypeScript:
 ```
 lineData = [
@@ -57,8 +55,6 @@ color="#ff4444"></ngx-beautiful-charts>
 ```
 
 ### Multi Line Graph
-
-![Line Graph in Angular](./chart-images/multi-line.png)
 
 #### TypeScript:
 ```
@@ -100,8 +96,6 @@ xAxisTitle="Time" yAxisTitle="Distance"
 
 ### Bar Chart
 
-![Line Graph in Angular](./chart-images/bar-chart.png)
-
 #### TypeScript:
 ```
 barChartData = [
@@ -137,8 +131,6 @@ color="#1166ee"></ngx-beautiful-charts>
 ```
 
 ### Clustered Bar Chart
-
-![Line Graph in Angular](./chart-images/clustered-bar-chart.png)
 
 #### TypeScript:
 ```

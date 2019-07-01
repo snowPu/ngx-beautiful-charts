@@ -1,0 +1,26 @@
+{
+  "name": "ngx-beautiful-charts",
+  "version": "1.0.3",
+  "description": "A library to create charts in Angular",
+  "peerDependencies": {
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1"
+  },
+  "author": "Sukanya Dasgupta",
+  "license": "GNU",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snowPu/ngx-beautiful-charts"
+  },
+  "bugs": {
+    "url": "https://github.com/snowPu/ngx-beautiful-charts/issues"
+  },
+  "homepage": "https://github.com/snowPu/ngx-beautiful-charts",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "charts",
+    "graphs"
+  ]
+}

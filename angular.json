@@ -3,33 +3,33 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-regular-charts": {
+    "ngx-beautiful-charts": {
       "projectType": "library",
-      "root": "projects/ngx-regular-charts",
-      "sourceRoot": "projects/ngx-regular-charts/src",
+      "root": "projects/ngx-beautiful-charts",
+      "sourceRoot": "projects/ngx-beautiful-charts/src",
       "prefix": "ngx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-regular-charts/tsconfig.lib.json",
-            "project": "projects/ngx-regular-charts/ng-package.json"
+            "tsConfig": "projects/ngx-beautiful-charts/tsconfig.lib.json",
+            "project": "projects/ngx-beautiful-charts/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-regular-charts/src/test.ts",
-            "tsConfig": "projects/ngx-regular-charts/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-regular-charts/karma.conf.js"
+            "main": "projects/ngx-beautiful-charts/src/test.ts",
+            "tsConfig": "projects/ngx-beautiful-charts/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-beautiful-charts/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-regular-charts/tsconfig.lib.json",
-              "projects/ngx-regular-charts/tsconfig.spec.json"
+              "projects/ngx-beautiful-charts/tsconfig.lib.json",
+              "projects/ngx-beautiful-charts/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -39,7 +39,7 @@
       }
     },
     "regular-app": {
-      "projectType": "application",
+      "projectType": "application", 
       "schematics": {},
       "root": "projects/regular-app",
       "sourceRoot": "projects/regular-app/src",
@@ -152,7 +152,7 @@
       }
     }
   },
-  "defaultProject": "ngx-regular-charts",
+  "defaultProject": "ngx-beautiful-charts",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

@@ -1,9 +1,0 @@
-<svg:g *ngFor="let line of data">
-  <svg:g ngx-line-graph [data]="line.data" [x]="regularChartsService.xPadding" [y]="regularChartsService.yPadding" 
-  [width]="regularChartsService.rectWidth" [height]="regularChartsService.rectHeight" [color]="line.color" />
-</svg:g>
-
-
-<!-- <svg:path *ngFor="let singleLine of graphLinePaths" class="line-path"
-[attr.d]="singleLine.path" fill="none" [attr.stroke]="singleLine.color"
-  /> -->

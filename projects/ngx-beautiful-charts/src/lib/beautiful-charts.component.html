@@ -1,0 +1,51 @@
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- <pattern id="grid" 
+    [attr.x]="padding" [attr.y]="padding" 
+    [attr.width]="gridWidthX" [attr.height]="gridWidthY" 
+    patternUnits="userSpaceOnUse">
+        <path [attr.d]="gridPath" fill="none" stroke="#444444" stroke-width="0.5" />
+    </pattern>
+    
+    <rect [attr.x]="padding" 
+    [attr.y]="padding" 
+    [attr.width]="rectWidth" 
+    [attr.height]="rectHeight" 
+    stroke="#444444" fill="url(#grid)" stroke-width="1"/> -->
+    <g ngx-chart-base
+    [xPadding]="xPadding" [yPadding]="yPadding"
+    [gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight"
+    [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle" [showGridLines]="showGridLines"
+     />
+
+    <g *ngIf="chartType=='line-graph'" ngx-line-graph [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" [color]="color" />
+    
+    <g *ngIf="chartType=='multi-line-graph'" ngx-multi-line-graph [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" />
+
+    <g *ngIf="chartType=='bar-chart'" ngx-bar-chart [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" [color]="color" />
+    
+    <g *ngIf="chartType=='clustered-bar-chart'" ngx-clustered-bar-chart 
+    [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" />
+
+    <g *ngIf="chartType=='pie-chart'" ngx-pie-chart
+    [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" />
+    
+    <g *ngIf="chartType=='donut-chart'" ngx-donut-chart
+    [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" />
+    
+    <g *ngIf="chartType=='sunburst-chart'" ngx-sunburst-chart
+    [data]="dataCopy" [x]="xPadding" [y]="yPadding" 
+    [width]="BeautifulChartsService.rectWidth" [height]="BeautifulChartsService.rectHeight" />
+    
+    <!-- <text
+    *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>
+    <text
+    *ngFor="let y of yAxis" class="axis-text" [attr.y]="y.yPos" [attr.x]="padding-30" class="small">{{ y.value }}</text> -->
+    
+</svg>

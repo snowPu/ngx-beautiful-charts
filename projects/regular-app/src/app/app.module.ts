@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RegularChartsModule } from 'regular-charts';
+import { BeautifulChartsModule } from 'ngx-beautiful-charts';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { RegularChartsModule } from 'regular-charts';
   ],
   imports: [
     BrowserModule,
-    RegularChartsModule
+    BeautifulChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
