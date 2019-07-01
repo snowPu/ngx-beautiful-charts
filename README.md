@@ -58,7 +58,7 @@ color="#ff4444"></ngx-beautiful-charts>
 
 ### Multi Line Graph
 
-![Line Graph in Angular](./chart-images/multi-line.png)
+![Multi Line Graph in Angular](./chart-images/multi-line.png)
 
 #### TypeScript:
 ```
@@ -100,7 +100,7 @@ xAxisTitle="Time" yAxisTitle="Distance"
 
 ### Bar Chart
 
-![Line Graph in Angular](./chart-images/bar-chart.png)
+![Bar Chart in Angular](./chart-images/bar-chart.png)
 
 #### TypeScript:
 ```
@@ -138,7 +138,7 @@ color="#1166ee"></ngx-beautiful-charts>
 
 ### Clustered Bar Chart
 
-![Line Graph in Angular](./chart-images/clustered-bar-chart.png)
+![Clustered Bar Chart in Angular](./chart-images/clustered-bar-chart.png)
 
 #### TypeScript:
 ```
@@ -225,6 +225,8 @@ chartType="clustered-bar-chart"></ngx-beautiful-charts>
 
 ### Pie Chart
 
+![Pie Chart in Angular](./chart-images/pie-chart.png)
+
 #### TypeScript:
 ```
 pieChartData = [
@@ -265,6 +267,8 @@ chartType="pie-chart"></ngx-beautiful-charts>
 
 ### Donut Chart
 
+![Donut Chart in Angular](./chart-images/donut-chart.png)
+
 #### TypeScript:
 ```
 donutChartData = [
@@ -304,6 +308,8 @@ chartType="donut-chart"></ngx-beautiful-charts>
 ```
 
 ### Sunburst Chart
+
+![Sunburst Chart in Angular](./chart-images/sunburst-chart.png)
 
 #### TypeScript:
 ```
