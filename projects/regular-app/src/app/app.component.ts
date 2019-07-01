@@ -69,6 +69,30 @@ export class AppComponent {
     ]}
   ];
 
+  multiLineData2 = [
+    {name: 'first', color: '#ff1111', data: [
+      {x: 10, y: 10, info: 'Point 1'},
+      {x: 80, y: 40, info: 'Point 2'},
+      {x: 30, y: 30, info: 'Point 3'},
+      {x: 40, y: 20, info: 'Point 4'},
+      {x: 40, y: 30, info: 'Point 5'}
+    ]},
+    {name: 'second', color: '#33bb33', data: [
+      {x: 10, y: 5, info:  ''},
+      {x: 80, y: 30, info: ''},
+      {x: 30, y: 25, info: ''},
+      {x: 40, y: 35, info: ''},
+      {x: 45, y: 25, info: ''}
+    ]},
+    {name: 'third', color: '#3333bb', data: [
+      {x: 5, y: 5, info: ''},
+      {x: 15, y: 30, info: ''},
+      {x: 25, y: 25, info: ''},
+      {x: 35, y: 15, info: ''},
+      {x: 45, y: 15, info: ''}
+    ]}
+  ];
+
 
   barChartData = [
     {
@@ -172,6 +196,52 @@ export class AppComponent {
         {
           name: 'Delhi',
           value: 140
+        }
+      ]
+    }
+  ];
+
+
+  clusteredBarChartData2 = [
+    {
+      series: '2010',
+      color: '#EAC435',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 120
+        },
+        {
+          name: 'Bombay',
+          value: 100
+        }
+      ]
+    },
+    {
+      series: '2020',
+      color: '#345995',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 220
+        },
+        {
+          name: 'Bombay',
+          value: 130
+        }
+      ]
+    },
+    {
+      series: '2030',
+      color: '#CA1551',
+      data: [
+        {
+          name: 'Calcutta',
+          value: 100
+        },
+        {
+          name: 'Bombay',
+          value: 120
         }
       ]
     }

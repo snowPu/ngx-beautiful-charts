@@ -144,8 +144,16 @@ clusteredBarChartData = [
           value: 120
         },
         {
+          name: 'Chennai',
+          value: 300
+        },
+        {
           name: 'Bombay',
           value: 100
+        },
+        {
+          name: 'Delhi',
+          value: 400
         }
       ]
     },
@@ -158,8 +166,16 @@ clusteredBarChartData = [
           value: 220
         },
         {
+          name: 'Chennai',
+          value: 320
+        },
+        {
           name: 'Bombay',
           value: 130
+        },
+        {
+          name: 'Delhi',
+          value: 440
         }
       ]
     },
@@ -172,8 +188,16 @@ clusteredBarChartData = [
           value: 100
         },
         {
+          name: 'Chennai',
+          value: 100
+        },
+        {
           name: 'Bombay',
           value: 120
+        },
+        {
+          name: 'Delhi',
+          value: 140
         }
       ]
     }
