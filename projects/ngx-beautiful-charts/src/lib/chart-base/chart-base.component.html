@@ -1,25 +1,25 @@
 
-<svg:g ngx-lg-chart-base *ngIf="BeautifulChartsService.chartType == 'line-graph'" 
+<svg:g ngx-lg-chart-base *ngIf="beautifulChartsService.chartType == 'line-graph'" 
 [gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
 [xPadding]="xPadding" [yPadding]="yPadding" 
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
 
-<svg:g ngx-mlg-chart-base *ngIf="BeautifulChartsService.chartType == 'multi-line-graph'" 
+<svg:g ngx-mlg-chart-base *ngIf="beautifulChartsService.chartType == 'multi-line-graph'" 
 [gridPrecisionX]="gridPrecisionX" [gridPrecisionY]="gridPrecisionY"
 [xPadding]="xPadding" [yPadding]="yPadding" 
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
 
-<svg:g ngx-bc-chart-base *ngIf="BeautifulChartsService.chartType == 'bar-chart' || BeautifulChartsService.chartType=='clustered-bar-chart'" 
+<svg:g ngx-bc-chart-base *ngIf="beautifulChartsService.chartType == 'bar-chart' || beautifulChartsService.chartType=='clustered-bar-chart'" 
 [xPadding]="xPadding" [yPadding]="yPadding" [showGridLines]="showGridLines"
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
 
-<svg:g ngx-pie-chart-base *ngIf="BeautifulChartsService.chartType == 'pie-chart' || BeautifulChartsService.chartType == 'donut-chart'" 
+<svg:g ngx-pie-chart-base *ngIf="beautifulChartsService.chartType == 'pie-chart' || beautifulChartsService.chartType == 'donut-chart'" 
 [xPadding]="xPadding" [yPadding]="yPadding"
 [width]="width" [height]="height"
  />

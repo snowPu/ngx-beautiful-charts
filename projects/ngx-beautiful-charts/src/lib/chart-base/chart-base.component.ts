@@ -25,8 +25,8 @@ export class ChartBaseComponent implements OnInit, OnChanges {
   x2: number;
 
   // computeLegionXs() {
-  //   this.x1 = this.width + 2 * this.xPadding + this.BeautifulChartsService.legionWidth / 4 * .2;
-  //   this.x2 = this.width + 2 * this.xPadding + this.BeautifulChartsService.legionWidth / 4 * .8;
+  //   this.x1 = this.width + 2 * this.xPadding + this.beautifulChartsService.legionWidth / 4 * .2;
+  //   this.x2 = this.width + 2 * this.xPadding + this.beautifulChartsService.legionWidth / 4 * .8;
   // }
 
   // computeGrid() {
@@ -40,11 +40,11 @@ export class ChartBaseComponent implements OnInit, OnChanges {
   //   return path;
   // }
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) { }
+  constructor(public beautifulChartsService: BeautifulChartsService) { }
 
   ngOnInit() {
     // this.computeGrid();
-    this.gridID = 'grid' + this.BeautifulChartsService.componentID;
+    this.gridID = 'grid' + this.beautifulChartsService.componentID;
     // this.computeLegionXs();
   }
 

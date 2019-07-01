@@ -387,4 +387,36 @@ export class AppComponent {
       ]
     }
   ];
+
+  bulletChartData = {
+    target: { name: 'Target Score', value: 65},
+    actual: { name: 'Actual Score', value: 48 },
+    valueBands: [
+      {
+        from: 0,
+        to: 20,
+        color: '#EAC435'
+      },
+      {
+        from: 20,
+        to: 40,
+        color: '#345995'
+      },
+      {
+        from: 40,
+        to: 60,
+        color: '#03CEA4'
+      },
+      {
+        from: 60,
+        to: 80,
+        color: '#CA1551'
+      },
+      {
+        from: 80,
+        to: 100,
+        color: '#FF6B6B'
+      }
+    ]
+  };
 }

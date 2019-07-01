@@ -45,7 +45,7 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
       for (const bcD of bcS.data) {
         cnt ++;
         const xPos = cnt * eachWidth + .25 * eachWidth + cntSeries * barWidth + .5 * barWidth + this.x;
-        const yPos = this.BeautifulChartsService.transformY(this.BeautifulChartsService.maxY - bcD.value) + this.y;
+        const yPos = this.beautifulChartsService.transformY(this.beautifulChartsService.maxY - bcD.value) + this.y;
         const xStart = xPos - barWidth / 2;
         const xEnd = xPos + barWidth / 2;
         const yStart = this.height + this.y;
@@ -58,12 +58,12 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
     }
   }
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) { }
+  constructor(public beautifulChartsService: BeautifulChartsService) { }
 
   setColors() {
     let cnt = 0;
     for (let seriesData of this.data) {
-      if (!seriesData.color) seriesData.color = coloSchemes[this.BeautifulChartsService.colorScheme][cnt % 10];
+      if (!seriesData.color) seriesData.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
       cnt++;
     }
   }

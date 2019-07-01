@@ -27,7 +27,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   gTranslate: string;
   hoverTranslate: string;
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) {
+  constructor(public beautifulChartsService: BeautifulChartsService) {
   }
 
   getRefinedData(data, i, color = null) {
@@ -155,13 +155,13 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   setColors() {
     let cnt = 0;
     for (let slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.BeautifulChartsService.colorScheme][cnt % 10];
+      if (!slice.color) slice.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
       cnt++;
     }
   }
 
   ngOnInit() {
-    console.log('service (oninitsun) color scheme: ' + this.BeautifulChartsService.colorScheme);
+    console.log('service (oninitsun) color scheme: ' + this.beautifulChartsService.colorScheme);
     this.setColors();
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');
@@ -170,8 +170,8 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     // console.log(this.sunDepth);
     // console.log('level sun slices: ');
     // console.log(this.levelSunSlices);
-    this.sunRadius = this.BeautifulChartsService.sunRadius;
-    this.hoverPieRadius = this.BeautifulChartsService.sunRadius / this.sunDepth * 1.05;
+    this.sunRadius = this.beautifulChartsService.sunRadius;
+    this.hoverPieRadius = this.beautifulChartsService.sunRadius / this.sunDepth * 1.05;
 
     this.sunSliceWidth = this.sunRadius / this.sunDepth;
     this.sunSlices = this.generateSunSlices(this.dataRefined);
@@ -186,7 +186,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   ngOnChanges() {
-    console.log('service (onchangessun) color scheme: ' + this.BeautifulChartsService.colorScheme);
+    console.log('service (onchangessun) color scheme: ' + this.beautifulChartsService.colorScheme);
     this.setColors();
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');
@@ -195,8 +195,8 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     // console.log(this.sunDepth);
     // console.log('level sun slices: ');
     // console.log(this.levelSunSlices);
-    this.sunRadius = this.BeautifulChartsService.sunRadius;
-    this.hoverPieRadius = this.BeautifulChartsService.sunRadius / this.sunDepth * 1.05;
+    this.sunRadius = this.beautifulChartsService.sunRadius;
+    this.hoverPieRadius = this.beautifulChartsService.sunRadius / this.sunDepth * 1.05;
 
     this.sunSliceWidth = this.sunRadius / this.sunDepth;
     this.sunSlices = this.generateSunSlices(this.dataRefined);

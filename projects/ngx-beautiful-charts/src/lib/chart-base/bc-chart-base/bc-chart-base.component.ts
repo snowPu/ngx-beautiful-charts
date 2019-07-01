@@ -25,8 +25,8 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
     // let minVal = null;
     // let maxVal = null;
     // let range = 0;
-    // minVal = Math.min(...this.BeautifulChartsService.data.map(oneData => oneData.value));
-    // maxVal = Math.max(...this.BeautifulChartsService.data.map(oneData => oneData.value));
+    // minVal = Math.min(...this.beautifulChartsService.data.map(oneData => oneData.value));
+    // maxVal = Math.max(...this.beautifulChartsService.data.map(oneData => oneData.value));
 
     // range = maxVal - minVal;
     // console.log('range: ' + range);
@@ -48,33 +48,33 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
     this.xAxis = [];
     this.yAxis = [];
 
-    for (let y = this.BeautifulChartsService.minY; y <= this.BeautifulChartsService.maxY; y = y + this.BeautifulChartsService.diff) {
+    for (let y = this.beautifulChartsService.minY; y <= this.beautifulChartsService.maxY; y = y + this.beautifulChartsService.diff) {
       const rectEnd = this.xPadding + this.width;
-      const yTransformed = this.BeautifulChartsService.transformY(this.BeautifulChartsService.maxY - y) + this.yPadding;
+      const yTransformed = this.beautifulChartsService.transformY(this.beautifulChartsService.maxY - y) + this.yPadding;
       const path = 'M ' + this.xPadding + ' ' + yTransformed + ' L ' + rectEnd + ' ' + yTransformed;
       this.yLevelPaths.push(path);
       this.yAxis.push({yPos: yTransformed, value: y });
     }
 
-    // console.log('diff: ' + this.BeautifulChartsService.diff);
+    // console.log('diff: ' + this.beautifulChartsService.diff);
     // console.log(this.yAxis);
 
     // now the x axis :)
 
     let noOfXAxisValues;
-    if (this.BeautifulChartsService.chartType === 'bar-chart') {
-      noOfXAxisValues = this.BeautifulChartsService.data.length;
+    if (this.beautifulChartsService.chartType === 'bar-chart') {
+      noOfXAxisValues = this.beautifulChartsService.data.length;
       const eachWidth = this.width / noOfXAxisValues;
       let cnt = -1;
-      for (const bcD of this.BeautifulChartsService.data) {
+      for (const bcD of this.beautifulChartsService.data) {
         cnt ++;
         const xPos = cnt * eachWidth + eachWidth / 2 + this.xPadding;
         this.xAxis.push({xPos: xPos, value: bcD.name});
       }
-    } else if (this.BeautifulChartsService.chartType === 'clustered-bar-chart') {
+    } else if (this.beautifulChartsService.chartType === 'clustered-bar-chart') {
       let uniqueXAxisValues;
       uniqueXAxisValues = new Set();
-      for (const series of this.BeautifulChartsService.data) {
+      for (const series of this.beautifulChartsService.data) {
         const seriesData = series.data;
         for (const sData of seriesData) {
           uniqueXAxisValues.add(sData.name);
@@ -90,23 +90,23 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
       }
     }
 
-    // this.gridWidthX = this.BeautifulChartsService.transformX(this.gridPrecisionX);
-    // this.gridWidthY = this.BeautifulChartsService.transformY(this.gridPrecisionY);
+    // this.gridWidthX = this.beautifulChartsService.transformX(this.gridPrecisionX);
+    // this.gridWidthY = this.beautifulChartsService.transformY(this.gridPrecisionY);
     // this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
     // this.xAxis = [];
     // this.yAxis = [];
-    // for (let x = this.BeautifulChartsService.minX; x <= this.BeautifulChartsService.maxX; x = x + this.gridPrecisionX) {
-    //   const xPos = this.BeautifulChartsService.transformX(x) + this.xPadding;
+    // for (let x = this.beautifulChartsService.minX; x <= this.beautifulChartsService.maxX; x = x + this.gridPrecisionX) {
+    //   const xPos = this.beautifulChartsService.transformX(x) + this.xPadding;
     //   this.xAxis.push({xPos: xPos, value: x});
     // }
 
-    // for (let y = this.BeautifulChartsService.minY; y <= this.BeautifulChartsService.maxY; y = y + this.gridPrecisionY) {
-    //   const yPos = this.BeautifulChartsService.transformY(y) + this.yPadding + 7;
-    //   this.yAxis.push({yPos: yPos, value: this.BeautifulChartsService.maxY - y });
+    // for (let y = this.beautifulChartsService.minY; y <= this.beautifulChartsService.maxY; y = y + this.gridPrecisionY) {
+    //   const yPos = this.beautifulChartsService.transformY(y) + this.yPadding + 7;
+    //   this.yAxis.push({yPos: yPos, value: this.beautifulChartsService.maxY - y });
     // }
   }
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) { }
+  constructor(public beautifulChartsService: BeautifulChartsService) { }
 
   ngOnInit() {
     this.computeGrid();

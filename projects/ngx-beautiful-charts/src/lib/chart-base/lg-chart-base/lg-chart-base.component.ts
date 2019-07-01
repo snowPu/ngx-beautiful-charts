@@ -29,27 +29,27 @@ export class LgChartBaseComponent implements OnInit, OnChanges {
   computeGrid() {
     // maxX - minX --> gridPrecisionX
     // width --> gridWidthX
-    this.gridWidthX = this.BeautifulChartsService.transformX(this.gridPrecisionX);
-    this.gridWidthY = this.BeautifulChartsService.transformY(this.gridPrecisionY);
+    this.gridWidthX = this.beautifulChartsService.transformX(this.gridPrecisionX);
+    this.gridWidthY = this.beautifulChartsService.transformY(this.gridPrecisionY);
     this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
     this.xAxis = [];
     this.yAxis = [];
-    for (let x = this.BeautifulChartsService.minX; x <= this.BeautifulChartsService.maxX; x = x + this.gridPrecisionX) {
-      const xPos = this.BeautifulChartsService.transformX(x) + this.xPadding;
+    for (let x = this.beautifulChartsService.minX; x <= this.beautifulChartsService.maxX; x = x + this.gridPrecisionX) {
+      const xPos = this.beautifulChartsService.transformX(x) + this.xPadding;
       this.xAxis.push({xPos: xPos, value: x});
     }
 
-    for (let y = this.BeautifulChartsService.minY; y <= this.BeautifulChartsService.maxY; y = y + this.gridPrecisionY) {
-      const yPos = this.BeautifulChartsService.transformY(y) + this.yPadding + 7;
-      this.yAxis.push({yPos: yPos, value: this.BeautifulChartsService.maxY - y });
+    for (let y = this.beautifulChartsService.minY; y <= this.beautifulChartsService.maxY; y = y + this.gridPrecisionY) {
+      const yPos = this.beautifulChartsService.transformY(y) + this.yPadding + 7;
+      this.yAxis.push({yPos: yPos, value: this.beautifulChartsService.maxY - y });
     }
   }
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) { }
+  constructor(public beautifulChartsService: BeautifulChartsService) { }
 
   ngOnInit() {
     this.computeGrid();
-    this.gridID = 'grid' + this.BeautifulChartsService.componentID;
+    this.gridID = 'grid' + this.beautifulChartsService.componentID;
   }
 
   ngOnChanges() {

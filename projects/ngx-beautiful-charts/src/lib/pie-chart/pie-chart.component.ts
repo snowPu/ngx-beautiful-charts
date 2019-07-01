@@ -23,7 +23,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   gTranslate: string;
   hoverTranslate: string;
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) {
+  constructor(public beautifulChartsService: BeautifulChartsService) {
   }
 
   generatePieSlices() {
@@ -73,7 +73,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   setColors() {
     let cnt = 0;
     for (let slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.BeautifulChartsService.colorScheme][cnt % 10];
+      if (!slice.color) slice.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
       cnt++;
     }
   }
@@ -82,8 +82,8 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.setColors();
     this.generatePieSlices();
     // console.log('x: ' + this.x);
-    this.pieRadius = this.BeautifulChartsService.pieRadius;
-    this.hoverPieRadius = this.BeautifulChartsService.pieRadius * 1.05;
+    this.pieRadius = this.beautifulChartsService.pieRadius;
+    this.hoverPieRadius = this.beautifulChartsService.pieRadius * 1.05;
     // console.log(this.hoverPieRadius);
     this.cX = this.x + this.pieRadius;
     this.cY = this.y + this.pieRadius;
@@ -98,8 +98,8 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.setColors();
     this.generatePieSlices();
     // console.log('x: ' + this.x);
-    this.pieRadius = this.BeautifulChartsService.pieRadius;
-    this.hoverPieRadius = this.BeautifulChartsService.pieRadius * 1.05;
+    this.pieRadius = this.beautifulChartsService.pieRadius;
+    this.hoverPieRadius = this.beautifulChartsService.pieRadius * 1.05;
     // console.log(this.hoverPieRadius);
     this.cX = this.x + this.pieRadius;
     this.cY = this.y + this.pieRadius;

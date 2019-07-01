@@ -63,15 +63,15 @@ export class BeautifulChartsService {
       this.legionWidth = this.width * .4 - this.xPadding * 2;
       this.legionHeight = 60 + 30 * noOfLines - 19;
     } else if (this.chartType === 'clustered-bar-chart') {
-      let uniqueXAxisValues;
-      uniqueXAxisValues = new Set();
-      for (const series of this.data) {
-        const seriesData = series.data;
-        for (const sData of seriesData) {
-          uniqueXAxisValues.add(sData.name);
-        }
-      }
-      const noOfLines = uniqueXAxisValues.size;
+      // let uniqueXAxisValues;
+      // uniqueXAxisValues = new Set();
+      // for (const series of this.data) {
+      //   const seriesData = series.data;
+      //   for (const sData of seriesData) {
+      //     uniqueXAxisValues.add(sData.name);
+      //   }
+      // }
+      const noOfLines = this.data.length;
       this.legionWidth = this.width * .3 - this.xPadding * 2;
       this.legionHeight = 60 + 30 * noOfLines - 19;
     } else if (this.chartType === 'pie-chart') {

@@ -21,14 +21,14 @@ export class LineGraphComponent implements OnInit, OnChanges {
   graphLinePath: string;
   transformedData;
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) {
+  constructor(public beautifulChartsService: BeautifulChartsService) {
   }
 
   transformData() {
     this.transformedData = [];
     for (const point of this.data) {
-      const x = this.BeautifulChartsService.transformX(point.x) + this.x;
-      const y = this.BeautifulChartsService.transformY(this.BeautifulChartsService.maxY - point.y) + this.y;
+      const x = this.beautifulChartsService.transformX(point.x) + this.x;
+      const y = this.beautifulChartsService.transformY(this.beautifulChartsService.maxY - point.y) + this.y;
       const toolTipX = x;
       const toolTipY = y - 30;
       const toolTip = point.info && (point.info !== '') ? 'block' : 'none';
@@ -71,7 +71,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
   }
 
   setColor() {
-    if (!this.color) this.color = coloSchemes[this.BeautifulChartsService.colorScheme][0];
+    if (!this.color) this.color = coloSchemes[this.beautifulChartsService.colorScheme][0];
   }
 
   ngOnInit() {

@@ -53,7 +53,7 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
   }
 
 
-  constructor(public BeautifulChartsService: BeautifulChartsService, private globalParametersService: GlobalParametersService) {
+  constructor(public beautifulChartsService: BeautifulChartsService, private globalParametersService: GlobalParametersService) {
   }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
     } else if (this.chartType === 'sunburst-chart') {
       this.height = this.width - this.xPadding;
     }
-    this.BeautifulChartsService.setValues({
+    this.beautifulChartsService.setValues({
       componentID: this.componentID,
       width: this.width,
       height: this.height,
@@ -100,7 +100,7 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
     } else if (this.chartType === 'sunburst-chart') {
       this.height = this.width - this.xPadding;
     }
-    this.BeautifulChartsService.setValues({
+    this.beautifulChartsService.setValues({
       componentID: this.componentID,
       width: this.width,
       height: this.height,

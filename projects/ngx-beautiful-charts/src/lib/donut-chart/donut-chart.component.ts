@@ -27,7 +27,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
   hoverTranslate: string;
   hoverShift: number;
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) {
+  constructor(public beautifulChartsService: BeautifulChartsService) {
   }
 
   generateDonutSlices() {
@@ -85,7 +85,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
   setColors() {
     let cnt = 0;
     for (let slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.BeautifulChartsService.colorScheme][cnt % 10];
+      if (!slice.color) slice.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
       cnt++;
     }
   }
@@ -94,9 +94,9 @@ export class DonutChartComponent implements OnInit, OnChanges {
     this.setColors();
     this.generateDonutSlices();
     // console.log('x: ' + this.x);
-    this.donutRadius = this.BeautifulChartsService.donutRadius;
-    this.donutInnerRadius = (1 - this.donutWidthPerc) * this.BeautifulChartsService.donutRadius;
-    this.hoverDonutRadius = this.BeautifulChartsService.donutRadius * 1.05;
+    this.donutRadius = this.beautifulChartsService.donutRadius;
+    this.donutInnerRadius = (1 - this.donutWidthPerc) * this.beautifulChartsService.donutRadius;
+    this.hoverDonutRadius = this.beautifulChartsService.donutRadius * 1.05;
     this.hoverDonutInnerRadius = this.donutInnerRadius;
     // console.log(this.hoverDonutRadius);
     this.cX = this.x + this.donutRadius;
@@ -112,9 +112,9 @@ export class DonutChartComponent implements OnInit, OnChanges {
     this.setColors();
     this.generateDonutSlices();
     // console.log('x: ' + this.x);
-    this.donutRadius = this.BeautifulChartsService.donutRadius;
-    this.donutInnerRadius = (1 - this.donutWidthPerc) * this.BeautifulChartsService.donutRadius;
-    this.hoverDonutRadius = this.BeautifulChartsService.donutRadius * 1.05;
+    this.donutRadius = this.beautifulChartsService.donutRadius;
+    this.donutInnerRadius = (1 - this.donutWidthPerc) * this.beautifulChartsService.donutRadius;
+    this.hoverDonutRadius = this.beautifulChartsService.donutRadius * 1.05;
     this.hoverDonutInnerRadius = this.donutInnerRadius;
     // console.log(this.hoverDonutRadius);
     this.cX = this.x + this.donutRadius;

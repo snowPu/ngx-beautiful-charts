@@ -28,8 +28,8 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   //     lineData = [];
   //     for (const point of singleLine.data) {
   //       lineData.push({
-  //         x: this.BeautifulChartsService.transformX(point.x) + this.x,
-  //         y: this.BeautifulChartsService.transformY(this.BeautifulChartsService.maxY - point.y) + this.y,
+  //         x: this.beautifulChartsService.transformX(point.x) + this.x,
+  //         y: this.beautifulChartsService.transformY(this.beautifulChartsService.maxY - point.y) + this.y,
   //         info: point.info,
   //         originalX: point.x,
   //         originalY: point.y
@@ -70,13 +70,13 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   // }
 
 
-  constructor(public BeautifulChartsService: BeautifulChartsService) {
+  constructor(public beautifulChartsService: BeautifulChartsService) {
   }
 
   setColors() {
     let cnt = 0;
     for (let line of this.data) {
-      if (!line.color) line.color = coloSchemes[this.BeautifulChartsService.colorScheme][cnt % 10];
+      if (!line.color) line.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
       cnt++;
     }
   }
