@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 Started out initially as an interesting way to pass time, NgxRegularCharts turned out to be something that could be useful to anyone who wants to create charts in Angular. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
 
+## Install via NPM
+
+> npm i ngx-regular-charts
+
 ## Types of charts offered
 - Line Graph
 - Multi Line Graph
