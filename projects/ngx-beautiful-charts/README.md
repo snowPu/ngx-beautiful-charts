@@ -16,6 +16,7 @@ Started out initially as an interesting way to pass time, NgxBeautifulCharts tur
 - Pie Chart
 - Donut Chart
 - Sunburst Chart
+- Gantt Chart
 
 ## How to use them
 

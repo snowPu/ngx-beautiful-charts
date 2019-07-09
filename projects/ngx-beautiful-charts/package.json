@@ -1,6 +1,6 @@
 {
   "name": "ngx-beautiful-charts",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "A library to create charts in Angular",
   "peerDependencies": {
     "@angular/common": "^8.0.1",
