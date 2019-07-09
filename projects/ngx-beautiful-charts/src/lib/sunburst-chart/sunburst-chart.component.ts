@@ -161,7 +161,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   ngOnInit() {
-    console.log('service (oninitsun) color scheme: ' + this.beautifulChartsService.colorScheme);
+    // console.log('service (oninitsun) color scheme: ' + this.beautifulChartsService.colorScheme);
     this.setColors();
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');
@@ -186,7 +186,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   ngOnChanges() {
-    console.log('service (onchangessun) color scheme: ' + this.beautifulChartsService.colorScheme);
+    // console.log('service (onchangessun) color scheme: ' + this.beautifulChartsService.colorScheme);
     this.setColors();
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');

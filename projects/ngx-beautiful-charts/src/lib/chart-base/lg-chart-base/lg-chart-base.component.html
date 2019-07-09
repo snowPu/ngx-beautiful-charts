@@ -13,7 +13,7 @@ stroke="#444444" [attr.fill]="'url(#' + gridID + ')'" stroke-width="1"/>
 
 <svg:text
 *ngFor="let x of xAxis" class="axis-text" 
-[attr.x]="x.xPos" [attr.y]="height+yPadding+30" class="small"> {{ x.value }} </svg:text>
+[attr.x]="x.xPos" [attr.y]="height+yPadding+30" class="small" text-anchor="middle"> {{ x.value }} </svg:text>
 
 <svg:text
 *ngFor="let y of yAxis" class="axis-text" 

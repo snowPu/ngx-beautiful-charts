@@ -12,6 +12,11 @@
 [width]="width" [height]="height"
 [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
  />
+ 
+<svg:g ngx-gc-chart-base *ngIf="beautifulChartsService.chartType == 'gantt-chart'"
+[xPadding]="xPadding" [yPadding]="yPadding" 
+[width]="width" [height]="height"
+ />
 
 <svg:g ngx-bc-chart-base *ngIf="beautifulChartsService.chartType == 'bar-chart' || beautifulChartsService.chartType=='clustered-bar-chart'" 
 [xPadding]="xPadding" [yPadding]="yPadding" [showGridLines]="showGridLines"

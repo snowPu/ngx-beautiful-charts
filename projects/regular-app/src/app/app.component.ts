@@ -142,7 +142,7 @@ export class AppComponent {
           value: 120
         },
         {
-          name: 'Chennai',
+          name: 'Madras',
           value: 300
         },
         {
@@ -164,7 +164,7 @@ export class AppComponent {
           value: 220
         },
         {
-          name: 'Chennai',
+          name: 'Madras',
           value: 320
         },
         {
@@ -186,7 +186,7 @@ export class AppComponent {
           value: 100
         },
         {
-          name: 'Chennai',
+          name: 'Madras',
           value: 100
         },
         {
@@ -224,10 +224,6 @@ export class AppComponent {
         {
           name: 'Calcutta',
           value: 220
-        },
-        {
-          name: 'Bombay',
-          value: 130
         }
       ]
     },
@@ -419,4 +415,139 @@ export class AppComponent {
       }
     ]
   };
+
+  ganttChartData = [
+    {
+      name: 'Market Team',
+      color: '#EAC435',
+      timelines: {
+        'Market Research': [
+          {from: 'June 9, 2019', to: 'July 20, 2019', info: 'wtv'},
+          {from: 'October 9, 2019', to: 'November 20, 2019', info: 'wtv'}
+        ],
+        'User Documentation': [
+          {from: 'August 10, 2019', to: 'September 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Development Team',
+      color: '#345995',
+      timelines: {
+        'Software Development': [
+          {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
+        ],
+        'Testing': [
+          {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
+        ],
+        'User Documentation': [
+          {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Test Team A',
+      color: '#CA1551',
+      timelines: {
+        'Testing': [
+          {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Test Team B',
+      color: '#FF6B6B',
+      timelines: {
+        'Testing': [
+          {from: 'August 15, 2019', to: 'August 30, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Sales Team',
+      color: '#03CEA4',
+      timelines: {
+        'Pitching': [
+          {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
+        ],
+        'Sales': [
+          {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Planning Team',
+      color: '#03CEA4',
+      timelines: {
+        'Planning': [
+          {from: 'May 9, 2019', to: 'May 30, 2019', info: 'wtv'}
+        ]
+      }
+    }
+  ];
+
+
+  ganttChartData2 = [
+    {
+      name: 'Market Team',
+      timelines: {
+        'Market Research': [
+          {from: 'June 9, 2019', to: 'July 20, 2019', info: 'wtv'},
+          {from: 'October 9, 2019', to: 'November 20, 2019', info: 'wtv'}
+        ],
+        'User Documentation': [
+          {from: 'August 10, 2019', to: 'September 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Development Team',
+      timelines: {
+        'Software Development': [
+          {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
+        ],
+        'Testing': [
+          {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
+        ],
+        'User Documentation': [
+          {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Test Team A',
+      timelines: {
+        'Testing': [
+          {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Test Team B',
+      timelines: {
+        'Testing': [
+          {from: 'August 15, 2019', to: 'August 30, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Sales Team',
+      timelines: {
+        'Pitching': [
+          {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
+        ],
+        'Sales': [
+          {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
+        ]
+      }
+    },
+    {
+      name: 'Planning Team',
+      timelines: {
+        'Planning': [
+          {from: 'May 9, 2019', to: 'May 30, 2019', info: 'wtv'}
+        ]
+      }
+    }
+  ];
 }

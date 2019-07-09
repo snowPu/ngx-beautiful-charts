@@ -23,7 +23,7 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
   @Input() xAxisTitle: string;
   @Input() yAxisTitle: string;
   @Input() data;
-  @Input() color;
+  @Input() color: string;
   @Input() chartType: string;
   @Input() showGridLines: boolean;
   @Input() colorScheme: string;
@@ -80,7 +80,8 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
       yPadding: this.yPadding,
       chartType: this.chartType,
       data: this.dataCopy,
-      colorScheme: this.colorScheme
+      colorScheme: this.colorScheme,
+      color: this.color
     });
     // this.printAllInput();
     // if (this.chartType === 'line-graph' || this.chartType === 'multi-line-graph') {
@@ -112,7 +113,8 @@ export class BeautifulChartsComponent implements OnInit, OnChanges {
       yPadding: this.yPadding,
       chartType: this.chartType,
       data: this.dataCopy,
-      colorScheme: this.colorScheme
+      colorScheme: this.colorScheme,
+      color: this.color
     });
     // this.printAllInput();
     // if (this.chartType === 'line-graph' || this.chartType === 'multi-line-graph') {
