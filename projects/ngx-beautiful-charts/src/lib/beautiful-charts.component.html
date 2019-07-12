@@ -45,6 +45,10 @@
     
     <g *ngIf="chartType=='gantt-chart'" ngx-gantt-chart
     [data]="dataCopy" [x]="xPadding" [y]="yPadding" />
+     
+    <g *ngIf="chartType=='timeline-chart'" ngx-timeline-chart
+    [data]="dataCopy" [x]="xPadding" [y]="yPadding"
+    [width]="beautifulChartsService.rectWidth" [height]="beautifulChartsService.rectHeight" />
     
     <!-- <text
     *ngFor="let x of xAxis" class="axis-text" [attr.x]="x.xPos" [attr.y]="rectHeight+padding+30" class="small"> {{ x.value }} </text>

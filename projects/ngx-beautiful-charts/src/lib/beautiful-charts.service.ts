@@ -87,6 +87,8 @@ export class BeautifulChartsService {
     } else if (this.chartType === 'gantt-chart') {
       this.rectWidth = this.width - this.xPadding * 2 - 150;
       this.rectHeight = this.ganttPhases.length * 60;
+    } else if (this.chartType === 'timeline-chart') {
+      this.rectWidth = this.width - this.xPadding * 2;
     }
 
 
