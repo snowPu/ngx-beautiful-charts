@@ -1,6 +1,9 @@
 # NgxBeautifulCharts
 
-![ngx-beautiful-charts](./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png)
+
+<img alt="ngx-beautiful-charts" src="./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
+
+<!-- ![ngx-beautiful-charts](./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
