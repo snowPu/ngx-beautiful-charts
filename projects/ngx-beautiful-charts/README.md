@@ -1,5 +1,7 @@
 # NgxBeautifulCharts
 
+![ngx-beautiful-charts](./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png)
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
 Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts in Angular. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
