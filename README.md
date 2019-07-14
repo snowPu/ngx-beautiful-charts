@@ -9,7 +9,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts in Angular. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
 
-Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) to know more!
+Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
 
 ## Install via NPM
 
