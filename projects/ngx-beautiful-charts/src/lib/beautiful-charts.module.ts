@@ -16,6 +16,7 @@ import { DonutChartComponent } from './donut-chart/donut-chart.component';
 import { SunburstChartComponent } from './sunburst-chart/sunburst-chart.component';
 import { GcChartBaseComponent } from './chart-base/gc-chart-base/gc-chart-base.component';
 import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
+import { TimelineChartComponent } from './timeline-chart/timeline-chart.component';
 
 @NgModule({
   declarations: [BeautifulChartsComponent,
@@ -24,7 +25,7 @@ import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
     MlgChartBaseComponent, BcChartBaseComponent,
     BarChartComponent, ClusteredBarChartComponent,
     PieChartComponent, PieChartBaseComponent,
-    DonutChartComponent, SunburstChartComponent, GcChartBaseComponent, GanttChartComponent],
+    DonutChartComponent, SunburstChartComponent, GcChartBaseComponent, GanttChartComponent, TimelineChartComponent],
   imports: [
     BrowserModule,
     CommonModule
