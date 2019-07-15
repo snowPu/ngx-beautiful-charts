@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { BeautifulChartsService } from '../beautiful-charts.service';
+import { coloSchemes } from '../../constants/color-schemes';
 
 @Component({
   selector: 'g[ngx-timeline-chart]',
@@ -41,6 +42,14 @@ export class TimelineChartComponent implements OnInit, OnChanges {
     this.barWidth = this.height * .05;
     this.barStartY = this.y + this.height / 2 - this.barWidth / 2;
     this.barEndY = this.y + this.height / 2 + this.barWidth / 2;
+  }
+
+  setColors() {
+    let cnt = 0;
+    for (let oneTimeData of this.data) {
+      if (!oneTimeData.color) oneTimeData.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
+      cnt++;
+    }
   }
 
   textWrap(text, width) {
@@ -85,7 +94,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
 
     console.log('max: ' + maxRadius);
     console.log('min: ' + minRadius);
-    
+
 
     if (this.timeBubbleRadius > maxRadius) this.timeBubbleRadius = maxRadius;
     if (this.timeBubbleRadius < minRadius) this.timeBubbleRadius = minRadius;
@@ -140,6 +149,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     const transX = this.x + this.width * .1;
     this.gTranslate = 'translate(' + transX + 'px, ' + this.y + 'px)';
+    this.setColors();
     this.computeBarDimensions();
     this.computeTimeData();
   }
@@ -147,6 +157,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   ngOnChanges() {
     const transX = this.x + this.width * .1;
     this.gTranslate = 'translate(' + transX + 'px, ' + this.y + 'px)';
+    this.setColors();
     this.computeBarDimensions();
     this.computeTimeData();
   }

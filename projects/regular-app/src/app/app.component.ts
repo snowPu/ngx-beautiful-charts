@@ -604,51 +604,39 @@ export class AppComponent {
   timelineChartData3 = [
     { time: 1,
       displayTime: 'January',
-      color: '#EAC435',
       text: 'This is what happened in January'
     }, { time: 2,
       displayTime: 'February',
-      color: '#C1FFF2',
       text: 'This is what happened in February'
     }, { time: 3,
       displayTime: 'March',
-      color: '#345995',
       text: 'This is what happened in March'
     }, { time: 4,
       displayTime: 'April',
-      color: '#511730',
       text: 'This is what happened in April'
     }, { time: 5,
       displayTime: 'May',
-      color: '#8789C0',
       text: 'This is what happened in May'
     }, { time: 6,
       displayTime: 'June',
-      color: '#03CEA4',
       text: 'This is what happened in 2014'
     }, { time: 7,
       displayTime: 'July',
-      color: '#FF6B6B',
       text: 'This is what happened in 2016'
     }, { time: 8,
       displayTime: 'August',
-      color: '#CA1551',
       text: 'This is what happened in 2018'
     }, { time: 9,
       displayTime: 'September',
-      color: '#CA1551',
       text: 'This is what happened in 2018'
     }, { time: 10,
       displayTime: 'October',
-      color: '#CA1551',
       text: 'This is what happened in 2018'
     }, { time: 11,
       displayTime: 'November',
-      color: '#CA1551',
       text: 'This is what happened in 2018'
     }, { time: 12,
       displayTime: 'December',
-      color: '#FFE19C',
       text: 'This is what happened in 2020'
     }
   ];
