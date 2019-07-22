@@ -1,4 +1,13 @@
-<svg:g *ngFor="let barPath of barPaths">
-  <svg:path class="chart-bar"
-  [attr.d]="barPath" [attr.fill]="color" />
-</svg:g>
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <g ngx-bc-chart-base
+  [showGridLines]="showGridLines"
+  [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+  />
+
+  <g *ngFor="let barPath of barPaths">
+    <path class="chart-bar"
+    [attr.d]="barPath" [attr.fill]="color" />
+  </g>
+
+</svg>

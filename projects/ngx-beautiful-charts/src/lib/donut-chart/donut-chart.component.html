@@ -1,13 +1,18 @@
-<svg:g *ngFor="let donutSlice of donutSlices">
-  <svg:g [ngStyle]="{'transform': gTranslate}">
-    <svg:path class="donut-slice" (mouseover)="donutSlice.hover=true" (mouseout)="donutSlice.hover=false"
-    [ngStyle]="{'opacity': donutSlice.hover ? 0.7 : 1.0, 'transform': donutSlice.rotation}"
-      [attr.d]="donutSlice.hover ? donutSlice.hoverD : donutSlice.d" [attr.fill]="donutSlice.color" />
-    <svg:text class="donut-text" [ngStyle]="{'display': donutSlice.hover ? 'block' : 'none'}" 
-    x="0" y="0" class="small"
-    text-anchor="middle" dominant-baseline="middle">
-      <svg:tspan x="0" dy="0em">{{ donutSlice.name }}</svg:tspan>
-      <svg:tspan x="0" dy="1.2em">{{ donutSlice.perc * 100 | number: '1.0-2'  }}%</svg:tspan>
-    </svg:text>
-  </svg:g>
-</svg:g>
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <g ngx-donut-chart-base />
+  <g *ngFor="let donutSlice of donutSlices">
+    <g [ngStyle]="{'transform': gTranslate}">
+      <path class="donut-slice" (mouseover)="donutSlice.hover=true" (mouseout)="donutSlice.hover=false"
+      [ngStyle]="{'opacity': donutSlice.hover ? 0.7 : 1.0, 'transform': donutSlice.rotation}"
+        [attr.d]="donutSlice.hover ? donutSlice.hoverD : donutSlice.d" [attr.fill]="donutSlice.color" />
+      <text class="donut-text" [ngStyle]="{'display': donutSlice.hover ? 'block' : 'none'}" 
+      x="0" y="0" class="small"
+      text-anchor="middle" dominant-baseline="middle">
+        <tspan x="0" dy="0em">{{ donutSlice.name }}</tspan>
+        <tspan x="0" dy="1.2em">{{ donutSlice.perc * 100 | number: '1.0-2'  }}%</tspan>
+      </text>
+    </g>
+  </g>
+
+</svg>

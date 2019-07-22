@@ -1,8 +1,46 @@
 .line-path {
     opacity: 0.6;
     stroke-width: 3;
+    z-index: 999999;
 
     &:hover {
         opacity: 1.0;
     }
 }
+
+.point {
+    fill: #444444;
+
+    &:hover {
+        fill: #222222;
+        stroke: #000000;
+        stroke-width: 0.5;
+    }
+}
+
+#component .tooltip {
+    visibility: hidden
+ }
+ 
+ #component:hover .tooltip {
+   visibility: visible;
+   position: absolute;
+  }
+ 
+ #component:hover:after .tooltip{
+  position: relative;
+  left: 0;
+  top: 100%;
+  white-space: nowrap;
+ }
+ 
+ .tooltip text {
+  fill: #eeeeee;
+  font-size: 12px;
+  font-family: sans-serif; 
+ }
+ 
+ .tooltip rect {
+  fill: #222222;
+  stroke: #111111;
+ }

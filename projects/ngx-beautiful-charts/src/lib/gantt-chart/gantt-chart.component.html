@@ -1,21 +1,24 @@
-<svg:g *ngFor="let phase of beautifulChartsService.ganttPhases; index as i">
-  <svg:g id="component" *ngFor="let ganttEntry of phaseTimelines[phase]; index as j">
-      <svg:rect class="gantt-entry"
-      [attr.x]="x + 150 + beautifulChartsService.transformGanttDate(ganttEntry.from)" 
-      [attr.y]="i * 60 + y + 20" 
-      [attr.width]="beautifulChartsService.transformGanttDate(ganttEntry.to) - beautifulChartsService.transformGanttDate(ganttEntry.from)" 
-      [attr.height]="20" 
-      rx="6" ry="6"
-      [attr.fill]="ganttEntry.color" />
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g ngx-gc-chart-base />
+  <g *ngFor="let phase of ganttChartService.ganttPhases; index as i">
+    <g id="component" *ngFor="let ganttEntry of phaseTimelines[phase]; index as j">
+        <rect class="gantt-entry"
+        [attr.x]="xPadding + 150 + ganttChartService.transformGanttDate(ganttEntry.from)" 
+        [attr.y]="i * 60 + yPadding + 20" 
+        [attr.width]="ganttChartService.transformGanttDate(ganttEntry.to) - ganttChartService.transformGanttDate(ganttEntry.from)" 
+        [attr.height]="20" 
+        rx="6" ry="6"
+        [attr.fill]="ganttEntry.color" />
 
-      <!-- [attr.x]="x + 150 + beautifulChartsService.transformGanttDate(ganttEntry.from)" 
-      [attr.y]="i * 60 + y + 20"  -->
-      <g class="tooltip" [ngStyle]="{
-        'transform': 'translate(' + (x + 150 + beautifulChartsService.transformGanttDate(ganttEntry.to) - ((beautifulChartsService.transformGanttDate(ganttEntry.to) - beautifulChartsService.transformGanttDate(ganttEntry.from)) / 2)) + 'px, ' + (i * 60 + y - 5) + 'px)',
-        'display': ganttEntry.toolTip}" 
-      opacity="0.9">
-        <svg:rect rx="5" width="200" height="25"></svg:rect>
-        <svg:text x="15" y="16">{{ ganttEntry.info }}</svg:text>
-        </g>
-  </svg:g>
-</svg:g>
+        <!-- [attr.x]="x + 150 + ganttChartService.transformGanttDate(ganttEntry.from)" 
+        [attr.y]="i * 60 + y + 20"  -->
+        <g class="tooltip" [ngStyle]="{
+          'transform': 'translate(' + (xPadding + 150 + ganttChartService.transformGanttDate(ganttEntry.to) - ((ganttChartService.transformGanttDate(ganttEntry.to) - ganttChartService.transformGanttDate(ganttEntry.from)) / 2)) + 'px, ' + (i * 60 + yPadding - 5) + 'px)',
+          'display': ganttEntry.toolTip}" 
+        opacity="0.9">
+          <rect rx="5" width="200" height="25"></rect>
+          <text x="15" y="16">{{ ganttEntry.info }}</text>
+          </g>
+    </g>
+  </g>
+</svg>

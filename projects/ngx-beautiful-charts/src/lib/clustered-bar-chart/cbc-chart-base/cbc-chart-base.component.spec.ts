@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartBaseComponent } from './chart-base.component';
+import { CbcChartBaseComponent } from './cbc-chart-base.component';
 
-describe('ChartBaseComponent', () => {
-  let component: ChartBaseComponent;
-  let fixture: ComponentFixture<ChartBaseComponent>;
+describe('CbcChartBaseComponent', () => {
+  let component: CbcChartBaseComponent;
+  let fixture: ComponentFixture<CbcChartBaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartBaseComponent ]
+      declarations: [ CbcChartBaseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartBaseComponent);
+    fixture = TestBed.createComponent(CbcChartBaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

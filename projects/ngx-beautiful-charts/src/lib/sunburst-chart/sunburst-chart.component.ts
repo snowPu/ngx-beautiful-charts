@@ -1,33 +1,39 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { BeautifulChartsService } from '../beautiful-charts.service';
+import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
 import { coloSchemes } from '../../constants/color-schemes';
+import { SunburstChartService } from './sunburst-chart.service';
+import { GlobalParametersService } from '../../global/global-parameters.service';
 
 @Component({
-  selector: 'g[ngx-sunburst-chart]',
+  selector: 'ngx-sunburst-chart',
   templateUrl: './sunburst-chart.component.html',
-  styleUrls: ['./sunburst-chart.component.scss']
+  styleUrls: ['./sunburst-chart.component.scss'],
+  providers: [SunburstChartService]
 })
 export class SunburstChartComponent implements OnInit , OnChanges {
 
   @Input() data: any;
-  @Input() x: number;
-  @Input() y: number;
   @Input() width: number;
-  @Input() height: number;
+  @Input() colorScheme = 'colorful';
 
+  componentID;
+  height: number;
+  xPadding = 60;
+  yPadding = this.xPadding / 2;
   dataRefined: any;
   sunSlices: any;
   sunSliceWidth: number;
   levelSunSlices: any;
   sunRadius: number;
   sunDepth = 0;
-  hoverPieRadius: number;
+  // hoverPieRadius: number;
   cX: number;
   cY: number;
   gTranslate: string;
   hoverTranslate: string;
 
-  constructor(public beautifulChartsService: BeautifulChartsService) {
+  constructor(public sunburstChartService: SunburstChartService,
+              private globalParametersService: GlobalParametersService,
+              private currentElement: ElementRef) {
   }
 
   getRefinedData(data, i, color = null) {
@@ -47,6 +53,22 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     return data;
   }
 
+  setDimensions() {
+    if (this.width) this.height = this.width - this.xPadding;
+    else {
+      const host = this.currentElement.nativeElement;
+      if (host.parentNode != null) {
+        const dims = host.parentNode.getBoundingClientRect();
+        this.width = dims.width;
+        this.height = this.width - this.xPadding;
+      }
+    }
+    console.log('---set dimensions---');
+    console.log('width: ' + this.width);
+    console.log('height: ' + this.height);
+    console.log('--------------------');
+  }
+
   generateSlice(data, sum, angleRange, rotation) {
     const perc = data.value / sum;
     const angle = angleRange * perc;
@@ -54,11 +76,10 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     const angleRad = angleMod * Math.PI / 180;
     const textRotation = (270 + angle / 2) % 360;
     const textX = (data.level - 1) * this.sunSliceWidth + this.sunSliceWidth / 2;
-    let textRotationString;
-    if (textRotation > 180) {
-      textRotationString = 'translate(' + textX + ', 0) scale(-1,-1) '
-    } else {
-
+    let textRotationString = 'rotate(' + textRotation + 'deg)';
+    if (rotation > 180) {
+      const x = textX * 2;
+      textRotationString = textRotationString + ' scale(-1,-1) translateX(' + -x + 'px)';
     }
     let path;
     let hoverPath;
@@ -75,18 +96,18 @@ export class SunburstChartComponent implements OnInit , OnChanges {
       + -hoverRadius * Math.cos(angleRad) + ' z';
     } else if (data.level > 1) {
       const sunSliceInnerRadius = this.sunRadius / (this.sunDepth) * (data.level - 1);
-      const sunSliceOuterRadiues = this.sunRadius / (this.sunDepth) * data.level;
+      const sunSliceOuterRadius = this.sunRadius / (this.sunDepth) * data.level;
 
-      path = 'M 0 ' + -sunSliceInnerRadius + ' 0 ' + -sunSliceOuterRadiues
-      + ' A ' + sunSliceOuterRadiues + ' ' + sunSliceOuterRadiues
-      + ' 0 0 1 ' + sunSliceOuterRadiues * Math.sin(angleRad) + ' '
-      + -sunSliceOuterRadiues * Math.cos(angleRad)
+      path = 'M 0 ' + -sunSliceInnerRadius + ' 0 ' + -sunSliceOuterRadius
+      + ' A ' + sunSliceOuterRadius + ' ' + sunSliceOuterRadius
+      + ' 0 0 1 ' + sunSliceOuterRadius * Math.sin(angleRad) + ' '
+      + -sunSliceOuterRadius * Math.cos(angleRad)
       + ' L ' + sunSliceInnerRadius * Math.sin(angleRad) + ' '
       + -sunSliceInnerRadius * Math.cos(angleRad) + ' A '
       + sunSliceInnerRadius + ' ' + sunSliceInnerRadius
       + ' 0 0 0 0 ' + -sunSliceInnerRadius + ' z';
 
-      const hoverSliceOuterRadius = sunSliceOuterRadiues + this.sunSliceWidth * 0.1;
+      const hoverSliceOuterRadius = sunSliceOuterRadius + this.sunSliceWidth * 0.1;
 
       hoverPath = 'M 0 ' + -sunSliceInnerRadius + ' 0 ' + -hoverSliceOuterRadius
       + ' A ' + hoverSliceOuterRadius + ' ' + hoverSliceOuterRadius
@@ -100,15 +121,15 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     // console.log(hoverPath);
 
     const sunSlice = {
-      perc: perc,
+      perc,
       name: data.name,
       color: data.color,
       hoverD: hoverPath,
       rotation: 'rotate(' + rotation + 'deg)',
-      textRotation: 'rotate(' + textRotation + ')',
-      textX: textX,
+      textRotation: textRotationString,
+      textX,
       d: path,
-      angle: angle,
+      angle,
       hover: false,
       children: null
     };
@@ -155,14 +176,25 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   setColors() {
     let cnt = 0;
     for (let slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.beautifulChartsService.colorScheme][cnt % 10];
+      if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
       cnt++;
     }
   }
 
   ngOnInit() {
-    // console.log('service (oninitsun) color scheme: ' + this.beautifulChartsService.colorScheme);
+    this.componentID = this.globalParametersService.addNewComponent();
+    // console.log('service (oninitsun) color scheme: ' + this.sunburstChartService.colorScheme);
     this.setColors();
+    this.setDimensions();
+    this.sunburstChartService.setValues({
+      componentID: this.componentID,
+      width: this.width,
+      height: this.height,
+      xPadding: this.xPadding,
+      yPadding: this.yPadding,
+      data: this.data
+    });
+    this.sunRadius = this.sunburstChartService.sunRadius;
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');
     // console.log(this.dataRefined);
@@ -170,24 +202,33 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     // console.log(this.sunDepth);
     // console.log('level sun slices: ');
     // console.log(this.levelSunSlices);
-    this.sunRadius = this.beautifulChartsService.sunRadius;
-    this.hoverPieRadius = this.beautifulChartsService.sunRadius / this.sunDepth * 1.05;
+    // this.hoverPieRadius = this.sunburstChartService.sunRadius / this.sunDepth * 1.05;
 
     this.sunSliceWidth = this.sunRadius / this.sunDepth;
     this.sunSlices = this.generateSunSlices(this.dataRefined);
     // console.log(this.hoverPieRadius);
-    this.cX = this.x + this.sunRadius;
-    this.cY = this.y + this.sunRadius;
-    const translateX = this.x + this.sunRadius;
-    const translateY = this.y + this.sunRadius;
+    this.cX = this.xPadding + this.sunRadius;
+    this.cY = this.yPadding + this.sunRadius;
+    const translateX = this.xPadding + this.sunRadius;
+    const translateY = this.yPadding + this.sunRadius;
     this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
     const hoverTranslateXY = this.sunRadius * 0.08;
     this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
   }
 
   ngOnChanges() {
-    // console.log('service (onchangessun) color scheme: ' + this.beautifulChartsService.colorScheme);
+    // console.log('service (onchangessun) color scheme: ' + this.sunburstChartService.colorScheme);
     this.setColors();
+    this.setDimensions();
+    this.sunburstChartService.setValues({
+      componentID: this.componentID,
+      width: this.width,
+      height: this.height,
+      xPadding: this.xPadding,
+      yPadding: this.yPadding,
+      data: this.data
+    });
+    this.sunRadius = this.sunburstChartService.sunRadius;
     this.dataRefined = this.getRefinedData(this.data, 1);
     // console.log('data refined: ');
     // console.log(this.dataRefined);
@@ -195,16 +236,15 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     // console.log(this.sunDepth);
     // console.log('level sun slices: ');
     // console.log(this.levelSunSlices);
-    this.sunRadius = this.beautifulChartsService.sunRadius;
-    this.hoverPieRadius = this.beautifulChartsService.sunRadius / this.sunDepth * 1.05;
+    // this.hoverPieRadius = this.sunburstChartService.sunRadius / this.sunDepth * 1.05;
 
     this.sunSliceWidth = this.sunRadius / this.sunDepth;
     this.sunSlices = this.generateSunSlices(this.dataRefined);
     // console.log(this.hoverPieRadius);
-    this.cX = this.x + this.sunRadius;
-    this.cY = this.y + this.sunRadius;
-    const translateX = this.x + this.sunRadius;
-    const translateY = this.y + this.sunRadius;
+    this.cX = this.xPadding + this.sunRadius;
+    this.cY = this.yPadding + this.sunRadius;
+    const translateX = this.xPadding + this.sunRadius;
+    const translateY = this.yPadding + this.sunRadius;
     this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
     const hoverTranslateXY = this.sunRadius * 0.08;
     this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';

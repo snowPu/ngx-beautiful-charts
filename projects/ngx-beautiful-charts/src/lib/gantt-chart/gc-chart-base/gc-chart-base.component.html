@@ -1,0 +1,46 @@
+<svg:pattern [attr.id]="gridID" 
+[attr.x]="ganttChartService.xPadding + 150" [attr.y]="ganttChartService.yPadding" 
+[attr.width]="gridWidthX" [attr.height]="gridWidthY" 
+patternUnits="userSpaceOnUse">
+    <svg:path [attr.d]="gridPath" fill="none" stroke="#444444" stroke-width="0.5" />
+</svg:pattern>
+
+<svg:rect [attr.x]="ganttChartService.xPadding + 150" 
+[attr.y]="ganttChartService.yPadding" 
+[attr.width]="ganttChartService.rectWidth" 
+[attr.height]="ganttChartService.rectHeight" 
+stroke="#444444" [attr.fill]="'url(#' + gridID + ')'" stroke-width="1"/>
+
+<svg:g *ngFor="let x of xAxis" [ngStyle]="{'transform': x.transform}">
+<svg:text class="x-axis-text small" text-anchor="end" dominant-baseline="middle"> {{ x.value }} </svg:text>
+</svg:g>
+
+<svg:text
+*ngFor="let y of yAxis" class="y-axis-text small" text-anchor="end"
+[attr.y]="y.yPos" [attr.x]="150+ganttChartService.xPadding-30">{{ y.value }}</svg:text>
+
+
+<!-- Legion -->
+<svg:rect [attr.x]="ganttChartService.xPadding + 150" 
+[attr.y]="ganttChartService.yPadding * 2 + 100 + ganttChartService.rectHeight" 
+[attr.width]="ganttChartService.legionWidth" 
+[attr.height]="ganttChartService.legionHeight" 
+fill="#f1f1f1" />
+
+
+<svg:g *ngFor="let legionLine of ganttChartService.legion; index as i">
+  <svg:g *ngFor="let legionEntry of legionLine; index as j">
+      <svg:rect *ngIf="ganttChartService.legionWidth" 
+      [attr.x]="ganttChartService.xPadding + 150 + ganttChartService.legionWidth / 3 * 0.1 + ganttChartService.legionWidth / 3 * j" 
+      [attr.y]="ganttChartService.yPadding * 2 + 100 + ganttChartService.rectHeight + 20 + 40*i + 10" 
+      [attr.width]="ganttChartService.legionWidth / 3 * 0.2" 
+      [attr.height]="20" 
+      rx="6" ry="6"
+      [attr.fill]="legionEntry.color" />
+
+      <!-- <svg:path class="legion-line" [attr.d]="computeLegionPath(i)" fill="none" [attr.stroke]="x.color" /> -->
+      <svg:text class="axis-text" dominant-baseline="middle"
+      [attr.x]="ganttChartService.xPadding + 150 + ganttChartService.legionWidth / 3 * j + ganttChartService.legionWidth / 3 * 0.4" 
+      [attr.y]="ganttChartService.yPadding * 2 + 100 + ganttChartService.rectHeight + 20 + 40*i + 20" class="small"> {{ legionEntry.name }} </svg:text>
+  </svg:g>
+</svg:g>

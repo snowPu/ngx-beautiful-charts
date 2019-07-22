@@ -8,31 +8,61 @@
 <p>Some regular Charts component below: </p>
 
 <h4>Line Graph</h4>
-<ngx-beautiful-charts [width]="800" [height]="400" 
+<ngx-line-graph
 [minX]="0" [maxX]="100" 
 [minY]="0" [maxY]="50" 
 [gridPrecisionX]="10" 
 [gridPrecisionY]="10"
-[displayXAxis]="true"
-[displayYAxis]="true"
 xAxisTitle="Time"
 yAxisTitle="Distance"
 [data]="data"
-chartType="line-graph"
-color="#ff4444"></ngx-beautiful-charts>
+color="#ff4444"></ngx-line-graph>
 
 <h4>Multi Line Graph</h4>
-<ngx-beautiful-charts [width]="1100" [height]="400" 
+<ngx-multi-line-graph [width]="1100" [height]="400" 
 [minX]="0" [maxX]="100" 
 [minY]="0" [maxY]="50" 
 [gridPrecisionX]="10" 
 [gridPrecisionY]="10"
-[displayXAxis]="true"
-[displayYAxis]="true"
 xAxisTitle="Time"
 yAxisTitle="Distance"
-[data]="multiLineData2"
-chartType="multi-line-graph"></ngx-beautiful-charts>
+[data]="multiLineData2"></ngx-multi-line-graph>
+
+<h4>Bar Chart</h4>
+<ngx-bar-chart [width]="1100" [height]="400"
+xAxisTitle="City"
+yAxisTitle="Value"
+[data]="barChartData"
+[showGridLines]="false"></ngx-bar-chart>
+
+<h4>Clustered Bar Chart</h4>
+<ngx-clustered-bar-chart [width]="1100" [height]="400"
+xAxisTitle="City"
+yAxisTitle="Value"
+[data]="clusteredBarChartData"></ngx-clustered-bar-chart>
+
+<ngx-pie-chart [width]="800"
+[data]="pieChartData" colorScheme="colorful"></ngx-pie-chart>
+
+<ngx-donut-chart [width]="800"
+[data]="pieChartData" colorScheme="colorful"></ngx-donut-chart>
+
+<ngx-sunburst-chart [width]="700"
+[data]="sunburstChartData" colorScheme="colorful"></ngx-sunburst-chart>
+
+<ngx-gantt-chart [width]="1100"
+[data]="ganttChartData2" colorScheme="colorful"></ngx-gantt-chart>
+
+<ngx-timeline-chart [width]="1100" [height]="500"
+[data]="timelineChartData" colorScheme="cool"
+></ngx-timeline-chart>
+
+<ngx-timeline-chart [width]="1100" [height]="500"
+[data]="timelineChartData3" colorScheme="cool"
+></ngx-timeline-chart>
+
+<!-- 
+
 
 <h4>Bar Chart</h4>
 <ngx-beautiful-charts [width]="1100" [height]="400"
@@ -110,4 +140,4 @@ chartType="timeline-chart"></ngx-beautiful-charts>
 
 <ngx-beautiful-charts [width]="1100" [height]="500"
 [data]="timelineChartData3"
-chartType="timeline-chart"></ngx-beautiful-charts>
+chartType="timeline-chart"></ngx-beautiful-charts> -->

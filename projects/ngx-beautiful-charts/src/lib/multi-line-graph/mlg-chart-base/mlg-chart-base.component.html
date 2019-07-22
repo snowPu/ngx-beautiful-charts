@@ -1,0 +1,50 @@
+<svg:pattern [attr.id]="gridID" 
+[attr.x]="multiLineGraphService.xPadding" [attr.y]="multiLineGraphService.yPadding" 
+[attr.width]="gridWidthX" [attr.height]="gridWidthY" 
+patternUnits="userSpaceOnUse">
+    <svg:path [attr.d]="gridPath" fill="none" stroke="#444444" stroke-width="0.5" />
+</svg:pattern>
+
+<svg:rect [attr.x]="multiLineGraphService.xPadding" 
+[attr.y]="multiLineGraphService.yPadding" 
+[attr.width]="multiLineGraphService.rectWidth" 
+[attr.height]="multiLineGraphService.rectHeight" 
+stroke="#444444" [attr.fill]="'url(#' + gridID + ')'" stroke-width="1"/>
+
+<svg:text
+*ngFor="let x of xAxis" class="axis-text" 
+[attr.x]="x.xPos" [attr.y]="multiLineGraphService.rectHeight+multiLineGraphService.yPadding+30" class="small" text-anchor="middle"> {{ x.value }} </svg:text>
+
+<svg:text
+*ngFor="let y of yAxis" class="axis-text" 
+[attr.y]="y.yPos" [attr.x]="multiLineGraphService.xPadding-30" class="small">{{ y.value }}</svg:text>
+
+<!-- x Axis Title -->
+<svg:text class="axis-text" 
+  [attr.x]="multiLineGraphService.rectWidth/2+multiLineGraphService.xPadding" [attr.y]="multiLineGraphService.rectHeight+multiLineGraphService.yPadding+60" dominant-baseline="middle" text-anchor="middle"> 
+  {{ xAxisTitle }} 
+</svg:text>
+
+<!-- y Axis Title -->
+<svg:text class="axis-text" 
+  [attr.x]="-multiLineGraphService.rectHeight/2-multiLineGraphService.yPadding" [attr.y]="multiLineGraphService.xPadding-50" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
+  {{ yAxisTitle }} 
+</svg:text>
+
+
+<!-- Legion -->
+<svg:rect [attr.x]="2*multiLineGraphService.xPadding + multiLineGraphService.rectWidth" 
+[attr.y]="multiLineGraphService.yPadding" 
+[attr.width]="multiLineGraphService.legionWidth" 
+[attr.height]="multiLineGraphService.legionHeight" 
+fill="#f1f1f1" />
+
+
+<svg:g *ngFor="let x of data; index as i">
+    <svg:path class="legion-line" [attr.d]="computeLegionPath(i)" fill="none" [attr.stroke]="x.color" />
+    <svg:text class="axis-text" 
+    [attr.x]="multiLineGraphService.rectWidth + 2*multiLineGraphService.xPadding + multiLineGraphService.legionWidth / 4" 
+    [attr.y]="multiLineGraphService.yPadding+40+30*i" class="small"> {{ x.name }} </svg:text>
+</svg:g>
+
+

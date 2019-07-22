@@ -247,7 +247,7 @@ export class AppComponent {
     {
       name: 'Calcutta',
       color: '#EAC435',
-      value: 50
+      value: 20
     },
     {
       name: 'Madras',
@@ -262,7 +262,7 @@ export class AppComponent {
     {
       name: 'Delhi',
       color: '#FF6B6B',
-      value: 50
+      value: 10
     },
     {
       name: 'Bangalore',

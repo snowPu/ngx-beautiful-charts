@@ -1,9 +1,8 @@
 # NgxBeautifulCharts
 
+<img alt="ngx-beautiful-charts" src="./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
 
-<img alt="ngx-beautiful-charts" src="./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
-
-<!-- ![ngx-beautiful-charts](./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
+<!-- ![ngx-beautiful-charts](./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
 <!-- 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1. -->
 
@@ -50,18 +49,16 @@ lineData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800" [height]="400" 
+<ngx-line-graph
+[width]="800" [height]="400"
 [minX]="0" [maxX]="100" 
 [minY]="0" [maxY]="50" 
 [gridPrecisionX]="10" 
 [gridPrecisionY]="10"
-[displayXAxis]="true"
-[displayYAxis]="true"
 xAxisTitle="Time"
 yAxisTitle="Distance"
 [data]="lineData"
-chartType="line-graph"
-color="#ff4444"></ngx-beautiful-charts>
+color="#ff4444"></ngx-line-graph>
 ```
 
 ### Multi Line Graph
@@ -97,13 +94,14 @@ multiLineData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100" [height]="400" 
-[minX]="0" [maxX]="100" [minY]="0" [maxY]="50" 
-[gridPrecisionX]="10" [gridPrecisionY]="10"
-[displayXAxis]="true" [displayYAxis]="true"
-xAxisTitle="Time" yAxisTitle="Distance"
-[data]="multiLineData" chartType="multi-line-graph">
-</ngx-beautiful-charts>
+<ngx-multi-line-graph [width]="1100" [height]="400" 
+[minX]="0" [maxX]="100" 
+[minY]="0" [maxY]="50" 
+[gridPrecisionX]="10" 
+[gridPrecisionY]="10"
+xAxisTitle="Time"
+yAxisTitle="Distance"
+[data]="multiLineData"></ngx-multi-line-graph>
 ```
 
 ### Bar Chart
@@ -134,14 +132,12 @@ barChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800" [height]="400"
-[displayXAxis]="true" colorScheme="cool"
-[displayYAxis]="true"
+<ngx-bar-chart [width]="1100" [height]="400"
 xAxisTitle="City"
 yAxisTitle="Value"
 [data]="barChartData"
-chartType="bar-chart" [showGridLines]="false"
-color="#1166ee"></ngx-beautiful-charts>
+[showGridLines]="false"
+color="#1166ee"></ngx-bar-chart>
 ```
 
 ### Clustered Bar Chart
@@ -222,13 +218,10 @@ clusteredBarChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100" [height]="400"
-[displayXAxis]="true"
-[displayYAxis]="true"
+<ngx-clustered-bar-chart [width]="1100" [height]="400"
 xAxisTitle="City"
 yAxisTitle="Value"
-[data]="clusteredBarChartData"
-chartType="clustered-bar-chart"></ngx-beautiful-charts>
+[data]="clusteredBarChartData"></ngx-clustered-bar-chart>
 ```
 
 ### Pie Chart
@@ -268,9 +261,8 @@ pieChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800"
-[data]="pieChartData"
-chartType="pie-chart"></ngx-beautiful-charts>
+<ngx-pie-chart [width]="800"
+[data]="pieChartData" colorScheme="colorful"></ngx-pie-chart>
 ```
 
 ### Donut Chart
@@ -310,9 +302,8 @@ donutChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800"
-[data]="donutChartData"
-chartType="donut-chart"></ngx-beautiful-charts>
+<ngx-donut-chart [width]="800"
+[data]="donutChartData" colorScheme="colorful"></ngx-donut-chart>
 ```
 
 ### Sunburst Chart
@@ -378,9 +369,8 @@ sunburstChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="700"
-[data]="sunburstChartData" colorScheme="cool"
-chartType="sunburst-chart"></ngx-beautiful-charts>
+<ngx-sunburst-chart [width]="700"
+[data]="sunburstChartData" colorScheme="cool"></ngx-sunburst-chart>
 ```
 
 
@@ -457,28 +447,60 @@ ganttChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100"
-[data]="ganttChartData" colorScheme="cool"
-chartType="gantt-chart"></ngx-beautiful-charts>
+<ngx-gantt-chart [width]="1100"
+[data]="ganttChartData" colorScheme="cool"></ngx-gantt-chart>
 ```
-<!-- 
-## Code scaffolding
 
-Run `ng generate component component-name --project regular-charts` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project regular-charts`.
-> Note: Don't forget to add `--project regular-charts` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
+### Timeline Chart
 
-Run `ng build regular-charts` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Timeline Chart](./chart-images/timeline-chart.png)
 
-## Publishing
+#### TypeScript:
+```
+timelineChartData = [
+    { time: 1,
+      displayTime: 'January',
+      text: 'This is what happened in January'
+    }, { time: 2,
+      displayTime: 'February',
+      text: 'This is what happened in February'
+    }, { time: 3,
+      displayTime: 'March',
+      text: 'This is what happened in March'
+    }, { time: 4,
+      displayTime: 'April',
+      text: 'This is what happened in April'
+    }, { time: 5,
+      displayTime: 'May',
+      text: 'This is what happened in May'
+    }, { time: 6,
+      displayTime: 'June',
+      text: 'This is what happened in 2014'
+    }, { time: 7,
+      displayTime: 'July',
+      text: 'This is what happened in 2016'
+    }, { time: 8,
+      displayTime: 'August',
+      text: 'This is what happened in 2018'
+    }, { time: 9,
+      displayTime: 'September',
+      text: 'This is what happened in 2018'
+    }, { time: 10,
+      displayTime: 'October',
+      text: 'This is what happened in 2018'
+    }, { time: 11,
+      displayTime: 'November',
+      text: 'This is what happened in 2018'
+    }, { time: 12,
+      displayTime: 'December',
+      text: 'This is what happened in 2020'
+    }
+  ];
+```
 
-After building your library with `ng build regular-charts`, go to the dist folder `cd dist/regular-charts` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test regular-charts` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md). -->
+#### HTML:
+```
+<ngx-timeline-chart [width]="1100" [height]="500"
+[data]="timelineChartData" colorScheme="cool"></ngx-timeline-chart>
+```

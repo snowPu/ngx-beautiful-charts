@@ -1,3 +1,41 @@
 .pie-slice {
     transition: all 0.3s ease-in 0s;
+    // transition: stroke-dasharray .2s linear;
 }
+
+// .pie-g {
+//     z-index: 100 !important;
+//     position: relative !important;
+// }
+
+#component .tooltip {
+    visibility: hidden;
+    position: relative !important;
+ }
+ 
+ #component:hover .tooltip {
+    visibility: visible;
+    position: absolute;
+    z-index: 9999999 !important;
+  }
+ 
+ #component:hover:after .tooltip{
+  position: relative;
+  left: 0;
+  top: 100%;
+  white-space: nowrap;
+  z-index: 9999999 !important;
+ }
+ 
+ .tooltip text {
+  fill: #eeeeee;
+  font-size: 12px;
+  font-family: sans-serif;
+  z-index: 9999999 !important;
+ }
+ 
+ .tooltip rect {
+  fill: #222222;
+  stroke: #111111;
+  z-index: 9999998 !important;
+ }

@@ -1,9 +1,21 @@
-<svg:g *ngFor="let pieSlice of pieSlices">
-  <svg:g [ngStyle]="{'transform': gTranslate + ' ' + pieSlice.rotation}">
-    <svg:path class="pie-slice" (mouseover)="pieSlice.hover=true" (mouseout)="pieSlice.hover=false"
-    [ngStyle]="{'opacity': pieSlice.hover ? 0.7 : 1.0}"
-      [attr.d]="pieSlice.hover ? pieSlice.hoverD : pieSlice.d" [attr.fill]="pieSlice.color" />
-  </svg:g>
-</svg:g>
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <g ngx-pie-chart-base />
+  <g *ngFor="let pieSlice of pieSlices">
+    <g id="component" [ngStyle]="{'transform': gTranslate}">
+      <g class="pie-g" [ngStyle]="{'transform': pieSlice.rotation, 'position': 'relative'}">
+        <path class="pie-slice" (mouseover)="pieSlice.hover=true" (mouseout)="pieSlice.hover=false"
+        [ngStyle]="{'opacity': pieSlice.hover ? 0.7 : 1.0}"
+        [attr.d]="pieSlice.hover ? pieSlice.hoverD : pieSlice.d" [attr.fill]="pieSlice.color" />
+      </g>
+      <g class="tooltip" [ngStyle]="{'transform': pieSlice.toolTipTranslate}" 
+      opacity="0.9">
+        <rect rx="5" width="70" height="25"></rect>
+        <text x="15" y="16">{{ pieSlice.toolTipText }}</text>
+      </g>
+    </g>
+  </g>
+  
+</svg>
 
 <!-- 'transform': pieSlice.hover ? hoverTranslate + ' ' + pieSlice.rotation : pieSlice.rotation, -->

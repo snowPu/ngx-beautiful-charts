@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { BeautifulChartsService } from '../../beautiful-charts.service';
+import { PieChartService } from '../pie-chart.service';
 
 @Component({
   selector: 'g[ngx-pie-chart-base]',
@@ -8,27 +8,22 @@ import { BeautifulChartsService } from '../../beautiful-charts.service';
 })
 export class PieChartBaseComponent implements OnInit, OnChanges {
 
-  @Input() xPadding: number;
-  @Input() yPadding: number;
-  @Input() width: number;
-  @Input() height: number;
-
   x1: number;
   x2: number;
 
   computeLegionXs() {
-    this.x1 = this.width + 2 * this.xPadding + this.beautifulChartsService.legionWidth / 4 * .2;
-    this.x2 = this.width + 2 * this.xPadding + this.beautifulChartsService.legionWidth / 4 * .8;
+    this.x1 = this.pieChartService.rectWidth + 2 * this.pieChartService.xPadding + this.pieChartService.legionWidth / 4 * .2;
+    this.x2 = this.pieChartService.rectHeight + 2 * this.pieChartService.xPadding + this.pieChartService.legionWidth / 4 * .8;
   }
 
   computeLegionPath(i: number) {
     let path = 'M ';
-    const y = this.yPadding + 30 + 30 * i;
+    const y = this.pieChartService.yPadding + 30 + 30 * i;
     path = path + this.x1 + ' ' + y + ' ' + this.x2 + ' ' + y;
     return path;
   }
 
-  constructor(public beautifulChartsService: BeautifulChartsService) { }
+  constructor(public pieChartService: PieChartService) { }
 
   ngOnInit() {
     this.computeLegionXs();

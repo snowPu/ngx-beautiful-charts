@@ -1,6 +1,15 @@
-<svg:g *ngFor="let series of barPaths">
-  <svg:g *ngFor="let barPath of series.paths">
-    <svg:path class="chart-bar"
-    [attr.d]="barPath" [attr.fill]="series.color" />
-  </svg:g>
-</svg:g>
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+  <g ngx-cbc-chart-base
+  [showGridLines]="showGridLines"
+  [xAxisTitle]="xAxisTitle" [yAxisTitle]="yAxisTitle"
+  />
+
+  <g *ngFor="let series of barPaths">
+    <g *ngFor="let barPath of series.paths">
+      <path class="chart-bar"
+      [attr.d]="barPath" [attr.fill]="series.color" />
+    </g>
+  </g>
+
+</svg>

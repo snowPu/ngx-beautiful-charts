@@ -1,43 +1,45 @@
-<svg:g [ngStyle]="{'transform': gTranslate}">
-    <svg:rect x="0" 
+<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g [ngStyle]="{'transform': gTranslate}">
+    <rect x="0" 
     [attr.y]="barStartY" 
-    [attr.width]="width * .8" 
+    [attr.width]="timelineChartService.rectWidth * .8" 
     [attr.height]="barWidth" 
     fill="grey" />
 
-    <svg:g *ngFor="let timeDataInst of timeData">
-        <svg:circle class="time-bubble" [attr.cx]="timeDataInst.timeBubble.centre.x" 
+    <g *ngFor="let timeDataInst of timeData">
+        <circle class="time-bubble" [attr.cx]="timeDataInst.timeBubble.centre.x" 
         [attr.cy]="timeDataInst.timeBubble.centre.y" 
         [attr.r]="timeBubbleRadius" [attr.fill]="timeDataInst.color">
-        </svg:circle>
+        </circle>
 
-        <svg:text class="time-bubble-text" [attr.x]="timeDataInst.timeBubble.centre.x"
+        <text class="time-bubble-text" [attr.x]="timeDataInst.timeBubble.centre.x"
         [attr.y]="timeDataInst.timeBubble.centre.y"
         text-anchor="middle" dominant-baseline="middle">
           {{ timeDataInst.timeBubble.text }}
-          <!-- <svg:tspan *ngFor="let line of timeDataInst.timeBubble.text" 
+          <!-- <tspan *ngFor="let line of timeDataInst.timeBubble.text" 
           [attr.x]="timeDataInst.timeBubble.centre.x"
           [attr.dx]="0"
           [attr.dy]="14">
           {{ line }}
-        </svg:tspan> -->
-      </svg:text>
+        </tspan> -->
+      </text>
         
-        <svg:path class="line-path"
+        <path class="line-path"
         [attr.d]="timeDataInst.line" fill="none" [attr.stroke]="timeDataInst.color" />
 
-        <svg:text class="time-block-text" [attr.x]="timeDataInst.textBlock.position.x"
+        <text class="time-block-text" [attr.x]="timeDataInst.textBlock.position.x"
         [attr.y]="timeDataInst.textBlock.position.y"
         [attr.height]="textBlockHeight"
         text-anchor="middle" dominant-baseline="middle">
-        <svg:tspan *ngFor="let line of timeDataInst.textBlock.text" 
+        <tspan *ngFor="let line of timeDataInst.textBlock.text" 
           [attr.x]="timeDataInst.textBlock.position.x"
           [attr.dx]="0"
           [attr.dy]="14">
           {{ line }}
-        </svg:tspan>
-        </svg:text>
+        </tspan>
+        </text>
 
-    </svg:g>
-</svg:g>
+      </g>
+  </g>
+</svg>
 

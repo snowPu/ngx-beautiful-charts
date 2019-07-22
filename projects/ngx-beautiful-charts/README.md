@@ -6,7 +6,7 @@
 <!-- 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1. -->
 
-Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts in Angular. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
+Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
 
 Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
 
@@ -23,12 +23,13 @@ Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for th
 - Donut Chart
 - Sunburst Chart
 - Gantt Chart
+- Timeline Chart
 
 ## How to use them
 
 ### Line Graph
 
-![Line Graph in Angular](./chart-images/line-graph.png)
+![Line Graph](./chart-images/line-graph.png)
 
 #### TypeScript:
 ```
@@ -49,23 +50,21 @@ lineData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800" [height]="400" 
+<ngx-line-graph
+[width]="800" [height]="400"
 [minX]="0" [maxX]="100" 
 [minY]="0" [maxY]="50" 
 [gridPrecisionX]="10" 
 [gridPrecisionY]="10"
-[displayXAxis]="true"
-[displayYAxis]="true"
 xAxisTitle="Time"
 yAxisTitle="Distance"
 [data]="lineData"
-chartType="line-graph"
-color="#ff4444"></ngx-beautiful-charts>
+color="#ff4444"></ngx-line-graph>
 ```
 
 ### Multi Line Graph
 
-![Multi Line Graph in Angular](./chart-images/multi-line.png)
+![Multi Line Graph](./chart-images/multi-line.png)
 
 #### TypeScript:
 ```
@@ -96,18 +95,19 @@ multiLineData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100" [height]="400" 
-[minX]="0" [maxX]="100" [minY]="0" [maxY]="50" 
-[gridPrecisionX]="10" [gridPrecisionY]="10"
-[displayXAxis]="true" [displayYAxis]="true"
-xAxisTitle="Time" yAxisTitle="Distance"
-[data]="multiLineData" chartType="multi-line-graph">
-</ngx-beautiful-charts>
+<ngx-multi-line-graph [width]="1100" [height]="400" 
+[minX]="0" [maxX]="100" 
+[minY]="0" [maxY]="50" 
+[gridPrecisionX]="10" 
+[gridPrecisionY]="10"
+xAxisTitle="Time"
+yAxisTitle="Distance"
+[data]="multiLineData"></ngx-multi-line-graph>
 ```
 
 ### Bar Chart
 
-![Bar Chart in Angular](./chart-images/bar-chart.png)
+![Bar Chart](./chart-images/bar-chart.png)
 
 #### TypeScript:
 ```
@@ -133,19 +133,17 @@ barChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800" [height]="400"
-[displayXAxis]="true" colorScheme="cool"
-[displayYAxis]="true"
+<ngx-bar-chart [width]="1100" [height]="400"
 xAxisTitle="City"
 yAxisTitle="Value"
 [data]="barChartData"
-chartType="bar-chart" [showGridLines]="false"
-color="#1166ee"></ngx-beautiful-charts>
+[showGridLines]="false"
+color="#1166ee"></ngx-bar-chart>
 ```
 
 ### Clustered Bar Chart
 
-![Clustered Bar Chart in Angular](./chart-images/clustered-bar-chart.png)
+![Clustered Bar Chart](./chart-images/clustered-bar-chart.png)
 
 #### TypeScript:
 ```
@@ -221,18 +219,15 @@ clusteredBarChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100" [height]="400"
-[displayXAxis]="true"
-[displayYAxis]="true"
+<ngx-clustered-bar-chart [width]="1100" [height]="400"
 xAxisTitle="City"
 yAxisTitle="Value"
-[data]="clusteredBarChartData"
-chartType="clustered-bar-chart"></ngx-beautiful-charts>
+[data]="clusteredBarChartData"></ngx-clustered-bar-chart>
 ```
 
 ### Pie Chart
 
-![Pie Chart in Angular](./chart-images/pie-chart.png)
+![Pie Chart](./chart-images/pie-chart.png)
 
 #### TypeScript:
 ```
@@ -267,14 +262,13 @@ pieChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800"
-[data]="pieChartData"
-chartType="pie-chart"></ngx-beautiful-charts>
+<ngx-pie-chart [width]="800"
+[data]="pieChartData" colorScheme="colorful"></ngx-pie-chart>
 ```
 
 ### Donut Chart
 
-![Donut Chart in Angular](./chart-images/donut-chart.png)
+![Donut Chart](./chart-images/donut-chart.png)
 
 #### TypeScript:
 ```
@@ -309,14 +303,13 @@ donutChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="800"
-[data]="donutChartData"
-chartType="donut-chart"></ngx-beautiful-charts>
+<ngx-donut-chart [width]="800"
+[data]="donutChartData" colorScheme="colorful"></ngx-donut-chart>
 ```
 
 ### Sunburst Chart
 
-![Sunburst Chart in Angular](./chart-images/sunburst-chart.png)
+![Sunburst Chart](./chart-images/sunburst-chart.png)
 
 #### TypeScript:
 ```
@@ -377,15 +370,14 @@ sunburstChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="700"
-[data]="sunburstChartData" colorScheme="cool"
-chartType="sunburst-chart"></ngx-beautiful-charts>
+<ngx-sunburst-chart [width]="700"
+[data]="sunburstChartData" colorScheme="cool"></ngx-sunburst-chart>
 ```
 
 
 ### Gantt Chart
 
-![Gantt Chart in Angular](./chart-images/gantt-chart.png)
+![Gantt Chart](./chart-images/gantt-chart.png)
 
 #### TypeScript:
 ```
@@ -456,10 +448,65 @@ ganttChartData = [
 
 #### HTML:
 ```
-<ngx-beautiful-charts [width]="1100"
-[data]="ganttChartData" colorScheme="cool"
-chartType="gantt-chart"></ngx-beautiful-charts>
+<ngx-gantt-chart [width]="1100"
+[data]="ganttChartData" colorScheme="cool"></ngx-gantt-chart>
 ```
+
+
+
+### Timeline Chart
+
+![Timeline Chart](./chart-images/timeline-chart.png)
+
+#### TypeScript:
+```
+timelineChartData = [
+    { time: 1,
+      displayTime: 'January',
+      text: 'This is what happened in January'
+    }, { time: 2,
+      displayTime: 'February',
+      text: 'This is what happened in February'
+    }, { time: 3,
+      displayTime: 'March',
+      text: 'This is what happened in March'
+    }, { time: 4,
+      displayTime: 'April',
+      text: 'This is what happened in April'
+    }, { time: 5,
+      displayTime: 'May',
+      text: 'This is what happened in May'
+    }, { time: 6,
+      displayTime: 'June',
+      text: 'This is what happened in 2014'
+    }, { time: 7,
+      displayTime: 'July',
+      text: 'This is what happened in 2016'
+    }, { time: 8,
+      displayTime: 'August',
+      text: 'This is what happened in 2018'
+    }, { time: 9,
+      displayTime: 'September',
+      text: 'This is what happened in 2018'
+    }, { time: 10,
+      displayTime: 'October',
+      text: 'This is what happened in 2018'
+    }, { time: 11,
+      displayTime: 'November',
+      text: 'This is what happened in 2018'
+    }, { time: 12,
+      displayTime: 'December',
+      text: 'This is what happened in 2020'
+    }
+  ];
+```
+
+#### HTML:
+```
+<ngx-timeline-chart [width]="1100" [height]="500"
+[data]="timelineChartData" colorScheme="cool"></ngx-timeline-chart>
+```
+
 <!-- 
 ## Code scaffolding
 

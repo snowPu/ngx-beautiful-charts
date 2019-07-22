@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { BeautifulChartsService } from '../../beautiful-charts.service';
+import { GanttChartService } from '../gantt-chart.service';
 
 @Component({
   selector: 'g[ngx-gc-chart-base]',
@@ -7,11 +7,6 @@ import { BeautifulChartsService } from '../../beautiful-charts.service';
   styleUrls: ['./gc-chart-base.component.scss']
 })
 export class GcChartBaseComponent implements OnInit, OnChanges {
-
-  @Input() width: number;
-  @Input() height: number;
-  @Input() xPadding: number;
-  @Input() yPadding: number;
 
   gridWidthX: number;
   gridWidthY: number;
@@ -73,7 +68,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
   //   }
   // ];
 
-  constructor(public beautifulChartsService: BeautifulChartsService) { }
+  constructor(public ganttChartService: GanttChartService) { }
 
   shortenDate(date) {
     date = date.replace('January', 'Jan');
@@ -95,8 +90,8 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     // compute the min date and max date
     // const oneDay = 24 * 60 * 60 * 1000;
     // const dateRange = Math.round(Math.abs(
-    //     (this.beautifulChartsService.ganttMaxDate.getTime()
-    //      - this.beautifulChartsService.ganttMinDate.getTime()
+    //     (this.ganttChartService.ganttMaxDate.getTime()
+    //      - this.ganttChartService.ganttMinDate.getTime()
     //      ) / (oneDay)));
     let flag = 0;
     let qts = 1;
@@ -106,7 +101,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     // 9m --> 3 weeks --> 12
 
     while (flag === 0) {
-      if (this.beautifulChartsService.ganttDateRange <= 90 * qts) {
+      if (this.ganttChartService.ganttDateRange <= 90 * qts) {
         this.gridPrecisionX = 7 * qts;
         flag = 1;
       } else qts = qts + 1;
@@ -114,25 +109,25 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
 
     console.log(this.gridPrecisionX);
 
-    this.gridWidthX = this.beautifulChartsService.transformX(this.gridPrecisionX);
-    this.gridWidthY = this.height / this.beautifulChartsService.ganttPhases.length;
+    this.gridWidthX = this.ganttChartService.transformX(this.gridPrecisionX);
+    this.gridWidthY = this.ganttChartService.rectHeight / this.ganttChartService.ganttPhases.length;
     this.gridPath = 'M ' + this.gridWidthX + ' 0 L 0 0 0 ' + this.gridWidthY;
 
     this.xAxis = [];
     this.yAxis = [];
 
-    let date = this.beautifulChartsService.ganttMinDate;
-    // let xPos = this.beautifulChartsService.transformGanttDate(date) + this.xPadding + 150;
-    let yTrans = this.height + this.yPadding + 10;
+    let date = this.ganttChartService.ganttMinDate;
+    // let xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
+    let yTrans = this.ganttChartService.rectHeight + this.ganttChartService.yPadding + 10;
     // let transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
     // this.xAxis.push({xPos: xPos, value: date, transform: transform});
     // console.log(date);
-    console.log('max date: ' + this.beautifulChartsService.ganttMaxDate);
+    console.log('max date: ' + this.ganttChartService.ganttMaxDate);
     console.log('date: ' + date);
-    while (new Date(date) <= new Date(this.beautifulChartsService.ganttMaxDate)) {
+    while (new Date(date) <= new Date(this.ganttChartService.ganttMaxDate)) {
       console.log('date: ' + date);
       // console.log(date);
-      let xPos = this.beautifulChartsService.transformGanttDate(date) + this.xPadding + 150;
+      let xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
       let transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
       this.xAxis.push({xPos: xPos, value: this.shortenDate(date), transform: transform});
       date = this.addDays(date, this.gridPrecisionX);
@@ -140,8 +135,8 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
 
     console.log(this.xAxis);
     let cnt = 0;
-    for (const phase of this.beautifulChartsService.ganttPhases) {
-      const yPos = this.gridWidthY * cnt + this.gridWidthY * 0.5 + this.yPadding;
+    for (const phase of this.ganttChartService.ganttPhases) {
+      const yPos = this.gridWidthY * cnt + this.gridWidthY * 0.5 + this.ganttChartService.yPadding;
       this.yAxis.push({yPos: yPos, value: phase });
       cnt++;
     }
@@ -149,7 +144,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.computeGrid();
-    this.gridID = 'grid' + this.beautifulChartsService.componentID;
+    this.gridID = 'grid' + this.ganttChartService.componentID;
   }
 
   ngOnChanges() {
