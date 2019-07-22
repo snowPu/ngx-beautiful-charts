@@ -23,6 +23,7 @@ Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for th
 - Donut Chart
 - Sunburst Chart
 - Gantt Chart
+- Timeline Chart
 
 ## How to use them
 
