@@ -1,6 +1,6 @@
 # NgxBeautifulCharts
 
-<img alt="ngx-beautiful-charts" src="./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
+<img alt="ngx-beautiful-charts" src="./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
 
 <!-- ![ngx-beautiful-charts](./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
 <!-- 
