@@ -478,25 +478,25 @@ timelineChartData = [
       text: 'This is what happened in May'
     }, { time: 6,
       displayTime: 'June',
-      text: 'This is what happened in 2014'
+      text: 'This is what happened in June'
     }, { time: 7,
       displayTime: 'July',
-      text: 'This is what happened in 2016'
+      text: 'This is what happened in July'
     }, { time: 8,
       displayTime: 'August',
-      text: 'This is what happened in 2018'
+      text: 'This is what happened in August'
     }, { time: 9,
       displayTime: 'September',
-      text: 'This is what happened in 2018'
+      text: 'This is what happened in September'
     }, { time: 10,
       displayTime: 'October',
-      text: 'This is what happened in 2018'
+      text: 'This is what happened in October'
     }, { time: 11,
       displayTime: 'November',
-      text: 'This is what happened in 2018'
+      text: 'This is what happened in November'
     }, { time: 12,
       displayTime: 'December',
-      text: 'This is what happened in 2020'
+      text: 'This is what happened in December'
     }
   ];
 ```
