@@ -1,5 +1,9 @@
 # NgxBeautifulCharts
 
+![GitHub last commit](https://img.shields.io/github/last-commit/snowpu/ngx-beautiful-charts.svg)
+&nbsp; ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/snowpu/ngx-beautiful-charts.svg)
+
+
 <img alt="ngx-beautiful-charts" src="https://raw.githubusercontent.com/snowPu/ngx-beautiful-charts/master/projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
 
 <!-- ![ngx-beautiful-charts](./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
