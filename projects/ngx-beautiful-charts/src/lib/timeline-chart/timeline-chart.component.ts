@@ -40,7 +40,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
 
   setColors() {
     let cnt = 0;
-    for (let oneTimeData of this.data) {
+    for (const oneTimeData of this.data) {
       if (!oneTimeData.color) oneTimeData.color = coloSchemes[this.colorScheme][cnt % 10];
       cnt++;
     }
@@ -67,7 +67,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
     const noOfCharactersPerLine = width / 10;
     const newLineStr = '\n';
     let done = false;
-    let res = [];
+    const res = [];
     do {
       let found = false;
       for (let i = noOfCharactersPerLine - 1; i >= 0; i--) {
@@ -94,7 +94,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
     const maxTime = Math.max(...this.data.map(timeData => timeData.time));
     const perTimeWidth = this.timelineChartService.rectWidth * .8 / (maxTime - minTime);
     this.data.sort((a, b) => a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-    let diffs = [];
+    const diffs = [];
     for (let i = 1; i < this.data.length; i++) {
       diffs.push(this.data[i].time - this.data[i - 1].time);
     }

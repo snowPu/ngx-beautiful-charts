@@ -37,7 +37,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   getRefinedData(data, i, color = null) {
-    for (let sbData of data) {
+    for (const sbData of data) {
       sbData.level = i;
       if (color) sbData.color = color;
       if (sbData.level > this.sunDepth) this.sunDepth = sbData.level;
@@ -140,7 +140,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   generateSunSlicesForAngle(data, angleRange, rotation) {
-    let sunSlices = [];
+    const sunSlices = [];
 
     let sum = 0;
     for (const val of data) {
@@ -175,7 +175,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
 
   setColors() {
     let cnt = 0;
-    for (let slice of this.data) {
+    for (const slice of this.data) {
       if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
       cnt++;
     }

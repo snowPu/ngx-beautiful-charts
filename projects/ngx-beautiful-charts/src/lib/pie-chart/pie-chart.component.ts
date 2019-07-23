@@ -111,7 +111,7 @@ export class PieChartComponent implements OnInit, OnChanges {
 
   setColors() {
     let cnt = 0;
-    for (let slice of this.data) {
+    for (const slice of this.data) {
       if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
       cnt++;
     }

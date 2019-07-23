@@ -437,7 +437,7 @@ export class AppComponent {
         'Software Development': [
           {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
         ],
-        'Testing': [
+        Testing: [
           {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
         ],
         'User Documentation': [
@@ -449,7 +449,7 @@ export class AppComponent {
       name: 'Test Team A',
       color: '#CA1551',
       timelines: {
-        'Testing': [
+        Testing: [
           {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
         ]
       }
@@ -458,7 +458,7 @@ export class AppComponent {
       name: 'Test Team B',
       color: '#FF6B6B',
       timelines: {
-        'Testing': [
+        Testing: [
           {from: 'August 15, 2019', to: 'August 30, 2019', info: 'wtv'}
         ]
       }
@@ -467,10 +467,10 @@ export class AppComponent {
       name: 'Sales Team',
       color: '#03CEA4',
       timelines: {
-        'Pitching': [
+        Pitching: [
           {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
         ],
-        'Sales': [
+        Sales: [
           {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
         ]
       }
@@ -479,7 +479,7 @@ export class AppComponent {
       name: 'Planning Team',
       color: '#03CEA4',
       timelines: {
-        'Planning': [
+        Planning: [
           {from: 'May 9, 2019', to: 'May 30, 2019', info: 'wtv'}
         ]
       }
@@ -506,7 +506,7 @@ export class AppComponent {
         'Software Development': [
           {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
         ],
-        'Testing': [
+        Testing: [
           {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
         ],
         'User Documentation': [
@@ -517,7 +517,7 @@ export class AppComponent {
     {
       name: 'Test Team A',
       timelines: {
-        'Testing': [
+        Testing: [
           {from: 'August 1, 2019', to: 'August 15, 2019', info: 'wtv'}
         ]
       }
@@ -525,7 +525,7 @@ export class AppComponent {
     {
       name: 'Test Team B',
       timelines: {
-        'Testing': [
+        Testing: [
           {from: 'August 15, 2019', to: 'August 30, 2019', info: 'wtv'}
         ]
       }
@@ -533,10 +533,10 @@ export class AppComponent {
     {
       name: 'Sales Team',
       timelines: {
-        'Pitching': [
+        Pitching: [
           {from: 'July 9, 2019', to: 'October 20, 2019', info: 'wtv'}
         ],
-        'Sales': [
+        Sales: [
           {from: 'October 25, 2019', to: 'November 15, 2019', info: 'wtv'}
         ]
       }
@@ -544,7 +544,7 @@ export class AppComponent {
     {
       name: 'Planning Team',
       timelines: {
-        'Planning': [
+        Planning: [
           {from: 'May 9, 2019', to: 'May 30, 2019', info: 'wtv'}
         ]
       }

@@ -28,11 +28,11 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
 
 
   addDays(date, days: number) {
-    let newdate = new Date(date);
+    const newdate = new Date(date);
     newdate.setDate((new Date(date)).getDate() + days);
-    let day = newdate.getDate();
-    let monthIndex = newdate.getMonth();
-    let year = newdate.getFullYear();
+    const day = newdate.getDate();
+    const monthIndex = newdate.getMonth();
+    const year = newdate.getFullYear();
 
 
     return this.monthNames[monthIndex] + ' ' + day + ', ' + year;
@@ -118,7 +118,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
 
     let date = this.ganttChartService.ganttMinDate;
     // let xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
-    let yTrans = this.ganttChartService.rectHeight + this.ganttChartService.yPadding + 10;
+    const yTrans = this.ganttChartService.rectHeight + this.ganttChartService.yPadding + 10;
     // let transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
     // this.xAxis.push({xPos: xPos, value: date, transform: transform});
     // console.log(date);
@@ -127,9 +127,9 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     while (new Date(date) <= new Date(this.ganttChartService.ganttMaxDate)) {
       console.log('date: ' + date);
       // console.log(date);
-      let xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
-      let transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
-      this.xAxis.push({xPos: xPos, value: this.shortenDate(date), transform: transform});
+      const xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
+      const transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
+      this.xAxis.push({xPos, value: this.shortenDate(date), transform});
       date = this.addDays(date, this.gridPrecisionX);
     }
 
@@ -137,7 +137,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     let cnt = 0;
     for (const phase of this.ganttChartService.ganttPhases) {
       const yPos = this.gridWidthY * cnt + this.gridWidthY * 0.5 + this.ganttChartService.yPadding;
-      this.yAxis.push({yPos: yPos, value: phase });
+      this.yAxis.push({yPos, value: phase });
       cnt++;
     }
   }

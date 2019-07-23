@@ -47,7 +47,7 @@ export class GanttChartComponent implements OnInit, OnChanges {
 
   definePhaseTimelines() {
     this.phaseTimelines = {};
-    for (let phase of this.ganttChartService.ganttPhases) {
+    for (const phase of this.ganttChartService.ganttPhases) {
       this.phaseTimelines[phase] = [];
     }
 

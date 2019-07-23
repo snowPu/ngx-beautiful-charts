@@ -60,7 +60,7 @@ export class CbcChartBaseComponent implements OnInit, OnChanges {
     for (const xAxisValue of uniqueXAxisValues) {
       cnt ++;
       const xPos = cnt * eachWidth + eachWidth / 2 + this.clusteredBarChartService.xPadding;
-      this.xAxis.push({xPos: xPos, value: xAxisValue });
+      this.xAxis.push({xPos, value: xAxisValue });
     }
 
   }

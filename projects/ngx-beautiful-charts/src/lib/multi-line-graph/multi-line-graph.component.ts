@@ -12,20 +12,6 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
 })
 export class MultiLineGraphComponent implements OnInit, OnChanges {
 
-
-// <h4>Multi Line Graph</h4>
-// <ngx-beautiful-charts [width]="1100" [height]="400" 
-// [minX]="0" [maxX]="100" 
-// [minY]="0" [maxY]="50" 
-// [gridPrecisionX]="10" 
-// [gridPrecisionY]="10"
-// [displayXAxis]="true"
-// [displayYAxis]="true"
-// xAxisTitle="Time"
-// yAxisTitle="Distance"
-// [data]="multiLineData2"
-// chartType="multi-line-graph"></ngx-beautiful-charts>
-
   @Input() data: [{name: string, color: string, data: [{x: number, y: number, info: any }]}];
   @Input() width: number;
   @Input() height: number;
@@ -84,8 +70,8 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
         const toolTipY = y - 30;
         const toolTip = point.info && (point.info !== '') ? 'block' : 'none';
         lineData.push({
-          x: x,
-          y: y,
+          x,
+          y,
           info: point.info,
           originalX: point.x,
           originalY: point.y,
@@ -135,7 +121,7 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
 
   setColors() {
     let cnt = 0;
-    for (let line of this.data) {
+    for (const line of this.data) {
       if (!line.color) line.color = coloSchemes[this.colorScheme][cnt % 10];
       cnt++;
     }

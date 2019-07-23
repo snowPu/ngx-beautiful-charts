@@ -57,7 +57,7 @@ export class GanttChartService {
     this.legion = [];
     let cnt = 0;
     for (let line = 0; line < noOfLines; line++) {
-      let legionLine = [];
+      const legionLine = [];
       for (let i = 0; i < 3; i++) {
         if (this.ganttTeams[cnt]) legionLine.push(this.ganttTeams[cnt]);
         cnt++;
@@ -101,9 +101,9 @@ export class GanttChartService {
     this.data = data;
     // console.log('service color scheme: ' + this.colorScheme)
 
-    let froms = [];
-    let tos = [];
-    let phases = new Set();
+    const froms = [];
+    const tos = [];
+    const phases = new Set();
     this.ganttTeams = [];
     // this.setColors();
     console.log(this.data);
@@ -161,11 +161,11 @@ export class GanttChartService {
   }
 
   addDays(date, days: number) {
-    let newdate = new Date(date);
+    const newdate = new Date(date);
     newdate.setDate((new Date(date)).getDate() + days);
-    let day = newdate.getDate();
-    let monthIndex = newdate.getMonth();
-    let year = newdate.getFullYear();
+    const day = newdate.getDate();
+    const monthIndex = newdate.getMonth();
+    const year = newdate.getFullYear();
 
 
     return this.monthNames[monthIndex] + ' ' + day + ', ' + year;

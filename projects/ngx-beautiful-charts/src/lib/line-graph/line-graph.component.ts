@@ -11,19 +11,6 @@ import { LineGraphService } from './line-graph.service';
 })
 export class LineGraphComponent implements OnInit, OnChanges {
 
-//   <ngx-beautiful-charts [width]="800" [height]="400" 
-// [minX]="0" [maxX]="100" 
-// [minY]="0" [maxY]="50" 
-// [gridPrecisionX]="10" 
-// [gridPrecisionY]="10"
-// [displayXAxis]="true"
-// [displayYAxis]="true"
-// xAxisTitle="Time"
-// yAxisTitle="Distance"
-// [data]="data"
-// chartType="line-graph"
-// color="#ff4444"></ngx-beautiful-charts>
-
   @Input() data: [{x: number, y: number, info: any }] = null;
   @Input() chartBase = true;
   @Input() width: number;
@@ -85,13 +72,13 @@ export class LineGraphComponent implements OnInit, OnChanges {
       const toolTipY = y - 30;
       const toolTip = point.info && (point.info !== '') ? 'block' : 'none';
       this.transformedData.push({
-        x: x,
-        y: y,
+        x,
+        y,
         info: point.info,
         originalX: point.x,
         originalY: point.y,
         toolTipTranslate: 'translate(' + toolTipX + 'px, ' + toolTipY + 'px)',
-        toolTip: toolTip
+        toolTip
       });
     }
     console.log(this.transformedData);
