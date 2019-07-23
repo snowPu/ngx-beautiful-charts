@@ -12,6 +12,8 @@ Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for th
 
 ## Install via NPM
 
+[![npm version](https://badge.fury.io/js/ngx-beautiful-charts.svg)](https://badge.fury.io/js/ngx-beautiful-charts)
+
 > npm i ngx-beautiful-charts
 
 ## Types of charts offered
