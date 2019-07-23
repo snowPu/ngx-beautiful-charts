@@ -2,6 +2,7 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/snowpu/ngx-beautiful-charts.svg)
 &nbsp; ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/snowpu/ngx-beautiful-charts.svg)
+&nbsp; ![npm](https://img.shields.io/npm/dm/ngx-beautiful-charts.svg)
 
 <img alt="ngx-beautiful-charts" src="./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
 

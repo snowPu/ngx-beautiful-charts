@@ -2,22 +2,11 @@ language: node_js
 node_js:
   - "9"
 dist: trusty
-sudo: false
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-
-cache:
-  directories:
-    - ./node_modules
-
+sudo: required
 branches:
   only:
   - master
-install:
-  - npm install
+before_script:
+  - npm install -g @angular/cli
 script:
-  - npm run test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+- ng build --base-href https://snowpu.github.io/ngx-beautiful-charts/
