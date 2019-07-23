@@ -2,12 +2,22 @@ language: node_js
 node_js:
   - "9"
 dist: trusty
-sudo: required
+sudo: false
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+cache:
+  directories:
+    - ./node_modules
+
 branches:
   only:
   - master
-before_script:
-  - npm install -g @angular/cli
+install:
+  - npm install
 script:
-- ng lint
-- ng build
+  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
