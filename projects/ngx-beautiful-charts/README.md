@@ -10,7 +10,11 @@
 <!-- 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1. -->
 
-Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :)
+<!-- 
+Started out initially as an interesting way to pass time, NgxBeautifulCharts turned out to be something that could be useful to anyone who wants to create charts in Angular. I have tried to make the charts as customizable and aesthetically pleasing as possible. More charts coming soon! :) -->
+NgxBeautifulCharts is an Angular library for creating charts in your application. The charts are customizable and aesthetically pleasing. Several charts that aren't provided by other Angular chart libraries, such as Sunburst Chart, Gantt Chart and Timeline Chart are offered by NgxBeautifulCharts. 
+
+I'm willing to work on more charts, please drop a message if you would like something else or have any specific feature requests.
 
 Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
 
