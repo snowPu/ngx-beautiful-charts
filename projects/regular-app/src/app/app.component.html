@@ -9,6 +9,7 @@
 
 <h4>Line Graph</h4>
 <ngx-line-graph
+[width]="800" [height]="400"
 [minX]="0" [maxX]="100" 
 [minY]="0" [maxY]="50" 
 [gridPrecisionX]="10" 
@@ -42,7 +43,7 @@ yAxisTitle="Value"
 [data]="clusteredBarChartData"></ngx-clustered-bar-chart>
 
 <ngx-pie-chart [width]="800"
-[data]="pieChartData" colorScheme="colorful"></ngx-pie-chart>
+[data]="pieChartData" [customColorScheme]="customColorScheme"></ngx-pie-chart>
 
 <ngx-donut-chart [width]="800"
 [data]="pieChartData" colorScheme="colorful"></ngx-donut-chart>

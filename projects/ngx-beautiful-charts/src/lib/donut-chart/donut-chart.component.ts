@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 import { DonutChartService } from './donut-chart.service';
 
@@ -14,6 +14,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
   @Input() data: [{name: string, color: string, value: number }];
   @Input() width: number;
   @Input() colorScheme: string;
+  @Input() customColorScheme: string[] = [];
 
   componentID;
   xPadding = 60;
@@ -105,25 +106,32 @@ export class DonutChartComponent implements OnInit, OnChanges {
         this.height = this.width * .6 - this.xPadding;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   setColors() {
     let cnt = 0;
     for (const slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
-      cnt++;
+      if (!slice.color) {
+        if (this.customColorScheme.length > 0) {
+          slice.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          slice.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+        cnt++;
+      }
     }
   }
 
   ngOnInit() {
+    this.data = JSON.parse(JSON.stringify(this.data));
     this.componentID = this.globalParametersService.addNewComponent();
-    this.setColors();
     this.setDimensions();
     this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    this.setColors();
     this.donutChartService.setValues({
       componentID: this.componentID,
       width: this.width,
@@ -147,7 +155,6 @@ export class DonutChartComponent implements OnInit, OnChanges {
       this.donutSlicesInit = 1;
       donutCompletion = donutCompletion + 0.01;
       donutCompletion = Math.round(donutCompletion * 100) / 100;
-      console.log(donutCompletion);
       if (donutCompletion > 1) clearInterval(intervalID);
     }, 5);
 
@@ -162,9 +169,10 @@ export class DonutChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.setColors();
+    this.data = JSON.parse(JSON.stringify(this.data));
     this.setDimensions();
     this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    this.setColors();
     this.donutChartService.setValues({
       componentID: this.componentID,
       width: this.width,
@@ -186,7 +194,6 @@ export class DonutChartComponent implements OnInit, OnChanges {
       this.donutSlicesInit = 1;
       donutCompletion = donutCompletion + 0.01;
       donutCompletion = Math.round(donutCompletion * 100) / 100;
-      console.log(donutCompletion);
       if (donutCompletion > 1) clearInterval(intervalID);
     }, 5);
 

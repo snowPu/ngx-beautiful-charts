@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -64,7 +64,7 @@ export class GanttChartService {
       }
       this.legion.push(legionLine);
     }
-    console.log(this.legion);
+    // console.log(this.legion);
   }
 
   transformGanttDate(d) {
@@ -106,7 +106,7 @@ export class GanttChartService {
     const phases = new Set();
     this.ganttTeams = [];
     // this.setColors();
-    console.log(this.data);
+    // console.log(this.data);
     for (const team of this.data) {
       this.ganttTeams.push({name: team.name, color: team.color});
       for (const phase of Object.keys(team.timelines)) {
@@ -119,8 +119,8 @@ export class GanttChartService {
     }
     this.ganttPhases = Array.from(phases);
 
-    console.log('phase timelines: ');
-    console.log(this.phaseTimelines);
+    // console.log('phase timelines: ');
+    // console.log(this.phaseTimelines);
 
     const minDate = froms.reduce((a, b) => new Date(a) < new Date(b) ? a : b );
     const maxDate = tos.reduce((a, b) => new Date(a) > new Date(b) ? a : b );
@@ -136,8 +136,8 @@ export class GanttChartService {
         (new Date(this.ganttMaxDate).getTime()
         - new Date(this.ganttMinDate).getTime()
         ) / (oneDay)));
-    console.log('Date Range: ');
-    console.log(this.ganttDateRange);
+    // console.log('Date Range: ');
+    // console.log(this.ganttDateRange);
     this.minX = 0;
     // this.maxX = this.ganttDateRange;
     let flag = 0;
@@ -157,7 +157,7 @@ export class GanttChartService {
     this.computeRectDimensions();
     this.computeLegionDimensions();
     this.computeLegion();
-    this.printAll();
+    // this.printAll();
   }
 
   addDays(date, days: number) {

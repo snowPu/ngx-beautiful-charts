@@ -20,7 +20,7 @@ export class DonutChartBaseComponent implements OnInit, OnChanges {
 
   computeLegionPath(i: number) {
     let path = 'M ';
-    const y = this.donutChartService.yPadding + 30 + 30 * i;
+    const y = this.donutChartService.yPadding + 25 + 30 * i;
     path = path + this.x1 + ' ' + y + ' ' + this.x2 + ' ' + y;
     return path;
   }

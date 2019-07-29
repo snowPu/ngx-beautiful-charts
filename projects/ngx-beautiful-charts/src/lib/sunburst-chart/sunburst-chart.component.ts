@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { SunburstChartService } from './sunburst-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -14,6 +14,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   @Input() data: any;
   @Input() width: number;
   @Input() colorScheme = 'colorful';
+  @Input() customColorScheme: string[] = [];
 
   componentID;
   height: number;
@@ -63,10 +64,10 @@ export class SunburstChartComponent implements OnInit , OnChanges {
         this.height = this.width - this.xPadding;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   generateSlice(data, sum, angleRange, rotation) {
@@ -176,8 +177,14 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   setColors() {
     let cnt = 0;
     for (const slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
-      cnt++;
+      if (!slice.color) {
+        if (this.customColorScheme.length > 0) {
+          slice.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          slice.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+        cnt++;
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-export const coloSchemes = {
+export const colorSchemes = {
     colorful: [
         '#EAC435', '#345995', '#03CEA4', '#FF6B6B', '#CA1551',
         '#3A3335', '#FFE19C', '#C1FFF2', '#511730', '#8789C0' ],

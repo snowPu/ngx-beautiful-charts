@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { MultiLineGraphService } from './multi-line-graph.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -24,6 +24,7 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   @Input() gridPrecisionY: number;
   @Input() xAxisTitle: string;
   @Input() yAxisTitle: string;
+  @Input() customColorScheme: string[] = [];
 
   componentID: number;
   xPadding = 60;
@@ -43,10 +44,10 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
         this.height = dims.width / 3;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   setMinandMax() {
@@ -97,13 +98,13 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
       singleLineData = singleLine.data;
       singleLineData.sort((a, b) => a.x < b.x ? -1 : a.x > b.x ? 1 : 0);
       for (const point of singleLineData) {
-        console.log(point);
+        // console.log(point);
         const coordX = point.x;
         const coordY = point.y;
 
         graphLinePath += ' ' + coordX + ' ' + coordY;
 
-        console.log(graphLinePath);
+        // console.log(graphLinePath);
       }
 
       this.graphLinePaths.push({
@@ -122,7 +123,13 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   setColors() {
     let cnt = 0;
     for (const line of this.data) {
-      if (!line.color) line.color = coloSchemes[this.colorScheme][cnt % 10];
+      if (!line.color) {
+        if (this.customColorScheme.length > 0) {
+          line.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          line.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+      }
       cnt++;
     }
   }

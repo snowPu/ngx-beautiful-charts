@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Input, OnChanges } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 import { LineGraphService } from './line-graph.service';
 
@@ -25,6 +25,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
   @Input() gridPrecisionY: number;
   @Input() xAxisTitle: string;
   @Input() yAxisTitle: string;
+  @Input() customColorScheme: string[] = [];
 
 
   componentID: number;
@@ -50,10 +51,10 @@ export class LineGraphComponent implements OnInit, OnChanges {
         this.height = dims.width / 3;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   setMinandMax() {
@@ -81,7 +82,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
         toolTip
       });
     }
-    console.log(this.transformedData);
+    // console.log(this.transformedData);
   }
 
   printAllInput() {
@@ -114,16 +115,22 @@ export class LineGraphComponent implements OnInit, OnChanges {
   }
 
   setColor() {
-    if (!this.color) this.color = coloSchemes[this.colorScheme][0];
+    if (!this.color) {
+      if (this.customColorScheme.length > 0) {
+        this.color = this.customColorScheme[0];
+      } else {
+        this.color = colorSchemes[this.colorScheme][0];
+      }
+    }
   }
 
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
-    console.log('init..');
+    // console.log('init..');
     this.setDimensions();
-    this.printAllInput();
+    // this.printAllInput();
     this.setMinandMax();
-    this.printAllInput();
+    // this.printAllInput();
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.lineGraphService.setValues({
       componentID: this.componentID,
@@ -143,10 +150,10 @@ export class LineGraphComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('changes..');
-    this.printAllInput();
+    // console.log('changes..');
+    // this.printAllInput();
     this.setMinandMax();
-    this.printAllInput();
+    // this.printAllInput();
 
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.lineGraphService.setValues({

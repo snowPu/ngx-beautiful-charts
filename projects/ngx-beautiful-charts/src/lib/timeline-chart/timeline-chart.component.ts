@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { TimelineChartService } from './timeline-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -15,6 +15,7 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   @Input() width: number;
   @Input() height: number;
   @Input() colorScheme = 'colorful';
+  @Input() customColorScheme: string[] = [];
 
 
   componentID;
@@ -41,8 +42,14 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   setColors() {
     let cnt = 0;
     for (const oneTimeData of this.data) {
-      if (!oneTimeData.color) oneTimeData.color = coloSchemes[this.colorScheme][cnt % 10];
-      cnt++;
+      if (!oneTimeData.color) {
+        if (this.customColorScheme.length > 0) {
+          oneTimeData.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          oneTimeData.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+        cnt++;
+      }
     }
   }
 
@@ -57,10 +64,10 @@ export class TimelineChartComponent implements OnInit, OnChanges {
         this.height = dims.width / 2;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   textWrap(text, width) {
@@ -103,8 +110,8 @@ export class TimelineChartComponent implements OnInit, OnChanges {
     const maxRadius = this.timelineChartService.rectWidth * .8 / (this.data.length - 1) * .25;
     const minRadius = this.timelineChartService.rectWidth * .8 * .04;
 
-    console.log('max: ' + maxRadius);
-    console.log('min: ' + minRadius);
+    // console.log('max: ' + maxRadius);
+    // console.log('min: ' + minRadius);
 
 
     if (this.timeBubbleRadius > maxRadius) this.timeBubbleRadius = maxRadius;

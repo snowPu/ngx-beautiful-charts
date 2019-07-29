@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { PieChartService } from './pie-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -18,6 +18,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   @Input() data: [{name: string, color: string, value: number }];
   @Input() width: number;
   @Input() colorScheme: string;
+  @Input() customColorScheme: string[] = [];
 
   componentID;
   xPadding = 60;
@@ -103,26 +104,33 @@ export class PieChartComponent implements OnInit, OnChanges {
         this.height = this.width * .6 - this.xPadding;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   setColors() {
     let cnt = 0;
     for (const slice of this.data) {
-      if (!slice.color) slice.color = coloSchemes[this.colorScheme][cnt % 10];
+      if (!slice.color) {
+        if (this.customColorScheme.length > 0) {
+          slice.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          slice.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+      }
       cnt++;
     }
   }
 
   ngOnInit() {
+    this.data = JSON.parse(JSON.stringify(this.data));
     this.componentID = this.globalParametersService.addNewComponent();
     // console.log('x: ' + this.x);
-    this.setColors();
     this.setDimensions();
     this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    this.setColors();
     this.pieSlicesInit = 0;
     this.pieChartService.setValues({
       componentID: this.componentID,
@@ -141,7 +149,6 @@ export class PieChartComponent implements OnInit, OnChanges {
       this.pieSlicesInit = 1;
       pieCompletion = pieCompletion + 0.01;
       pieCompletion = Math.round(pieCompletion * 100) / 100;
-      console.log(pieCompletion);
       if (pieCompletion > 1) clearInterval(intervalID);
     }, 5);
     // console.log(this.hoverPieRadius);
@@ -155,10 +162,11 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this.data = JSON.parse(JSON.stringify(this.data));
     // console.log('x: ' + this.x);
-    this.setColors();
     this.setDimensions();
     this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    this.setColors();
     this.pieSlicesInit = 0;
     this.pieChartService.setValues({
       componentID: this.componentID,

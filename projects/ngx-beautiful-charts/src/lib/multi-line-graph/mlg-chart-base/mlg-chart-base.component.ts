@@ -54,7 +54,7 @@ export class MlgChartBaseComponent implements OnInit, OnChanges {
 
   computeLegionPath(i: number) {
     let path = 'M ';
-    const y = this.multiLineGraphService.yPadding + 40 + 30 * i;
+    const y = this.multiLineGraphService.yPadding + 35 + 30 * i;
     path = path + this.x1 + ' ' + y + ' ' + this.x2 + ' ' + y;
     return path;
   }

@@ -8,6 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'NgxBeautifulCharts';
 
+  customColorScheme = [
+    '#DFD6A7', '#D4AFCD', '#F7CE5B', '#AC9969', '#A1D2CE',
+    '#78CAD2', '#62A8AC', '#5497A7', '#50858B', '#2E6171'
+  ];
+
   data = [
     {x: 10, y: 10, info: 'Point 1'},
     {x: 80, y: 40, info: 'Point 2'},
@@ -246,27 +251,22 @@ export class AppComponent {
   pieChartData = [
     {
       name: 'Calcutta',
-      color: '#EAC435',
       value: 20
     },
     {
       name: 'Madras',
-      color: '#345995',
       value: 50
     },
     {
       name: 'Bombay',
-      color: '#03CEA4',
       value: 50
     },
     {
       name: 'Delhi',
-      color: '#FF6B6B',
       value: 10
     },
     {
       name: 'Bangalore',
-      color: '#CA1551',
       value: 50
     }
   ];

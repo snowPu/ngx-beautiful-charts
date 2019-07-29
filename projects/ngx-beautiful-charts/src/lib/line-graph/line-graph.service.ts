@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -61,7 +61,7 @@ export class LineGraphService {
     this.yPadding = yPadding;
     // console.log('service color scheme: ' + this.colorScheme)
     this.computeRectDimensions();
-    this.printAll();
+    // this.printAll();
   }
 
   printAll() {

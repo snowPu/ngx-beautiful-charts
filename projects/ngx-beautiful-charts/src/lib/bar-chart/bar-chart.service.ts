@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -74,7 +74,7 @@ export class BarChartService {
     this.maxY = this.maxY + this.diff * 2;
 
     this.computeRectDimensions();
-    this.printAll();
+    // this.printAll();
   }
 
   printAll() {

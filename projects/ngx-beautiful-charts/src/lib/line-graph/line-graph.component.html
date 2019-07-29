@@ -10,7 +10,7 @@
     />
 
   <g id="component" *ngFor="let point of transformedData;">
-    <circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4">
+    <circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4" [attr.fill]="color">
     </circle>
     
     <g class="tooltip" [ngStyle]="{'transform': point.toolTipTranslate, 'display': point.toolTip}" 

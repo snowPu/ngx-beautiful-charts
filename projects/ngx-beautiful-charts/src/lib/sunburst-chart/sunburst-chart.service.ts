@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -47,7 +47,7 @@ export class SunburstChartService {
     this.sunRadius = (this.width - this.xPadding * 2) / 2;
 
     this.computeRectDimensions();
-    this.printAll();
+    // this.printAll();
   }
 
   printAll() {

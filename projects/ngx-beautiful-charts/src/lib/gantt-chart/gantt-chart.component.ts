@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { GanttChartService } from './gantt-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -14,6 +14,7 @@ export class GanttChartComponent implements OnInit, OnChanges {
   @Input() data;
   @Input() width: number;
   @Input() colorScheme = 'colorful';
+  @Input() customColorScheme: string[] = [];
 
   componentID;
   xPadding = 60;
@@ -31,17 +32,23 @@ export class GanttChartComponent implements OnInit, OnChanges {
         this.height = this.width - this.xPadding;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   setColors() {
     let cnt = 0;
     for (const team of this.data) {
-      if (!team.color) team.color = coloSchemes[this.colorScheme][cnt % 10];
-      cnt++;
+      if (!team.color) {
+        if (this.customColorScheme.length > 0) {
+          team.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          team.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+        cnt++;
+      }
     }
   }
 
@@ -62,14 +69,14 @@ export class GanttChartComponent implements OnInit, OnChanges {
         }
       }
     }
-    console.log('phase timelines: ');
-    console.log(this.phaseTimelines);
+    // console.log('phase timelines: ');
+    // console.log(this.phaseTimelines);
   }
 
   // setColors() {
   //   let cnt = 0;
   //   for (const team of this.ganttChartService.data) {
-  //     if (!team.color) team.color = coloSchemes[this.ganttChartService.colorScheme][cnt % 10];
+  //     if (!team.color) team.color = colorSchemes[this.ganttChartService.colorScheme][cnt % 10];
   //     cnt++;
   //   }
   // }

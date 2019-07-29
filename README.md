@@ -39,7 +39,7 @@ Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for th
 
 ### Line Graph
 
-![Line Graph in Angular](./chart-images/line-graph.png)
+![Line Graph in Angular](./projects/ngx-beautiful-charts/chart-images/line-graph.png)
 
 #### TypeScript:
 ```
@@ -74,7 +74,7 @@ color="#ff4444"></ngx-line-graph>
 
 ### Multi Line Graph
 
-![Multi Line Graph in Angular](./chart-images/multi-line.png)
+![Multi Line Graph in Angular](./projects/ngx-beautiful-charts/chart-images/multi-line.png)
 
 #### TypeScript:
 ```
@@ -117,7 +117,7 @@ yAxisTitle="Distance"
 
 ### Bar Chart
 
-![Bar Chart in Angular](./chart-images/bar-chart.png)
+![Bar Chart in Angular](./projects/ngx-beautiful-charts/chart-images/bar-chart.png)
 
 #### TypeScript:
 ```
@@ -153,7 +153,7 @@ color="#1166ee"></ngx-bar-chart>
 
 ### Clustered Bar Chart
 
-![Clustered Bar Chart in Angular](./chart-images/clustered-bar-chart.png)
+![Clustered Bar Chart in Angular](./projects/ngx-beautiful-charts/chart-images/clustered-bar-chart.png)
 
 #### TypeScript:
 ```
@@ -237,34 +237,35 @@ yAxisTitle="Value"
 
 ### Pie Chart
 
-![Pie Chart in Angular](./chart-images/pie-chart.png)
+![Pie Chart in Angular](./projects/ngx-beautiful-charts/chart-images/pie-chart.png)
 
 #### TypeScript:
 ```
+
+customColorScheme = [
+  '#DFD6A7', '#D4AFCD', '#F7CE5B', '#AC9969', '#A1D2CE',
+  '#78CAD2', '#62A8AC', '#5497A7', '#50858B', '#2E6171'
+];
+
 pieChartData = [
     {
       name: 'Calcutta',
-      color: '#EAC435',
-      value: 50
+      value: 20
     },
     {
       name: 'Madras',
-      color: '#345995',
       value: 50
     },
     {
       name: 'Bombay',
-      color: '#03CEA4',
       value: 50
     },
     {
       name: 'Delhi',
-      color: '#FF6B6B',
-      value: 50
+      value: 10
     },
     {
       name: 'Bangalore',
-      color: '#CA1551',
       value: 50
     }
   ];
@@ -273,39 +274,34 @@ pieChartData = [
 #### HTML:
 ```
 <ngx-pie-chart [width]="800"
-[data]="pieChartData" colorScheme="colorful"></ngx-pie-chart>
+[data]="pieChartData" [customColorScheme]="customColorScheme"></ngx-pie-chart>
 ```
 
 ### Donut Chart
 
-![Donut Chart in Angular](./chart-images/donut-chart.png)
+![Donut Chart in Angular](./projects/ngx-beautiful-charts/chart-images/donut-chart.png)
 
 #### TypeScript:
 ```
 donutChartData = [
     {
       name: 'Calcutta',
-      color: '#EAC435',
-      value: 50
+      value: 20
     },
     {
       name: 'Madras',
-      color: '#345995',
       value: 50
     },
     {
       name: 'Bombay',
-      color: '#03CEA4',
       value: 50
     },
     {
       name: 'Delhi',
-      color: '#FF6B6B',
-      value: 50
+      value: 10
     },
     {
       name: 'Bangalore',
-      color: '#CA1551',
       value: 50
     }
   ];
@@ -320,7 +316,7 @@ donutChartData = [
 ### Sunburst Chart
 
 <!-- ![Sunburst Chart](./chart-images/sunburst-chart.png) -->
-<img alt="v" src="./chart-images/sunburst-chart.png" width="600">
+<img alt="v" src="./projects/ngx-beautiful-charts/chart-images/sunburst-chart.png" width="600">
 
 #### TypeScript:
 ```
@@ -388,7 +384,7 @@ sunburstChartData = [
 
 ### Gantt Chart
 
-![Gantt Chart in Angular](./chart-images/gantt-chart.png)
+![Gantt Chart in Angular](./projects/ngx-beautiful-charts/chart-images/gantt-chart.png)
 
 #### TypeScript:
 ```
@@ -466,7 +462,7 @@ ganttChartData = [
 
 ### Timeline Chart
 
-![Timeline Chart](./chart-images/timeline-chart.png)
+![Timeline Chart](./projects/ngx-beautiful-charts/chart-images/timeline-chart.png)
 
 #### TypeScript:
 ```

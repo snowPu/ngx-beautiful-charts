@@ -107,7 +107,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
       } else qts = qts + 1;
     }
 
-    console.log(this.gridPrecisionX);
+    // console.log(this.gridPrecisionX);
 
     this.gridWidthX = this.ganttChartService.transformX(this.gridPrecisionX);
     this.gridWidthY = this.ganttChartService.rectHeight / this.ganttChartService.ganttPhases.length;
@@ -122,10 +122,10 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     // let transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
     // this.xAxis.push({xPos: xPos, value: date, transform: transform});
     // console.log(date);
-    console.log('max date: ' + this.ganttChartService.ganttMaxDate);
-    console.log('date: ' + date);
+    // console.log('max date: ' + this.ganttChartService.ganttMaxDate);
+    // console.log('date: ' + date);
     while (new Date(date) <= new Date(this.ganttChartService.ganttMaxDate)) {
-      console.log('date: ' + date);
+      // console.log('date: ' + date);
       // console.log(date);
       const xPos = this.ganttChartService.transformGanttDate(date) + this.ganttChartService.xPadding + 150;
       const transform = 'translate(' + xPos + 'px, ' + yTrans + 'px)';
@@ -133,7 +133,7 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
       date = this.addDays(date, this.gridPrecisionX);
     }
 
-    console.log(this.xAxis);
+    // console.log(this.xAxis);
     let cnt = 0;
     for (const phase of this.ganttChartService.ganttPhases) {
       const yPos = this.gridWidthY * cnt + this.gridWidthY * 0.5 + this.ganttChartService.yPadding;

@@ -26,7 +26,7 @@
   
   <g *ngFor="let line of transformedData;">
     <g id="component" *ngFor="let point of line.data">
-        <circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4">
+        <circle class="point" [attr.cx]="point.x" [attr.cy]="point.y" r="4" [attr.fill]="line.color">
         </circle>
         
         <g class="tooltip" [ngStyle]="{'transform': point.toolTipTranslate, 'display': point.toolTip}" 

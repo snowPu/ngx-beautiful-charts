@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { ClusteredBarChartService } from './clustered-bar-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -18,6 +18,7 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
   @Input() yAxisTitle: string;
   @Input() showGridLines = false;
   @Input() colorScheme = 'colorful';
+  @Input() customColorScheme: string[] = [];
 
   componentID: number;
   xPadding = 60;
@@ -37,10 +38,10 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
         this.height = dims.width / 3;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   computeBarPaths() {
@@ -90,8 +91,14 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
   setColors() {
     let cnt = 0;
     for (const seriesData of this.data) {
-      if (!seriesData.color) seriesData.color = coloSchemes[this.colorScheme][cnt % 10];
-      cnt++;
+      if (!seriesData.color) {
+        if (this.customColorScheme.length > 0) {
+          seriesData.color = this.customColorScheme[cnt % this.customColorScheme.length];
+        } else {
+          seriesData.color = colorSchemes[this.colorScheme][cnt % 10];
+        }
+        cnt++;
+      }
     }
   }
 

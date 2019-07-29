@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
-import { coloSchemes } from '../../constants/color-schemes';
+import { colorSchemes } from '../../constants/color-schemes';
 import { BarChartService } from './bar-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 
@@ -28,6 +28,7 @@ export class BarChartComponent implements OnInit, OnChanges {
   @Input() showGridLines = false;
   @Input() color: string;
   @Input() colorScheme = 'colorful';
+  @Input() customColorScheme: string[] = [];
 
   componentID: number;
   xPadding = 60;
@@ -64,7 +65,13 @@ export class BarChartComponent implements OnInit, OnChanges {
               private currentElement: ElementRef) { }
 
   setColor() {
-    if (!this.color) this.color = coloSchemes[this.colorScheme][0];
+    if (!this.color) {
+      if (this.customColorScheme.length > 0) {
+        this.color = this.customColorScheme[0];
+      } else {
+        this.color = colorSchemes[this.colorScheme][0];
+      }
+    }
   }
 
   setDimensions() {
@@ -78,15 +85,15 @@ export class BarChartComponent implements OnInit, OnChanges {
         this.height = dims.width / 3;
       }
     }
-    console.log('---set dimensions---');
-    console.log('width: ' + this.width);
-    console.log('height: ' + this.height);
-    console.log('--------------------');
+    // console.log('---set dimensions---');
+    // console.log('width: ' + this.width);
+    // console.log('height: ' + this.height);
+    // console.log('--------------------');
   }
 
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
-    console.log('init..');
+    // console.log('init..');
     this.setDimensions();
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.barChartService.setValues({
@@ -98,7 +105,7 @@ export class BarChartComponent implements OnInit, OnChanges {
       data: this.data
     });
     this.setColor();
-    console.log(this.color);
+    // console.log(this.color);
     this.computeBarPaths();
   }
 
@@ -113,7 +120,7 @@ export class BarChartComponent implements OnInit, OnChanges {
       data: this.data
     });
     this.setColor();
-    console.log(this.color);
+    // console.log(this.color);
     this.computeBarPaths();
   }
 
