@@ -237,7 +237,7 @@ yAxisTitle="Value"
 
 ### Pie Chart
 
-![Pie Chart in Angular](./projects/ngx-beautiful-charts/chart-images/pie-chart.png)
+<img alt="Donut Chart" src="./projects/ngx-beautiful-charts/chart-images/pie-chart.png" width="700">
 
 #### TypeScript:
 ```
@@ -279,7 +279,8 @@ pieChartData = [
 
 ### Donut Chart
 
-![Donut Chart in Angular](./projects/ngx-beautiful-charts/chart-images/donut-chart.png)
+<img alt="Donut Chart" src="./projects/ngx-beautiful-charts/chart-images/donut-chart.png" width="700">
+
 
 #### TypeScript:
 ```

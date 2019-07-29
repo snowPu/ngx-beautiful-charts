@@ -320,7 +320,7 @@ donutChartData = [
 ### Sunburst Chart
 
 <!-- ![Sunburst Chart](./chart-images/sunburst-chart.png) -->
-<img alt="v" src="./chart-images/sunburst-chart.png" width="600">
+<img alt="sunburst chart" src="./chart-images/sunburst-chart.png" width="600">
 
 #### TypeScript:
 ```
