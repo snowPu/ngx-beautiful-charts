@@ -15,6 +15,8 @@ NgxBeautifulCharts is an Angular library for creating charts in your application
 
 I'm willing to work on more charts, please drop a message if you would like something else or have any specific feature requests.
 
+Please star this repository if you like it :)
+
 Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
 
 ## Install via NPM
