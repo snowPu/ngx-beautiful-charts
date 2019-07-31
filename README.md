@@ -21,7 +21,7 @@ Please star this repository if you like it :)
 Demo available on Stackblitz: [https://stackblitz.com/edit/ngx-beautiful-charts-demo](https://stackblitz.com/edit/ngx-beautiful-charts-demo)
 
 ## Documentation
-Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation.
+Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for full documentation.
 
 
 
