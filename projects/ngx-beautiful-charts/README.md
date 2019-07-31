@@ -16,7 +16,7 @@ NgxBeautifulCharts is an Angular library for creating charts in your application
 
 I'm willing to work on more charts, please drop a message if you would like something else or have any specific feature requests.
 
-Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
+Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation and [live demo](https://stackblitz.com/edit/ngx-beautiful-charts-demo) to see how charts look!
 
 ## Install via NPM
 
@@ -237,7 +237,7 @@ yAxisTitle="Value"
 
 ### Pie Chart
 
-![Pie Chart](./chart-images/pie-chart.png)
+<img alt="Pie Chart" src="./chart-images/pie-chart.png" width="600">
 
 #### TypeScript:
 ```
@@ -278,7 +278,7 @@ pieChartData = [
 
 ### Donut Chart
 
-![Donut Chart](./chart-images/donut-chart.png)
+<img alt="Donut Chart" src="./chart-images/donut-chart.png" width="600">
 
 #### TypeScript:
 ```

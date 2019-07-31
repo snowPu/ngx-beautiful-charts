@@ -17,7 +17,9 @@ I'm willing to work on more charts, please drop a message if you would like some
 
 Please star this repository if you like it :)
 
-Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation!
+Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for the full documentation and [live demo](https://stackblitz.com/edit/ngx-beautiful-charts-demo) to see how charts look!
+
+
 
 ## Install via NPM
 

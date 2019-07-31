@@ -14,7 +14,10 @@
    version="1.1"
    id="svg855"
    sodipodi:docname="ngx-beautiful-charts-logo-with-text.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   inkscape:export-filename="C:\Users\sukan\Documents\AngularLibraries\regular-lib\projects\ngx-beautiful-charts\assets\images\pngs\ngx-beautiful-charts-logo-with-text.png"
+   inkscape:export-xdpi="5.3200002"
+   inkscape:export-ydpi="5.3200002">
   <metadata
      id="metadata861">
     <rdf:RDF>
@@ -42,13 +45,13 @@
      inkscape:window-height="801"
      id="namedview857"
      showgrid="false"
-     inkscape:zoom="0.0625"
-     inkscape:cx="7596.7379"
-     inkscape:cy="-629.26832"
+     inkscape:zoom="0.03125"
+     inkscape:cx="-3532.4614"
+     inkscape:cy="-2629.7463"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g5276" />
+     inkscape:current-layer="svg855" />
   <rect
      style="opacity:1;fill:#303029;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.38618183;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:456.09390259;stroke-opacity:1"
      id="rect5111"
@@ -64,9 +67,9 @@
      id="rect5117"
      style="opacity:1;fill:#404036;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.47189403;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:456.09390259;stroke-opacity:1" />
   <rect
-     style="opacity:1;fill:#515145;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.55319828;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:456.09390259;stroke-opacity:1"
+     style="opacity:1;fill:#515145;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.57182145;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:456.09390259;stroke-opacity:1"
      id="rect5119"
-     width="31.783852"
+     width="33.95985"
      height="148.95883"
      x="94.868675"
      y="94.605042" />
@@ -142,7 +145,8 @@
          y="1447.8251" /></flowRegion><flowPara
        id="flowPara5202"></flowPara></flowRoot>  <g
      id="g5276"
-     transform="translate(14.5792)">
+     transform="translate(14.5792)"
+     style="opacity:1">
     <text
        id="text5186"
        y="157.56876"
