@@ -16,6 +16,18 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
   xAxis;
   yAxis;
 
+  fontSizeXAxisTickLabel: number;
+  fontSizeYAxisTickLabel: number;
+  fontSizeXAxisTitle: number;
+  fontSizeYAxisTitle: number;
+
+  positions = {
+    xTick: 0,
+    yTick: 0,
+    xTitle: {x: 0, y: 0},
+    yTitle: {x: 0, y: 0}
+  };
+
   computeGrid() {
     this.yLevelPaths = [];
     this.xAxis = [];
@@ -64,14 +76,43 @@ export class BcChartBaseComponent implements OnInit, OnChanges {
 
   }
 
+  computeTickAndTitlePositions() {
+    this.positions.xTick = this.barChartService.rectHeight
+     + this.barChartService.yPadding + this.barChartService.rectHeight * 0.05 + 5;
+    this.positions.yTick = this.barChartService.xPadding
+     - this.barChartService.rectWidth * 0.03 - 5;
+    this.positions.xTitle = {
+      x: this.barChartService.rectWidth / 2 + this.barChartService.xPadding,
+      y: this.barChartService.rectHeight + this.barChartService.yPadding + this.barChartService.rectHeight * 0.15 + 5
+    };
+    this.positions.yTitle = {
+      x: -this.barChartService.rectHeight / 2 - this.barChartService.yPadding,
+      y: this.barChartService.xPadding - this.barChartService.rectWidth * 0.06 - 5
+    };
+  }
+
+  computeFontSizes() {
+    this.fontSizeXAxisTickLabel = this.barChartService.rectWidth * .015 + 5;
+    this.fontSizeYAxisTickLabel = this.barChartService.rectWidth * .015 + 5;
+    this.fontSizeXAxisTitle = this.barChartService.rectWidth * .025 + 5;
+    this.fontSizeYAxisTitle = this.barChartService.rectWidth * .025 + 5;
+  }
+
   constructor(public barChartService: BarChartService) { }
 
   ngOnInit() {
     this.computeGrid();
+    this.barChartService.rectWidthBS.subscribe(w => {
+      this.computeGrid();
+      this.computeFontSizes();
+      this.computeTickAndTitlePositions();
+    });
   }
 
   ngOnChanges() {
     this.computeGrid();
+    this.computeFontSizes();
+    this.computeTickAndTitlePositions();
   }
 
 }

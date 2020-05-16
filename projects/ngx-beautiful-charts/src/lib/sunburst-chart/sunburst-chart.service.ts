@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
 import { colorSchemes } from '../../constants/color-schemes';
+import { BehaviorSubject } from 'rxjs';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -19,12 +20,16 @@ export class SunburstChartService {
   sunRadius: number;
   rectWidth: number;
   rectHeight: number;
+  rectWidthBS = new BehaviorSubject(null);
+  rectHeightBS = new BehaviorSubject(null);
 
   constructor() { }
 
   computeRectDimensions() {
     this.rectWidth = this.width - this.xPadding * 2;
     this.rectHeight = this.rectWidth;
+    this.rectWidthBS.next(this.rectWidth);
+    this.rectHeightBS.next(this.rectHeight);
   }
 
 

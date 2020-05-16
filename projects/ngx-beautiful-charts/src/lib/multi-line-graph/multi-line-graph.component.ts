@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, AfterViewInit } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { MultiLineGraphService } from './multi-line-graph.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./multi-line-graph.component.scss'],
   providers: [MultiLineGraphService]
 })
-export class MultiLineGraphComponent implements OnInit, OnChanges {
+export class MultiLineGraphComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() data: [{name: string, color: string, data: [{x: number, y: number, info: any }]}];
   @Input() width: number;
@@ -32,23 +34,56 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   dataCopy;
   graphLinePaths;
   transformedData = [];
+  resizeSubscription;
+  setWidth = 0;
+  setHeight = 0;
+
+  setPadding() {
+    this.xPadding = this.setWidth * 0.08 + 10;
+    this.yPadding = this.setHeight * 0.05 + 10;
+  }
 
   setDimensions() {
-    if (this.width && !this.height) this.height = this.width / 3;
-    else if (!this.width && this.height) this.width = this.height * 3;
-    else if (!this.width && !this.height) {
+    if (this.width && this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.height;
+      this.setPadding();
+    } else if (this.width && !this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.width / 3;
+      this.setPadding();
+    } else if (!this.width && this.height) {
+      this.setHeight = this.height;
+      this.setWidth = this.height * 3;
+      this.setPadding();
+    } else if (!this.width && !this.height) {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = dims.width / 3;
+        this.setWidth = Math.max(dims.width, 500);
+        this.setHeight = Math.max(dims.width / 3, 200);
       }
+      this.setPadding();
     }
     // console.log('---set dimensions---');
     // console.log('width: ' + this.width);
     // console.log('height: ' + this.height);
     // console.log('--------------------');
   }
+
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+
 
   setMinandMax() {
     if (this.minX == null) this.minX = Math.min(...this.data.map(line => Math.min(...line.data.map(oneData => oneData.x))));
@@ -137,14 +172,41 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
     console.log('init..');
+    this.doAll();
+  }
+
+  ngOnChanges() {
+    this.doAll();
+    // console.log('changes..');
+    // this.setMinandMax();
+    // this.setColors();
+    // this.dataCopy = JSON.parse(JSON.stringify(this.data));
+    // this.multiLineGraphService.setValues({
+    //   componentID: this.componentID,
+    //   width: this.width,
+    //   height: this.height,
+    //   minX: this.minX,
+    //   maxX: this.maxX,
+    //   minY: this.minY,
+    //   maxY: this.maxY,
+    //   dataLength: this.data.length,
+    //   xPadding: this.xPadding,
+    //   yPadding: this.yPadding
+    // });
+
+    // this.transformData();
+    // this.setLinePath();
+  }
+
+  doAll() {
     this.setDimensions();
     this.setMinandMax();
     this.setColors();
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.multiLineGraphService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       minX: this.minX,
       maxX: this.maxX,
       minY: this.minY,
@@ -158,26 +220,8 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
     this.setLinePath();
   }
 
-  ngOnChanges() {
-    console.log('changes..');
-    this.setMinandMax();
-    this.setColors();
-    this.dataCopy = JSON.parse(JSON.stringify(this.data));
-    this.multiLineGraphService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      minX: this.minX,
-      maxX: this.maxX,
-      minY: this.minY,
-      maxY: this.maxY,
-      dataLength: this.data.length,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding
-    });
-
-    this.transformData();
-    this.setLinePath();
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
   }
 
 }

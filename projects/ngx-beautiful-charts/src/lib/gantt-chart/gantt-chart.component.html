@@ -1,4 +1,4 @@
-<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg [attr.width]="ganttChartService.width" [attr.height]="ganttChartService.height" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <g ngx-gc-chart-base />
   <g *ngFor="let phase of ganttChartService.ganttPhases; index as i">
     <g id="component" *ngFor="let ganttEntry of phaseTimelines[phase]; index as j">

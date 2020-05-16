@@ -19,24 +19,24 @@ stroke="#444444" fill="none" stroke-width="1"/>
 
 <svg:text
 *ngFor="let x of xAxis" class="axis-text" 
-[attr.x]="x.xPos" [attr.y]="barChartService.rectHeight+barChartService.yPadding+30" class="small"
+[attr.x]="x.xPos" [attr.y]="positions['xTick']" [attr.font-size]="fontSizeXAxisTickLabel"
 text-anchor="middle" dominant-baseline="middle"> {{ x.value }} </svg:text>
 
 <svg:text
 *ngFor="let y of yAxis" class="axis-text" 
-[attr.y]="y.yPos" [attr.x]="barChartService.xPadding-30" class="small">{{ y.value }}</svg:text>
+[attr.y]="y.yPos" [attr.x]="positions['yTick']" [attr.font-size]="fontSizeYAxisTickLabel">{{ y.value }}</svg:text>
 
 <!-- x Axis Title -->
-<svg:text class="axis-text" 
-  [attr.x]="barChartService.rectWidth/2+barChartService.xPadding" 
-  [attr.y]="barChartService.rectHeight+barChartService.yPadding+60" dominant-baseline="middle" text-anchor="middle"> 
+<svg:text class="axis-title" 
+  [attr.x]="positions['xTitle'].x" [attr.font-size]="fontSizeXAxisTitle" 
+  [attr.y]="positions['xTitle'].y" dominant-baseline="middle" text-anchor="middle"> 
   {{ xAxisTitle }} 
 </svg:text>
 
 <!-- y Axis Title -->
-<svg:text class="axis-text" 
-  [attr.x]="-barChartService.rectHeight/2-barChartService.yPadding" 
-  [attr.y]="barChartService.xPadding-50" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
+<svg:text class="axis-title" 
+  [attr.x]="positions['yTitle'].x" [attr.font-size]="fontSizeYAxisTitle" 
+  [attr.y]="positions['yTitle'].y" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
   {{ yAxisTitle }} 
 </svg:text>
 

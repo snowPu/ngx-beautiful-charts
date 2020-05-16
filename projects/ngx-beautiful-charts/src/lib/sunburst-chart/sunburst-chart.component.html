@@ -1,4 +1,4 @@
-<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg [attr.width]="sunburstChartService.width" [attr.height]="sunburstChartService.height" version="1.1" xmlns="http://www.w3.org/2000/svg">
 
   <g *ngFor="let level of levelSunSlices">
     <g *ngFor="let slice of level">
@@ -6,7 +6,7 @@
         <path class="sun-slice" (mouseover)="slice.hover=true" (mouseout)="slice.hover=false"
         [ngStyle]="{'opacity': slice.hover ? 0.7 : 1.0}"
           [attr.d]="slice.hover ? slice.hoverD : slice.d" [attr.fill]="slice.color" />
-      <text class="slice-text" [attr.x]="slice.textX" 
+      <text class="slice-text" [attr.x]="slice.textX" [attr.font-size]="fontSize"
       [attr.y]="0" dominant-baseline="middle" text-anchor="middle" [ngStyle]="{'transform': slice.textRotation}"> 
         {{ slice.name }} 
       </text>

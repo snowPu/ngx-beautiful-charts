@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
 import { colorSchemes } from '../../constants/color-schemes';
+import { BehaviorSubject } from 'rxjs';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -23,16 +24,21 @@ export class MultiLineGraphService {
   legionWidth: number;
   legionHeight: number;
 
+  rectWidthBS = new BehaviorSubject(null);
+  rectHeightBS = new BehaviorSubject(null);
+
   constructor() { }
 
   computeRectDimensions() {
     this.rectHeight = this.height - this.yPadding * 4;
-    this.rectWidth = this.width * .6 - this.xPadding * 2;
+    this.rectWidth = (this.width - this.xPadding * 2) * .7;
+    this.rectWidthBS.next(this.rectWidth);
+    this.rectHeightBS.next(this.rectHeight);
   }
 
   computeLegionDimensions() {
     const noOfLines = this.dataLength;
-    this.legionWidth = this.width * .4 - this.xPadding * 2;
+    this.legionWidth = (this.width - this.xPadding * 2) * .3;
     this.legionHeight = 60 + 30 * noOfLines - 19;
   }
 
@@ -68,8 +74,8 @@ export class MultiLineGraphService {
     this.xPadding = xPadding;
     this.yPadding = yPadding;
     // console.log('service color scheme: ' + this.colorScheme)
-    this.computeRectDimensions();
     this.computeLegionDimensions();
+    this.computeRectDimensions();
     // this.printAll();
   }
 

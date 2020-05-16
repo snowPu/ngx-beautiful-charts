@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
 import { colorSchemes } from '../../constants/color-schemes';
+import { BehaviorSubject } from 'rxjs';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -20,11 +21,16 @@ export class LineGraphService {
   rectWidth = 0;
   rectHeight = 0;
 
+  rectWidthBS = new BehaviorSubject(null);
+  rectHeightBS = new BehaviorSubject(null);
+
   constructor() { }
 
   computeRectDimensions() {
     this.rectHeight = this.height - this.yPadding * 4;
     this.rectWidth = this.width - this.xPadding * 2;
+    this.rectWidthBS.next(this.rectWidth);
+    this.rectHeightBS.next(this.rectHeight);
   }
 
   transformX(x: number) {

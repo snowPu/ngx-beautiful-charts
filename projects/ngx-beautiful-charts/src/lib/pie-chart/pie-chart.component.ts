@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { PieChartService } from './pie-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-pie-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./pie-chart.component.scss'],
   providers: [PieChartService]
 })
-export class PieChartComponent implements OnInit, OnChanges {
+export class PieChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   // <ngx-beautiful-charts [width]="800"
   // [data]="pieChartData"
@@ -32,6 +34,15 @@ export class PieChartComponent implements OnInit, OnChanges {
   gTranslate: string;
   hoverTranslate: string;
   pieSlicesInit = 0;
+
+  setWidth = 0;
+  setHeight = 0;
+  resizeSubscription: Subscription;
+
+  setPadding() {
+    this.xPadding = this.setWidth * 0.08 + 10;
+    this.yPadding = this.setHeight * 0.05 + 10;
+  }
 
   constructor(public pieChartService: PieChartService,
               private globalParametersService: GlobalParametersService,
@@ -95,13 +106,15 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   setDimensions() {
-    if (this.width) this.height = this.width * .6 - this.xPadding;
-    else {
+    if (this.width) {
+      this.setWidth = this.width;
+      this.setHeight = this.setWidth * .6 - this.xPadding;
+    } else {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = this.width * .6 - this.xPadding;
+        this.setWidth = Math.max(dims.width, 500);
+        this.setHeight = this.setWidth * .6 - this.xPadding;
       }
     }
     // console.log('---set dimensions---');
@@ -124,7 +137,20 @@ export class PieChartComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit() {
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new.');
+      this.doAll(false);
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+
+  private doAll(animate = true) {
     this.data = JSON.parse(JSON.stringify(this.data));
     this.componentID = this.globalParametersService.addNewComponent();
     // console.log('x: ' + this.x);
@@ -134,8 +160,8 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.pieSlicesInit = 0;
     this.pieChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       xPadding: this.xPadding,
       yPadding: this.yPadding,
       data: this.data
@@ -143,7 +169,7 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.pieRadius = this.pieChartService.pieRadius;
     this.hoverPieRadius = this.pieChartService.pieRadius * 1.05;
     let pieCompletion = 0;
-
+    if (!animate) { pieCompletion = 1; }
     const intervalID = setInterval(() => {
       this.generatePieSlices(pieCompletion);
       this.pieSlicesInit = 1;
@@ -159,41 +185,89 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
     const hoverTranslateXY = this.pieRadius * 0.08;
     this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+  }
+
+  ngOnInit() {
+    // this.data = JSON.parse(JSON.stringify(this.data));
+    // this.componentID = this.globalParametersService.addNewComponent();
+    // // console.log('x: ' + this.x);
+    // this.setDimensions();
+    // this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    // this.setColors();
+    // this.pieSlicesInit = 0;
+    // this.pieChartService.setValues({
+    //   componentID: this.componentID,
+    //   width: this.setWidth,
+    //   height: this.setHeight,
+    //   xPadding: this.xPadding,
+    //   yPadding: this.yPadding,
+    //   data: this.data
+    // });
+    // this.pieRadius = this.pieChartService.pieRadius;
+    // this.hoverPieRadius = this.pieChartService.pieRadius * 1.05;
+    // let pieCompletion = 0;
+
+    // const intervalID = setInterval(() => {
+    //   this.generatePieSlices(pieCompletion);
+    //   this.pieSlicesInit = 1;
+    //   pieCompletion = pieCompletion + 0.01;
+    //   pieCompletion = Math.round(pieCompletion * 100) / 100;
+    //   if (pieCompletion > 1) clearInterval(intervalID);
+    // }, 5);
+    // // console.log(this.hoverPieRadius);
+    // this.cX = this.xPadding + this.pieRadius;
+    // this.cY = this.yPadding + this.pieRadius;
+    // const translateX = this.xPadding + this.pieRadius;
+    // const translateY = this.yPadding + this.pieRadius;
+    // this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
+    // const hoverTranslateXY = this.pieRadius * 0.08;
+    // this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+    this.doAll();
   }
 
   ngOnChanges() {
-    this.data = JSON.parse(JSON.stringify(this.data));
-    // console.log('x: ' + this.x);
-    this.setDimensions();
-    this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
-    this.setColors();
-    this.pieSlicesInit = 0;
-    this.pieChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding,
-      data: this.data
-    });
-    this.pieRadius = this.pieChartService.pieRadius;
-    this.hoverPieRadius = this.pieChartService.pieRadius * 1.05;
-    let pieCompletion = 0;
-    const intervalID = setInterval(() => {
-      this.generatePieSlices(pieCompletion);
-      this.pieSlicesInit = 1;
-      pieCompletion = pieCompletion + 0.01;
-      pieCompletion = Math.round(pieCompletion * 100) / 100;
-      if (pieCompletion > 1) clearInterval(intervalID);
-    }, 5);
-    // console.log(this.hoverPieRadius);
-    this.cX = this.xPadding + this.pieRadius;
-    this.cY = this.yPadding + this.pieRadius;
-    const translateX = this.xPadding + this.pieRadius;
-    const translateY = this.yPadding + this.pieRadius;
-    this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
-    const hoverTranslateXY = this.pieRadius * 0.08;
-    this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+    // this.data = JSON.parse(JSON.stringify(this.data));
+    // // console.log('x: ' + this.x);
+    // this.setDimensions();
+    // this.data.sort((a, b) => a.value > b.value ? -1 : a.value < b.value ? 1 : 0);
+    // this.setColors();
+    // this.pieSlicesInit = 0;
+    // this.pieChartService.setValues({
+    //   componentID: this.componentID,
+    //   width: this.width,
+    //   height: this.height,
+    //   xPadding: this.xPadding,
+    //   yPadding: this.yPadding,
+    //   data: this.data
+    // });
+    // this.pieRadius = this.pieChartService.pieRadius;
+    // this.hoverPieRadius = this.pieChartService.pieRadius * 1.05;
+    // let pieCompletion = 0;
+    // const intervalID = setInterval(() => {
+    //   this.generatePieSlices(pieCompletion);
+    //   this.pieSlicesInit = 1;
+    //   pieCompletion = pieCompletion + 0.01;
+    //   pieCompletion = Math.round(pieCompletion * 100) / 100;
+    //   if (pieCompletion > 1) clearInterval(intervalID);
+    // }, 5);
+    // // console.log(this.hoverPieRadius);
+    // this.cX = this.xPadding + this.pieRadius;
+    // this.cY = this.yPadding + this.pieRadius;
+    // const translateX = this.xPadding + this.pieRadius;
+    // const translateY = this.yPadding + this.pieRadius;
+    // this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
+    // const hoverTranslateXY = this.pieRadius * 0.08;
+    // this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+    this.doAll();
   }
+
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
+  }
+
 
 }

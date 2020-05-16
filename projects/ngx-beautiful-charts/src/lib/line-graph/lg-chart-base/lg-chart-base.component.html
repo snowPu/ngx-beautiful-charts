@@ -12,22 +12,22 @@ patternUnits="userSpaceOnUse">
 stroke="#444444" [attr.fill]="'url(#' + gridID + ')'" stroke-width="1"/>
 
 <svg:text
-*ngFor="let x of xAxis" class="axis-text" 
-[attr.x]="x.xPos" [attr.y]="lineGraphService.rectHeight+lineGraphService.yPadding+30" class="small" text-anchor="middle"> {{ x.value }} </svg:text>
+*ngFor="let x of xAxis" class="axis-text" [attr.font-size]="fontSizeXAxisTickLabel"
+[attr.x]="x.xPos" [attr.y]="positions['xTick']" text-anchor="middle"> {{ x.value }} </svg:text>
 
 <svg:text
-*ngFor="let y of yAxis" class="axis-text" 
-[attr.y]="y.yPos" [attr.x]="lineGraphService.xPadding-30" class="small">{{ y.value }}</svg:text>
+*ngFor="let y of yAxis" class="axis-text" [attr.font-size]="fontSizeYAxisTickLabel" 
+[attr.y]="y.yPos" [attr.x]="positions['yTick']" >{{ y.value }}</svg:text>
 
 <!-- x Axis Title -->
-<svg:text class="axis-text" 
-  [attr.x]="lineGraphService.rectWidth/2+lineGraphService.xPadding" [attr.y]="lineGraphService.rectHeight+lineGraphService.yPadding+60" dominant-baseline="middle" text-anchor="middle"> 
+<svg:text class="axis-title" [attr.font-size]="fontSizeXAxisTitle" 
+  [attr.x]="positions['xTitle'].x" [attr.y]="positions['xTitle'].y" dominant-baseline="middle" text-anchor="middle"> 
   {{ xAxisTitle }} 
 </svg:text>
 
 <!-- y Axis Title -->
-<svg:text class="axis-text" 
-  [attr.x]="-lineGraphService.rectHeight/2-lineGraphService.yPadding" [attr.y]="lineGraphService.xPadding-50" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
+<svg:text class="axis-title" [attr.font-size]="fontSizeYAxisTitle"
+  [attr.x]="positions['yTitle'].x" [attr.y]="positions['yTitle'].y" dominant-baseline="middle" text-anchor="middle" transform="rotate(270)"> 
   {{ yAxisTitle }} 
 </svg:text>
 

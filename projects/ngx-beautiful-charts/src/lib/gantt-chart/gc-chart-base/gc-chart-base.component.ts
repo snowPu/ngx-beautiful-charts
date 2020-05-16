@@ -26,6 +26,9 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     'November', 'December'
   ];
 
+  fontSizeGantt: number;
+  fontSizeLegend: number;
+
 
   addDays(date, days: number) {
     const newdate = new Date(date);
@@ -142,12 +145,22 @@ export class GcChartBaseComponent implements OnInit, OnChanges {
     }
   }
 
+  computeFontSizes() {
+    this.fontSizeGantt = this.ganttChartService.rectWidth * .01 + 10;
+    this.fontSizeGantt = Math.min(this.fontSizeGantt, 15);
+    this.fontSizeLegend = this.ganttChartService.rectWidth * .01 + 10;
+  }
+
   ngOnInit() {
-    this.computeGrid();
+    this.ganttChartService.rectWidthBS.subscribe(w => {
+      this.computeGrid();
+      this.computeFontSizes();
+    });
     this.gridID = 'grid' + this.ganttChartService.componentID;
   }
 
   ngOnChanges() {
     this.computeGrid();
+    this.computeFontSizes();
   }
 }

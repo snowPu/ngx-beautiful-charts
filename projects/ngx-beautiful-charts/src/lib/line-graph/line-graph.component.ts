@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, ElementRef, OnInit, Input, OnChanges, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { GlobalParametersService } from '../../global/global-parameters.service';
 import { LineGraphService } from './line-graph.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-line-graph',
@@ -34,23 +36,61 @@ export class LineGraphComponent implements OnInit, OnChanges {
   graphLinePath: string;
   dataCopy;
   transformedData;
+  resizeSubscription: Subscription;
+  setWidth = 0;
+  setHeight = 0;
 
   constructor(public lineGraphService: LineGraphService,
               private globalParametersService: GlobalParametersService,
               private currentElement: ElementRef) {
   }
 
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+  setPadding() {
+    this.xPadding = this.setWidth * 0.07 + 10;
+    this.yPadding = this.setHeight * 0.04 + 10;
+  }
+
+
   setDimensions() {
-    if (this.width && !this.height) this.height = this.width / 3;
-    else if (!this.width && this.height) this.width = this.height * 3;
-    else if (!this.width && !this.height) {
+    if (this.width && this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.height;
+    } else if (this.width && !this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.width / 2;
+      console.log('1');
+    } else if (!this.width && this.height) {
+      this.setHeight = this.height;
+      this.setWidth = this.height * 2;
+      console.log('2');
+    } else if (!this.width && !this.height) {
       const host = this.currentElement.nativeElement;
+      console.log('3');
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = dims.width / 3;
+        this.setWidth = Math.max(dims.width, 400);
+        this.setHeight = Math.max(dims.width / 2, 200);
+        // console.log('3-1');
+        // console.log('width: ' + this.setWidth);
+        // console.log('height: ' + this.setHeight);
       }
     }
+    this.setPadding();
+    // if (this.cd) {
+    //   this.cd.markForCheck();
+    // }
     // console.log('---set dimensions---');
     // console.log('width: ' + this.width);
     // console.log('height: ' + this.height);
@@ -127,39 +167,45 @@ export class LineGraphComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
     // console.log('init..');
-    this.setDimensions();
-    // this.printAllInput();
-    this.setMinandMax();
-    // this.printAllInput();
-    this.dataCopy = JSON.parse(JSON.stringify(this.data));
-    this.lineGraphService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      minX: this.minX,
-      maxX: this.maxX,
-      minY: this.minY,
-      maxY: this.maxY,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding
-    });
+    // this.setDimensions();
+    // // this.printAllInput();
+    // this.setMinandMax();
+    // // this.printAllInput();
+    // this.dataCopy = JSON.parse(JSON.stringify(this.data));
+    // this.lineGraphService.setValues({
+    //   componentID: this.componentID,
+    //   width: this.setWidth,
+    //   height: this.setHeight,
+    //   minX: this.minX,
+    //   maxX: this.maxX,
+    //   minY: this.minY,
+    //   maxY: this.maxY,
+    //   xPadding: this.xPadding,
+    //   yPadding: this.yPadding
+    // });
 
-    this.setColor();
-    this.transformData();
-    this.setLinePath();
+    // this.setColor();
+    // this.transformData();
+    // this.setLinePath();
+    this.doAll();
   }
 
   ngOnChanges() {
     // console.log('changes..');
     // this.printAllInput();
+    this.doAll();
+  }
+
+  doAll() {
+    this.setDimensions();
     this.setMinandMax();
     // this.printAllInput();
 
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.lineGraphService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       minX: this.minX,
       maxX: this.maxX,
       minY: this.minY,
@@ -169,9 +215,17 @@ export class LineGraphComponent implements OnInit, OnChanges {
     });
 
     this.setColor();
-
     this.transformData();
     this.setLinePath();
   }
+
+
+  // ngAfterViewInit(): void {
+  //   // this.bindWindowResizeEvent();
+  // }
+
+  // ngOnDestroy() {
+  //   this.resizeSubscription.unsubscribe();
+  // }
 
 }

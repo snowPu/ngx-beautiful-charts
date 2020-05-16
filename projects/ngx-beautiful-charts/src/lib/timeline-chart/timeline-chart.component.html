@@ -1,4 +1,4 @@
-<svg [attr.width]="width" [attr.height]="height" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg [attr.width]="timelineChartService.width" [attr.height]="timelineChartService.height" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <g [ngStyle]="{'transform': gTranslate}">
     <rect x="0" 
     [attr.y]="barStartY" 
@@ -31,7 +31,7 @@
         [attr.y]="timeDataInst.textBlock.position.y"
         [attr.height]="textBlockHeight"
         text-anchor="middle" dominant-baseline="middle">
-        <tspan *ngFor="let line of timeDataInst.textBlock.text" 
+        <tspan *ngFor="let line of timeDataInst.textBlock.text; index as i" 
           [attr.x]="timeDataInst.textBlock.position.x"
           [attr.dx]="0"
           [attr.dy]="14">

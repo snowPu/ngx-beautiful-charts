@@ -24,13 +24,49 @@ export class MlgChartBaseComponent implements OnInit, OnChanges {
   xAxis: any;
   yAxis: any;
 
+  fontSizeXAxisTickLabel: number;
+  fontSizeYAxisTickLabel: number;
+  fontSizeXAxisTitle: number;
+  fontSizeYAxisTitle: number;
+  fontSizeLegend: number;
+
+  positions = {
+    xTick: 0,
+    yTick: 0,
+    xTitle: {x: 0, y: 0},
+    yTitle: {x: 0, y: 0}
+  };
+
+  computeTickAndTitlePositions() {
+    this.positions.xTick = this.multiLineGraphService.rectHeight
+     + this.multiLineGraphService.yPadding + this.multiLineGraphService.rectHeight * 0.1 + 5;
+    this.positions.yTick = this.multiLineGraphService.xPadding
+     - this.multiLineGraphService.rectWidth * 0.05 - 5;
+    this.positions.xTitle = {
+      x: this.multiLineGraphService.rectWidth / 2 + this.multiLineGraphService.xPadding,
+      y: this.multiLineGraphService.rectHeight + this.multiLineGraphService.yPadding + this.multiLineGraphService.rectHeight * 0.2 + 5
+    };
+    this.positions.yTitle = {
+      x: -this.multiLineGraphService.rectHeight / 2 - this.multiLineGraphService.yPadding,
+      y: this.multiLineGraphService.xPadding - this.multiLineGraphService.rectWidth * 0.08 - 5
+    };
+  }
+
+  computeFontSizes() {
+    this.fontSizeXAxisTickLabel = this.multiLineGraphService.rectWidth * .02 + 5;
+    this.fontSizeYAxisTickLabel = this.multiLineGraphService.rectWidth * .02 + 5;
+    this.fontSizeXAxisTitle = this.multiLineGraphService.rectWidth * .03 + 5;
+    this.fontSizeYAxisTitle = this.multiLineGraphService.rectWidth * .03 + 5;
+    this.fontSizeLegend = this.multiLineGraphService.rectWidth * .02 + 10;
+  }
+
   computeLegionXs() {
     this.x1 = this.multiLineGraphService.rectWidth
     + 2 * this.multiLineGraphService.xPadding
-    + this.multiLineGraphService.legionWidth / 4 * .2;
+    + this.multiLineGraphService.legionWidth / 16;
     this.x2 = this.multiLineGraphService.rectWidth
     + 2 * this.multiLineGraphService.xPadding
-    + this.multiLineGraphService.legionWidth / 4 * .8;
+    + this.multiLineGraphService.legionWidth * 3 / 16;
   }
 
   computeGrid() {
@@ -64,12 +100,20 @@ export class MlgChartBaseComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.computeGrid();
     this.gridID = 'grid' + this.multiLineGraphService.componentID;
-    this.computeLegionXs();
+    this.multiLineGraphService.rectWidthBS.subscribe(w => {
+      this.computeGrid();
+      this.computeLegionXs();
+      this.computeFontSizes();
+      this.computeTickAndTitlePositions();
+    });
+
   }
 
   ngOnChanges() {
     this.computeGrid();
     this.computeLegionXs();
+    this.computeFontSizes();
+    this.computeTickAndTitlePositions();
   }
 
 }

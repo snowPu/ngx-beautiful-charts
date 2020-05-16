@@ -10,12 +10,17 @@ export class DonutChartBaseComponent implements OnInit, OnChanges {
 
   x1: number;
   x2: number;
+  fontSizeLegend: number;
 
   computeLegionXs() {
     this.x1 = this.donutChartService.rectWidth + 2 * this.donutChartService.xPadding
                + this.donutChartService.legionWidth / 4 * .2;
     this.x2 = this.donutChartService.rectHeight + 2 * this.donutChartService.xPadding
                + this.donutChartService.legionWidth / 4 * .8;
+  }
+
+  computeFontSizes() {
+    this.fontSizeLegend = this.donutChartService.rectWidth * .02 + 10;
   }
 
   computeLegionPath(i: number) {
@@ -28,11 +33,15 @@ export class DonutChartBaseComponent implements OnInit, OnChanges {
   constructor(public donutChartService: DonutChartService) { }
 
   ngOnInit() {
-    this.computeLegionXs();
+    this.donutChartService.rectWidthBS.subscribe(w => {
+      this.computeLegionXs();
+      this.computeFontSizes();
+    });
   }
 
   ngOnChanges() {
     this.computeLegionXs();
+    this.computeFontSizes();
   }
 
 }

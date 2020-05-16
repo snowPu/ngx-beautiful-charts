@@ -10,6 +10,7 @@ export class PieChartBaseComponent implements OnInit, OnChanges {
 
   x1: number;
   x2: number;
+  fontSizeLegend: number;
 
   computeLegionXs() {
     this.x1 = this.pieChartService.rectWidth + 2 * this.pieChartService.xPadding + this.pieChartService.legionWidth / 4 * .2;
@@ -23,14 +24,22 @@ export class PieChartBaseComponent implements OnInit, OnChanges {
     return path;
   }
 
+  computeFontSizes() {
+    this.fontSizeLegend = this.pieChartService.rectWidth * .02 + 10;
+  }
+
   constructor(public pieChartService: PieChartService) { }
 
   ngOnInit() {
-    this.computeLegionXs();
+    this.pieChartService.rectWidthBS.subscribe(w => {
+      this.computeLegionXs();
+      this.computeFontSizes();
+    });
   }
 
   ngOnChanges() {
     this.computeLegionXs();
+    this.computeFontSizes();
   }
 
 }

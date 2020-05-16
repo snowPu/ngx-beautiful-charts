@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
 import { colorSchemes } from '../../constants/color-schemes';
+import { BehaviorSubject } from 'rxjs';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -21,12 +22,16 @@ export class PieChartService {
   rectHeight: number;
   legionWidth: number;
   legionHeight: number;
+  rectWidthBS = new BehaviorSubject(null);
+  rectHeightBS = new BehaviorSubject(null);
 
   constructor() { }
 
   computeRectDimensions() {
     this.rectWidth = this.width * .6 - this.xPadding * 2;
     this.rectHeight = this.rectWidth;
+    this.rectWidthBS.next(this.rectWidth);
+    this.rectHeightBS.next(this.rectHeight);
   }
 
   computeLegionDimensions() {
@@ -53,8 +58,8 @@ export class PieChartService {
 
     this.pieRadius = (this.width * .6 - this.xPadding * 2) / 2;
 
-    this.computeRectDimensions();
     this.computeLegionDimensions();
+    this.computeRectDimensions();
     // this.printAll();
   }
 

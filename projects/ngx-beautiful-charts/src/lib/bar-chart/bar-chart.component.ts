@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { BarChartService } from './bar-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-bar-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./bar-chart.component.scss'],
   providers: [BarChartService]
 })
-export class BarChartComponent implements OnInit, OnChanges {
+export class BarChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   // <h4>Bar Chart</h4>
   // <ngx-beautiful-charts [width]="1100" [height]="400"
@@ -30,11 +32,20 @@ export class BarChartComponent implements OnInit, OnChanges {
   @Input() colorScheme = 'colorful';
   @Input() customColorScheme: string[] = [];
 
+  setWidth: number;
+  setHeight: number;
   componentID: number;
   xPadding = 60;
   yPadding = this.xPadding / 2;
   barPaths: string[];
   dataCopy;
+  resizeSubscription: Subscription;
+
+
+  setPadding() {
+    this.xPadding = this.setWidth * 0.07 + 10;
+    this.yPadding = this.setHeight * 0.04 + 10;
+  }
 
   computeBarPaths() {
     this.barPaths = [];
@@ -75,53 +86,68 @@ export class BarChartComponent implements OnInit, OnChanges {
   }
 
   setDimensions() {
-    if (this.width && !this.height) this.height = this.width / 3;
-    else if (!this.width && this.height) this.width = this.height * 3;
+    if (this.width && this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.height;
+    } else if (this.width && !this.height) this.setHeight = this.width / 2;
+    else if (!this.width && this.height) this.setWidth = this.height * 2;
     else if (!this.width && !this.height) {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = dims.width / 3;
+        this.setWidth = Math.max(dims.width, 400);
+        this.setHeight = Math.max(dims.width / 2, 300);
       }
     }
+    this.setPadding();
     // console.log('---set dimensions---');
-    // console.log('width: ' + this.width);
-    // console.log('height: ' + this.height);
+    // console.log('width: ' + this.setWidth);
+    // console.log('height: ' + this.setHeight);
     // console.log('--------------------');
   }
 
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
-    // console.log('init..');
+    this.doAll();
+  }
+
+  ngOnChanges() {
+    this.doAll();
+  }
+
+  doAll() {
     this.setDimensions();
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.barChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       xPadding: this.xPadding,
       yPadding: this.yPadding,
       data: this.data
     });
     this.setColor();
-    // console.log(this.color);
     this.computeBarPaths();
   }
 
-  ngOnChanges() {
-    this.dataCopy = JSON.parse(JSON.stringify(this.data));
-    this.barChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding,
-      data: this.data
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new - bar chart.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
     });
-    this.setColor();
-    // console.log(this.color);
-    this.computeBarPaths();
+    this.resizeSubscription = subscription;
+  }
+
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
 }

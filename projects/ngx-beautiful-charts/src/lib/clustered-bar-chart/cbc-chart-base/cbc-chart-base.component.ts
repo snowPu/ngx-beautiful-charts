@@ -16,6 +16,19 @@ export class CbcChartBaseComponent implements OnInit, OnChanges {
   xAxis;
   yAxis;
 
+  fontSizeXAxisTickLabel: number;
+  fontSizeYAxisTickLabel: number;
+  fontSizeXAxisTitle: number;
+  fontSizeYAxisTitle: number;
+  fontSizeLegend: number;
+
+  positions = {
+    xTick: 0,
+    yTick: 0,
+    xTitle: {x: 0, y: 0},
+    yTitle: {x: 0, y: 0}
+  };
+
   computeGrid() {
     this.yLevelPaths = [];
     this.xAxis = [];
@@ -65,14 +78,47 @@ export class CbcChartBaseComponent implements OnInit, OnChanges {
 
   }
 
+  computeTickAndTitlePositions() {
+    this.positions.xTick = this.clusteredBarChartService.rectHeight
+     + this.clusteredBarChartService.yPadding + this.clusteredBarChartService.rectHeight * 0.1 + 5;
+    this.positions.yTick = this.clusteredBarChartService.xPadding
+     - this.clusteredBarChartService.rectWidth * 0.05 - 5;
+    this.positions.xTitle = {
+      x: this.clusteredBarChartService.rectWidth / 2 + this.clusteredBarChartService.xPadding,
+      y: this.clusteredBarChartService.rectHeight
+       + this.clusteredBarChartService.yPadding + this.clusteredBarChartService.rectHeight * 0.2 + 5
+    };
+    this.positions.yTitle = {
+      x: -this.clusteredBarChartService.rectHeight / 2 - this.clusteredBarChartService.yPadding,
+      y: this.clusteredBarChartService.xPadding - this.clusteredBarChartService.rectWidth * 0.08 - 5
+    };
+  }
+
+  computeFontSizes() {
+    this.fontSizeXAxisTickLabel = this.clusteredBarChartService.rectWidth * .02 + 5;
+    this.fontSizeYAxisTickLabel = this.clusteredBarChartService.rectWidth * .02 + 5;
+    this.fontSizeXAxisTitle = this.clusteredBarChartService.rectWidth * .03 + 5;
+    this.fontSizeYAxisTitle = this.clusteredBarChartService.rectWidth * .03 + 5;
+    this.fontSizeLegend = this.clusteredBarChartService.rectWidth * .02 + 10;
+  }
+
+
+
   constructor(public clusteredBarChartService: ClusteredBarChartService) { }
 
   ngOnInit() {
     this.computeGrid();
+    this.clusteredBarChartService.rectWidthBS.subscribe(w => {
+      this.computeGrid();
+      this.computeFontSizes();
+      this.computeTickAndTitlePositions();
+    });
   }
 
   ngOnChanges() {
     this.computeGrid();
+    this.computeFontSizes();
+    this.computeTickAndTitlePositions();
   }
 
 }

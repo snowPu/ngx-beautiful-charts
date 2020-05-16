@@ -1,7 +1,9 @@
-import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { ClusteredBarChartService } from './clustered-bar-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-clustered-bar-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./clustered-bar-chart.component.scss'],
   providers: [ClusteredBarChartService]
 })
-export class ClusteredBarChartComponent implements OnInit, OnChanges {
+export class ClusteredBarChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() data: [{series: string, color: string, data: [{name: string, value: number }]}];
   @Input() width: number;
@@ -20,28 +22,41 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
   @Input() colorScheme = 'colorful';
   @Input() customColorScheme: string[] = [];
 
+  setWidth: number;
+  setHeight: number;
   componentID: number;
   xPadding = 60;
   yPadding = this.xPadding / 2;
   barPaths: any;
   dataCopy;
+  resizeSubscription: Subscription;
   // [{color: string, paths: string[]}];
 
+
+  setPadding() {
+    this.xPadding = this.setWidth * 0.08 + 10;
+    this.yPadding = this.setHeight * 0.05 + 10;
+  }
+
   setDimensions() {
-    if (this.width && !this.height) this.height = this.width / 3;
-    else if (!this.width && this.height) this.width = this.height * 3;
+    if (this.width && this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.height;
+    } else if (this.width && !this.height) this.setHeight = this.width / 3;
+    else if (!this.width && this.height) this.setWidth = this.height * 3;
     else if (!this.width && !this.height) {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = dims.width / 3;
+        this.setWidth = Math.max(dims.width, 500);
+        this.setHeight = Math.max(dims.width / 3, 300);
       }
     }
-    // console.log('---set dimensions---');
-    // console.log('width: ' + this.width);
-    // console.log('height: ' + this.height);
-    // console.log('--------------------');
+    this.setPadding();
+    console.log('---set dimensions---');
+    console.log('width: ' + this.setWidth);
+    console.log('height: ' + this.setHeight);
+    console.log('--------------------');
   }
 
   computeBarPaths() {
@@ -105,13 +120,22 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.componentID = this.globalParametersService.addNewComponent();
     console.log('init..');
+    this.doAll();
+  }
+
+  ngOnChanges() {
+    this.doAll();
+  }
+
+  private doAll() {
     this.setDimensions();
     this.dataCopy = JSON.parse(JSON.stringify(this.data));
     this.setColors();
+    console.log(this.setWidth + '-' + this.setHeight);
     this.clusteredBarChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       xPadding: this.xPadding,
       yPadding: this.yPadding,
       data: this.data
@@ -119,17 +143,24 @@ export class ClusteredBarChartComponent implements OnInit, OnChanges {
     this.computeBarPaths();
   }
 
-  ngOnChanges() {
-    this.setColors();
-    this.clusteredBarChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding,
-      data: this.data
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new - bar chart.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
     });
-    this.computeBarPaths();
+    this.resizeSubscription = subscription;
+  }
+
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
 }

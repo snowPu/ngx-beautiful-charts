@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { LineGraphService } from '../line-graph.service';
 
 @Component({
@@ -22,6 +22,40 @@ export class LgChartBaseComponent implements OnInit, OnChanges {
   xAxis: any;
   yAxis: any;
 
+  fontSizeXAxisTickLabel: number;
+  fontSizeYAxisTickLabel: number;
+  fontSizeXAxisTitle: number;
+  fontSizeYAxisTitle: number;
+
+  positions = {
+    xTick: 0,
+    yTick: 0,
+    xTitle: {x: 0, y: 0},
+    yTitle: {x: 0, y: 0}
+  };
+
+  computeTickAndTitlePositions() {
+    this.positions.xTick = this.lineGraphService.rectHeight
+     + this.lineGraphService.yPadding + this.lineGraphService.rectHeight * 0.05 + 5;
+    this.positions.yTick = this.lineGraphService.xPadding
+     - this.lineGraphService.rectWidth * 0.03 - 5;
+    this.positions.xTitle = {
+      x: this.lineGraphService.rectWidth / 2 + this.lineGraphService.xPadding,
+      y: this.lineGraphService.rectHeight + this.lineGraphService.yPadding + this.lineGraphService.rectHeight * 0.15 + 5
+    };
+    this.positions.yTitle = {
+      x: -this.lineGraphService.rectHeight / 2 - this.lineGraphService.yPadding,
+      y: this.lineGraphService.xPadding - this.lineGraphService.rectWidth * 0.06 - 5
+    };
+  }
+
+  computeFontSizes() {
+    this.fontSizeXAxisTickLabel = this.lineGraphService.rectWidth * .015 + 5;
+    this.fontSizeYAxisTickLabel = this.lineGraphService.rectWidth * .015 + 5;
+    this.fontSizeXAxisTitle = this.lineGraphService.rectWidth * .025 + 5;
+    this.fontSizeYAxisTitle = this.lineGraphService.rectWidth * .025 + 5;
+  }
+
   computeGrid() {
     // maxX - minX --> gridPrecisionX
     // width --> gridWidthX
@@ -41,15 +75,22 @@ export class LgChartBaseComponent implements OnInit, OnChanges {
     }
   }
 
-  constructor(public lineGraphService: LineGraphService) { }
+  constructor(public lineGraphService: LineGraphService, protected cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.computeGrid();
     this.gridID = 'grid' + this.lineGraphService.componentID;
+    this.lineGraphService.rectWidthBS.subscribe(w => {
+      this.computeGrid();
+      this.computeFontSizes();
+      this.computeTickAndTitlePositions();
+    });
   }
 
   ngOnChanges() {
     this.computeGrid();
+    this.computeFontSizes();
+    this.computeTickAndTitlePositions();
   }
 
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { TimelineChartService } from './timeline-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-timeline-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./timeline-chart.component.scss'],
   providers: [TimelineChartService]
 })
-export class TimelineChartComponent implements OnInit, OnChanges {
+export class TimelineChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() data: any;
   @Input() width: number;
@@ -31,6 +33,9 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   textBlockHeight: number;
   timeData = [];
 
+  setWidth = 0;
+  setHeight = 0;
+  resizeSubscription: Subscription;
 
 
   computeBarDimensions() {
@@ -54,14 +59,21 @@ export class TimelineChartComponent implements OnInit, OnChanges {
   }
 
   setDimensions() {
-    if (this.width && !this.height) this.height = this.width / 2;
-    else if (!this.width && this.height) this.width = this.height * 2;
-    else if (!this.width && !this.height) {
+    if (this.width && this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.height;
+    } else if (this.width && !this.height) {
+      this.setWidth = this.width;
+      this.setHeight = this.setWidth / 2;
+    } else if (!this.width && this.height) {
+      this.setWidth = this.height * 2;
+      this.setHeight = this.height;
+    } else if (!this.width && !this.height) {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = dims.width / 2;
+        this.setWidth = Math.max(dims.width, 600);
+        this.setHeight = Math.max(dims.width / 2, 300);
       }
     }
     // console.log('---set dimensions---');
@@ -142,21 +154,22 @@ export class TimelineChartComponent implements OnInit, OnChanges {
         y: (up === 1) ? this.barStartY - this.timelineChartService.rectHeight / 4 : this.barEndY + this.timelineChartService.rectHeight / 4
       };
       const line = 'M ' + start.x + ' ' + start.y + ' ' + end.x + ' ' + end.y;
-
+      const text = this.textWrap(oneTimeData.text, this.timeBubbleRadius * 4);
       const textBlock = {
         position: {
           x,
           y: (up === 1) ?
-          this.barStartY - this.timelineChartService.rectHeight * 7 / 16 :
+          this.barStartY - this.timelineChartService.rectHeight  / 4 - ( text.length * 20) :
           this.barEndY + this.timelineChartService.rectHeight * 4 / 16
         },
-        text: this.textWrap(oneTimeData.text, this.timeBubbleRadius * 4)
+        text
       };
       this.timeData.push({
         timeBubble,
         line,
         textBlock,
-        color
+        color,
+        up: (up === 1) ? true : false
       });
       up = up * -1;
       cnt++;
@@ -168,14 +181,26 @@ export class TimelineChartComponent implements OnInit, OnChanges {
               private currentElement: ElementRef) {
   }
 
-  ngOnInit() {
-    this.componentID = this.globalParametersService.addNewComponent();
+  bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+  doAll() {
+    this.setDimensions();
     this.computeBarDimensions();
     this.setColors();
     this.timelineChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       xPadding: this.xPadding,
       yPadding: this.yPadding
     });
@@ -183,21 +208,23 @@ export class TimelineChartComponent implements OnInit, OnChanges {
     this.gTranslate = 'translate(' + transX + 'px, ' + this.yPadding + 'px)';
     this.computeBarDimensions();
     this.computeTimeData();
+    console.log(this.timeData);
+  }
+
+  ngOnInit() {
+    this.componentID = this.globalParametersService.addNewComponent();
+    this.doAll();
   }
 
   ngOnChanges() {
-    this.computeBarDimensions();
-    this.setColors();
-    this.timelineChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding
-    });
-    const transX = this.xPadding + this.timelineChartService.rectWidth * .1;
-    this.gTranslate = 'translate(' + transX + 'px, ' + this.yPadding + 'px)';
-    this.computeBarDimensions();
-    this.computeTimeData();
+    this.doAll();
+  }
+
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { GanttChartService } from './gantt-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-gantt-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./gantt-chart.component.scss'],
   providers: [GanttChartService]
 })
-export class GanttChartComponent implements OnInit, OnChanges {
+export class GanttChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() data;
   @Input() width: number;
@@ -22,14 +24,20 @@ export class GanttChartComponent implements OnInit, OnChanges {
   height: number;
   phaseTimelines;
 
+  setWidth = 0;
+  setHeight = 0;
+  resizeSubscription: Subscription;
+
   setDimensions() {
-    if (this.width) this.height = this.width - this.xPadding;
-    else {
+    if (this.width) {
+      this.setWidth = this.width;
+      this.setHeight = this.setWidth - this.xPadding;
+    } else {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = this.width - this.xPadding;
+        this.setWidth = Math.max(dims.width, 400);
+        this.setHeight = Math.max(this.setWidth - this.xPadding);
       }
     }
     // console.log('---set dimensions---');
@@ -85,13 +93,24 @@ export class GanttChartComponent implements OnInit, OnChanges {
               private globalParametersService: GlobalParametersService,
               private currentElement: ElementRef) { }
 
-  ngOnInit() {
-    this.componentID = this.globalParametersService.addNewComponent();
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+  doAll() {
     this.setDimensions();
     this.setColors();
     this.ganttChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
+      width: this.setWidth,
       xPadding: this.xPadding,
       yPadding: this.yPadding,
       data: this.data
@@ -100,18 +119,21 @@ export class GanttChartComponent implements OnInit, OnChanges {
     this.definePhaseTimelines();
   }
 
+  ngOnInit() {
+    this.componentID = this.globalParametersService.addNewComponent();
+    this.doAll();
+  }
+
   ngOnChanges() {
-    this.setDimensions();
-    this.setColors();
-    this.ganttChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding,
-      data: this.data
-    });
-    this.height = this.ganttChartService.height;
-    this.definePhaseTimelines();
+    this.doAll();
+  }
+
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
 }

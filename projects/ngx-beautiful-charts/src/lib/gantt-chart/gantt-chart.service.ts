@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BeautifulChartsModule } from '../beautiful-charts.module';
 import { colorSchemes } from '../../constants/color-schemes';
+import { BehaviorSubject } from 'rxjs';
 
 // @Injectable({
 //   providedIn: BeautifulChartsModule
@@ -25,8 +26,11 @@ export class GanttChartService {
   rectHeight: number;
   legionWidth: number;
   legionHeight: number;
+  legionPerLine: number;
   minX: number;
   maxX: number;
+  rectWidthBS = new BehaviorSubject(null);
+  rectHeightBS = new BehaviorSubject(null);
 
   monthNames = [
     'January', 'February', 'March',
@@ -40,12 +44,21 @@ export class GanttChartService {
   computeRectDimensions() {
     this.rectWidth = this.width - this.xPadding * 2 - 150;
     this.rectHeight = this.ganttPhases.length * 60;
+    this.rectWidthBS.next(this.rectWidth);
+    this.rectHeightBS.next(this.rectHeight);
   }
 
   computeLegionDimensions() {
-    const noOfLines = Math.ceil(this.data.length / 3);
     this.legionWidth = this.width - this.xPadding * 2 - 150;
+    this.legionPerLine = Math.floor(this.legionWidth / 250);
+    const noOfLines = Math.ceil(this.data.length / this.legionPerLine);
     this.legionHeight = 40 + 40 * noOfLines;
+  }
+
+  setHeight() {
+    this.height = this.ganttPhases.length * 60 + this.legionHeight + this.yPadding * 4 + 130;
+    console.log('rect height: ' + this.ganttPhases.length * 60);
+    console.log('legion height: ' + this.legionHeight);
   }
 
   transformX(x: number) {
@@ -53,12 +66,12 @@ export class GanttChartService {
   }
 
   computeLegion() {
-    const noOfLines = Math.ceil(this.data.length / 3);
+    const noOfLines = Math.ceil(this.data.length / this.legionPerLine);
     this.legion = [];
     let cnt = 0;
     for (let line = 0; line < noOfLines; line++) {
       const legionLine = [];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < this.legionPerLine; i++) {
         if (this.ganttTeams[cnt]) legionLine.push(this.ganttTeams[cnt]);
         cnt++;
       }
@@ -154,8 +167,9 @@ export class GanttChartService {
     this.maxX = this.closestMultipleMoreThanEqualTo(7 * qts, this.ganttDateRange);
     this.ganttMaxDate = this.addDays(this.ganttMinDate, this.maxX);
 
-    this.computeRectDimensions();
     this.computeLegionDimensions();
+    this.setHeight();
+    this.computeRectDimensions();
     this.computeLegion();
     // this.printAll();
   }

@@ -1,7 +1,9 @@
-import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { colorSchemes } from '../../constants/color-schemes';
 import { SunburstChartService } from './sunburst-chart.service';
 import { GlobalParametersService } from '../../global/global-parameters.service';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-sunburst-chart',
@@ -9,7 +11,7 @@ import { GlobalParametersService } from '../../global/global-parameters.service'
   styleUrls: ['./sunburst-chart.component.scss'],
   providers: [SunburstChartService]
 })
-export class SunburstChartComponent implements OnInit , OnChanges {
+export class SunburstChartComponent implements OnInit , OnChanges, AfterViewInit, OnDestroy {
 
   @Input() data: any;
   @Input() width: number;
@@ -32,10 +34,21 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   gTranslate: string;
   hoverTranslate: string;
 
+  setWidth = 0;
+  setHeight = 0;
+  resizeSubscription: Subscription;
+
+  fontSize: number;
+
   constructor(public sunburstChartService: SunburstChartService,
               private globalParametersService: GlobalParametersService,
               private currentElement: ElementRef) {
   }
+
+  computeFontSizes() {
+    this.fontSize = this.sunburstChartService.rectWidth * .015 + 5;
+  }
+
 
   getRefinedData(data, i, color = null) {
     for (const sbData of data) {
@@ -55,13 +68,15 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   }
 
   setDimensions() {
-    if (this.width) this.height = this.width - this.xPadding;
-    else {
+    if (this.width) {
+      this.setWidth = this.width;
+      this.setHeight = this.setWidth - this.xPadding;
+    } else {
       const host = this.currentElement.nativeElement;
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
-        this.width = dims.width;
-        this.height = this.width - this.xPadding;
+        this.setWidth = Math.max(dims.width, 400);
+        this.setHeight = Math.max(this.setWidth - this.xPadding);
       }
     }
     // console.log('---set dimensions---');
@@ -188,15 +203,27 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     }
   }
 
-  ngOnInit() {
+  private bindWindowResizeEvent(): void {
+    const source = observableFromEvent(window, 'resize');
+    const subscription = source.pipe(debounceTime(200)).subscribe(e => {
+      console.log('window has been resized new.');
+      this.doAll();
+      // if (this.cd) {
+      //   this.cd.markForCheck();
+      // }
+    });
+    this.resizeSubscription = subscription;
+  }
+
+  doAll() {
     this.componentID = this.globalParametersService.addNewComponent();
     // console.log('service (oninitsun) color scheme: ' + this.sunburstChartService.colorScheme);
     this.setColors();
     this.setDimensions();
     this.sunburstChartService.setValues({
       componentID: this.componentID,
-      width: this.width,
-      height: this.height,
+      width: this.setWidth,
+      height: this.setHeight,
       xPadding: this.xPadding,
       yPadding: this.yPadding,
       data: this.data
@@ -221,40 +248,22 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
     const hoverTranslateXY = this.sunRadius * 0.08;
     this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+    this.computeFontSizes();
+  }
+
+  ngOnInit() {
+    this.doAll();
   }
 
   ngOnChanges() {
-    // console.log('service (onchangessun) color scheme: ' + this.sunburstChartService.colorScheme);
-    this.setColors();
-    this.setDimensions();
-    this.sunburstChartService.setValues({
-      componentID: this.componentID,
-      width: this.width,
-      height: this.height,
-      xPadding: this.xPadding,
-      yPadding: this.yPadding,
-      data: this.data
-    });
-    this.sunRadius = this.sunburstChartService.sunRadius;
-    this.dataRefined = this.getRefinedData(this.data, 1);
-    // console.log('data refined: ');
-    // console.log(this.dataRefined);
-    this.initiateLevelSunSlices();
-    // console.log(this.sunDepth);
-    // console.log('level sun slices: ');
-    // console.log(this.levelSunSlices);
-    // this.hoverPieRadius = this.sunburstChartService.sunRadius / this.sunDepth * 1.05;
+    this.doAll();
+  }
+  ngAfterViewInit(): void {
+    this.bindWindowResizeEvent();
+  }
 
-    this.sunSliceWidth = this.sunRadius / this.sunDepth;
-    this.sunSlices = this.generateSunSlices(this.dataRefined);
-    // console.log(this.hoverPieRadius);
-    this.cX = this.xPadding + this.sunRadius;
-    this.cY = this.yPadding + this.sunRadius;
-    const translateX = this.xPadding + this.sunRadius;
-    const translateY = this.yPadding + this.sunRadius;
-    this.gTranslate = 'translate(' + translateX + 'px, ' + translateY + 'px)';
-    const hoverTranslateXY = this.sunRadius * 0.08;
-    this.hoverTranslate = 'translate(' + hoverTranslateXY + 'px, ' + -hoverTranslateXY + 'px)';
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
 }
