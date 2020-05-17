@@ -73,7 +73,7 @@ export class TimelineChartComponent implements OnInit, OnChanges, AfterViewInit,
       if (host.parentNode != null) {
         const dims = host.parentNode.getBoundingClientRect();
         this.setWidth = Math.max(dims.width, 600);
-        this.setHeight = Math.max(dims.width / 2, 300);
+        this.setHeight = Math.max(dims.width / 2, 400);
       }
     }
     // console.log('---set dimensions---');
