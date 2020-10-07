@@ -54,25 +54,26 @@ export class DonutChartComponent implements OnInit, OnChanges {
       // console.log(val);
       const perc = val.value / sum * donutCompletion;
       const angle = 360 * perc;
-      const angleMod = (angle > 180 ) ? 360 - angle : angle;
-      const angleRad = angleMod * Math.PI / 180;
+      const angleRad = angle * Math.PI / 180;
+      const largeArc = (angle > 180) ? 1 : 0;
+
       const path = 'M 0 ' + -this.donutInnerRadius + ' 0 ' + -this.donutRadius
       + ' A ' + this.donutRadius + ' ' + this.donutRadius
-      + ' 0 0 1 ' + this.donutRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1' + this.donutRadius * Math.sin(angleRad) + ' '
       + -this.donutRadius * Math.cos(angleRad)
       + ' L ' + this.donutInnerRadius * Math.sin(angleRad) + ' '
       + -this.donutInnerRadius * Math.cos(angleRad) + ' A '
       + this.donutInnerRadius + ' ' + this.donutInnerRadius
-      + ' 0 0 0 0 ' + -this.donutInnerRadius + ' z';
+      + ' 0 ' + largeArc + ' 0 0 ' + -this.donutInnerRadius + ' z';
 
       const hoverPath = 'M 0 ' + -this.hoverDonutInnerRadius + ' 0 ' + -this.hoverDonutRadius
       + ' A ' + this.hoverDonutRadius + ' ' + this.hoverDonutRadius
-      + ' 0 0 1 ' + this.hoverDonutRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1' + this.hoverDonutRadius * Math.sin(angleRad) + ' '
       + -this.hoverDonutRadius * Math.cos(angleRad)
       + ' L ' + this.hoverDonutInnerRadius * Math.sin(angleRad) + ' '
       + -this.hoverDonutInnerRadius * Math.cos(angleRad) + ' A '
       + this.hoverDonutInnerRadius + ' ' + this.hoverDonutInnerRadius
-      + ' 0 0 0 0 ' + -this.hoverDonutInnerRadius + ' z';
+      + ' 0 ' + largeArc + ' 0 0 ' + -this.hoverDonutInnerRadius + ' z';
 
 
       const donutSlice = {

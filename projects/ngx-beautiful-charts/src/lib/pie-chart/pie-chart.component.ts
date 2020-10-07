@@ -54,16 +54,18 @@ export class PieChartComponent implements OnInit, OnChanges {
       // console.log(val);
       const perc = val.value / sum * pieCompletion;
       const angle = 360 * perc;
-      const angleMod = (angle > 180 ) ? 360 - angle : angle;
-      const angleRad = angleMod * Math.PI / 180;
+      // const angleMod = (angle > 180 ) ? 360 - angle : angle;
+      const angleRad = angle * Math.PI / 180;
+      const largeArc = (angle > 180) ? 1 : 0;
+
       const path = 'M 0 0 0 ' + -this.pieRadius + ' A '
       + this.pieRadius + ' ' + this.pieRadius
-      + ' 0 0 1' + this.pieRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1' + this.pieRadius * Math.sin(angleRad) + ' '
       + -this.pieRadius * Math.cos(angleRad) + ' z';
 
       const hoverPath = 'M 0 0 0 ' + -this.hoverPieRadius + ' A '
       + this.hoverPieRadius + ' ' + this.hoverPieRadius
-      + ' 0 0 1' + this.hoverPieRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1' + this.hoverPieRadius * Math.sin(angleRad) + ' '
       + -this.hoverPieRadius * Math.cos(angleRad) + ' z';
 
       const pieInteriorX = this.pieRadius * 2 / 3 * Math.sin(rotationRad + angleRad / 2);

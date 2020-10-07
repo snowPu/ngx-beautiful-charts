@@ -73,8 +73,9 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   generateSlice(data, sum, angleRange, rotation) {
     const perc = data.value / sum;
     const angle = angleRange * perc;
-    const angleMod = (angle > 180 ) ? 360 - angle : angle;
-    const angleRad = angleMod * Math.PI / 180;
+    // const angleMod = (angle > 180 ) ? 360 - angle : angle;
+    const angleRad = angle * Math.PI / 180;
+    const largeArc = (angle > 180) ? 1 : 0;
     const textRotation = (270 + angle / 2) % 360;
     const textX = (data.level - 1) * this.sunSliceWidth + this.sunSliceWidth / 2;
     let textRotationString = 'rotate(' + textRotation + 'deg)';
@@ -87,13 +88,13 @@ export class SunburstChartComponent implements OnInit , OnChanges {
     if (data.level === 1) {
       path = 'M 0 0 0 ' + -this.sunSliceWidth + ' A '
       + this.sunSliceWidth + ' ' + this.sunSliceWidth
-      + ' 0 0 1' + this.sunSliceWidth * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1 ' + this.sunSliceWidth * Math.sin(angleRad) + ' '
       + -this.sunSliceWidth * Math.cos(angleRad) + ' z';
 
       const hoverRadius = this.sunSliceWidth * 1.1;
       hoverPath = 'M 0 0 0 ' + -hoverRadius + ' A '
       + hoverRadius + ' ' + hoverRadius
-      + ' 0 0 1' + hoverRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1 ' + hoverRadius * Math.sin(angleRad) + ' '
       + -hoverRadius * Math.cos(angleRad) + ' z';
     } else if (data.level > 1) {
       const sunSliceInnerRadius = this.sunRadius / (this.sunDepth) * (data.level - 1);
@@ -101,23 +102,23 @@ export class SunburstChartComponent implements OnInit , OnChanges {
 
       path = 'M 0 ' + -sunSliceInnerRadius + ' 0 ' + -sunSliceOuterRadius
       + ' A ' + sunSliceOuterRadius + ' ' + sunSliceOuterRadius
-      + ' 0 0 1 ' + sunSliceOuterRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1 ' + sunSliceOuterRadius * Math.sin(angleRad) + ' '
       + -sunSliceOuterRadius * Math.cos(angleRad)
       + ' L ' + sunSliceInnerRadius * Math.sin(angleRad) + ' '
       + -sunSliceInnerRadius * Math.cos(angleRad) + ' A '
       + sunSliceInnerRadius + ' ' + sunSliceInnerRadius
-      + ' 0 0 0 0 ' + -sunSliceInnerRadius + ' z';
+      + ' 0 ' + largeArc + ' 0 0 ' + -sunSliceInnerRadius + ' z';
 
       const hoverSliceOuterRadius = sunSliceOuterRadius + this.sunSliceWidth * 0.1;
 
       hoverPath = 'M 0 ' + -sunSliceInnerRadius + ' 0 ' + -hoverSliceOuterRadius
       + ' A ' + hoverSliceOuterRadius + ' ' + hoverSliceOuterRadius
-      + ' 0 0 1 ' + hoverSliceOuterRadius * Math.sin(angleRad) + ' '
+      + ' 0 ' + largeArc + ' 1 ' + hoverSliceOuterRadius * Math.sin(angleRad) + ' '
       + -hoverSliceOuterRadius * Math.cos(angleRad)
       + ' L ' + sunSliceInnerRadius * Math.sin(angleRad) + ' '
       + -sunSliceInnerRadius * Math.cos(angleRad) + ' A '
       + sunSliceInnerRadius + ' ' + sunSliceInnerRadius
-      + ' 0 0 0 0 ' + -sunSliceInnerRadius + ' z';
+      + ' 0 ' + largeArc + ' 0 0 ' + -sunSliceInnerRadius + ' z';
     }
     // console.log(hoverPath);
 
