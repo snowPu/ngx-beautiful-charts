@@ -4,6 +4,7 @@
 &nbsp; ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/snowpu/ngx-beautiful-charts.svg)
 &nbsp; ![npm](https://img.shields.io/npm/dm/ngx-beautiful-charts.svg)
 
+
 <img alt="ngx-beautiful-charts" src="./projects/ngx-beautiful-charts/assets/images/pngs/ngx-beautiful-charts-logo-with-text.png" width="600">
 
 <!-- ![ngx-beautiful-charts](./assets/images/pngs/ngx-beautiful-charts-logo-with-text.png) -->
@@ -23,14 +24,17 @@ Demo available on Stackblitz: [https://stackblitz.com/edit/ngx-beautiful-charts-
 ## Documentation
 Check out the [wiki](https://github.com/snowPu/ngx-beautiful-charts/wiki) for full documentation.
 
-
-
 ## Install via NPM
-
 
 [![npm version](https://badge.fury.io/js/ngx-beautiful-charts.svg)](https://badge.fury.io/js/ngx-beautiful-charts)
 
 > npm i ngx-beautiful-charts
+
+## Donation
+If this library has helped you, you could buy me a cup of tea. Yes, I'm a tea person :)
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/sukanyadasgupta)
+
 
 ## Types of charts offered
 - Line Graph
