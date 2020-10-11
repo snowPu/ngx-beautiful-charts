@@ -13,7 +13,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
 
   @Input() data: [{name: string, color: string, value: number }];
   @Input() width: number;
-  @Input() colorScheme: string;
+  @Input() colorScheme = 'colorful';
   @Input() customColorScheme: string[] = [];
 
   componentID;
