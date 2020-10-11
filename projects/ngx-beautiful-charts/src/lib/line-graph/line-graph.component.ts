@@ -16,7 +16,7 @@ export class LineGraphComponent implements OnInit, OnChanges {
   @Input() width: number;
   @Input() height: number;
   @Input() color: string;
-  @Input() colorScheme: string;
+  @Input() colorScheme = 'colorful';
   @Input() minX: number = null;
   @Input() minY: number = null;
   @Input() maxX: number = null;

@@ -15,7 +15,7 @@ export class MultiLineGraphComponent implements OnInit, OnChanges {
   @Input() data: [{name: string, color: string, data: [{x: number, y: number, info: any }]}];
   @Input() width: number;
   @Input() height: number;
-  @Input() colorScheme: string;
+  @Input() colorScheme = 'colorful';
   @Input() minX: number = null;
   @Input() minY: number = null;
   @Input() maxX: number = null;
