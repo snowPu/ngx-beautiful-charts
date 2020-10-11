@@ -40,7 +40,7 @@ export class SunburstChartComponent implements OnInit , OnChanges {
   getRefinedData(data, i, color = null) {
     for (const sbData of data) {
       sbData.level = i;
-      if (color) sbData.color = color;
+      if (color && !sbData.color) sbData.color = color;
       if (sbData.level > this.sunDepth) this.sunDepth = sbData.level;
       if (sbData.children) {
         if (sbData.children.length > 0) {
